@@ -47,20 +47,17 @@
                     <p class="mb-2">It is Very Easy to Customize and it uses in your website apllication.</p>
                 </div> --}}
                 <div class="card-body pt-3">
-                    <form method="post" action="{{ route('category.update' , $category) }}">
                         @csrf
-                        @method('put')
                         <div class="">
                             <div class="form-group">
-                                <label for="exampleInputname1">{{ __("website/admin.category_name") }}</label>
-                                <input name="name" type="name" class="form-control" id="exampleInputname1" value="{{ $category->name }}" placeholder="{{ __('website/admin.enter_category_name') }}">
-                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-
+                                {{-- <label for="exampleInputname1">{{ __("website/admin.category_name") }}</label>
+                                <input name="name" type="name" class="form-control" id="exampleInputname1" placeholder="{{ __('website/admin.enter_category_name') }}">
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" /> --}}
+<h6>{{ __("website/admin.category_name") }}</h6>
+                                    <label class="form-control">{{ $category->name }} </label>
                             </div>
 
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3 mb-0">{{ __('website/admin.submit') }}</button>
-                    </form>
                 </div>
             </div>
         </div>

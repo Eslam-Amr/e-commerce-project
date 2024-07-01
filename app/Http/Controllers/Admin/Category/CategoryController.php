@@ -54,7 +54,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return $this->categoryRepository->show($category);
+
     }
 
     /**
@@ -62,7 +63,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return $this->categoryRepository->edit($category);
+
     }
 
     /**
@@ -70,6 +72,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
+        return $this->categoryRepository->update($request,$category);
         //
     }
 
@@ -78,6 +81,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // dd("asf");
+        // dd($category);
+        return $this->categoryRepository->destroy($category);
     }
 }

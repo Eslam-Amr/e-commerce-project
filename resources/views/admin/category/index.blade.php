@@ -69,11 +69,15 @@
                                 <td>{{ $categories[$i]->name }}</td>
                                 {{-- <td>System Architect</td> --}}
                                 <td>
-
+                                    {{-- <a href="{{ route('category.destroy',$categories[$i]) }}">delete</a> --}}
                                     <a class="modal-effect btn btn-sm btn-warning" href="{{ route('category.show',$categories[$i]) }}"><i class="far fa-eye"></i></a>
                                     <a class="modal-effect btn btn-sm btn-info" href="{{ route('category.edit',$categories[$i]) }}"><i class="las la-pen"></i></a>
-                                    <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="{{ route('category.destroy',$categories[$i]) }}"><i class="las la-trash"></i></a>
-                                </td>
+                                    <form class="d-inline" action="{{ route('category.destroy',$categories[$i]) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="modal-effect btn btn-sm btn-danger " type="submit"><i class="las la-trash"></i></button>
+                                    </form>
+                                 </td>
                             </tr>
                             @endfor
                             {{-- @endif --}}

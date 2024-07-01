@@ -20,6 +20,7 @@ Route::group(
         Route::view('/test','admin.doctors.index');
         // Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
         Route::resource('/category',  CategoryController::class );
+        // Route::resource('/category/delete',  CategoryController::class )->name('category.delete');
         Route::view('/admin','admin.index')->name('admin');
     });
 Route::get('/dashboard', function () {
