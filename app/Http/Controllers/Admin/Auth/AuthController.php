@@ -14,10 +14,10 @@ class AuthController extends Controller
         $validator = $request->validated();
         // dd($validator);
         // dd(auth()->guard('admin')->user());
-        if (Auth::guard("admin")->attempt($validator))
-            return redirect()->route('home');
-        if (Auth::guard("seller")->attempt($validator))
-            return redirect()->route('home');
+        if (Auth::guard("admin")->attempt($validator)||Auth::guard("seller")->attempt($validator))
+            return redirect()->route('admin');
+        // if (Auth::guard("seller")->attempt($validator))
+        //     return redirect()->route('home');
         return back()->with('message', 'invalid email or password');
     }
 }

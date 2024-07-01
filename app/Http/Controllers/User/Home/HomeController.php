@@ -15,7 +15,7 @@ class HomeController extends Controller
         // $guard = Auth::getDefaultDriver();
 
         // Dump and die the guard
-        dd(Auth::guard('seller')->user());
+        // dd(Auth::guard('seller')->user());
         // dd($guard,auth()->guard('admin')->user());
         return view('user.main.home.index');
     }

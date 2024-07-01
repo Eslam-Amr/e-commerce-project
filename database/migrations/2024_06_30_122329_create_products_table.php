@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('additonal_information');
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
