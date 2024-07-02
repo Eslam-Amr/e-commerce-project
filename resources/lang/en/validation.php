@@ -189,6 +189,17 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+//         'price'=>'price',
+// 'discount'=>'discount',
+// 'stock'=>'stock',
+// 'color'=>'color',
+// 'name'=>'name',
+// 'size'=>'size',
+// 'description'=>'description',
+// 'additonal_information'=>'additonal_information',
+// 'seller_id'=>'seller_id',
+// 'category_id'=>'category_id',
+    ],
 
 ];

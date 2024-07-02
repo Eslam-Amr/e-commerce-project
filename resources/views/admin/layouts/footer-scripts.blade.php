@@ -25,6 +25,7 @@
 <script src="{{URL::asset('admin-asset/assets/plugins/sidebar/sidebar-custom.js')}}"></script>
 <!-- Eva-icons js -->
 <script src="{{URL::asset('admin-asset/assets/js/eva-icons.min.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/js/all.min.js')}}"></script>
 @yield('js')
 <!-- Sticky js -->
 <script src="{{URL::asset('admin-asset/assets/js/sticky.js')}}"></script>

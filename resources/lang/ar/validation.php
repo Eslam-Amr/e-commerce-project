@@ -186,6 +186,19 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'price' => 'السعر',
+'discount' => 'الخصم',
+'stock' => 'المخزون',
+'color' => 'اللون',
+'name' => 'الاسم',
+'size' => 'الحجم',
+'description' => 'الوصف',
+'additonal_information' => 'معلومات إضافية',
+// 'seller_id' => 'معرّف البائع',
+// 'category_id' => 'معرّف الفئة',
+'category_id' => 'الفئة',
+
+    ],
 
 ];

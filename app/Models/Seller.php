@@ -12,6 +12,9 @@ class Seller extends Authenticatable
 {
     use HasFactory, Notifiable;
     protected $table = 'users';
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
     protected static function boot(){
         parent::boot();
         static::addGlobalScope('seller',function(Builder $bulder){

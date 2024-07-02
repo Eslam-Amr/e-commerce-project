@@ -7,6 +7,7 @@ use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Admin\Seller\Product\ProductController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -18,8 +19,9 @@ Route::group(
         'middleware' => [ ('auth:admin,seller'),'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){ //...
         Route::view('/test','admin.doctors.index');
-        // Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
-        Route::resource('/category',  CategoryController::class );
+        Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
+        Route::resource('/product',  ProductController::class );
+        // Route::resource('/category',  CategoryController::class );
         // Route::resource('/category/delete',  CategoryController::class )->name('category.delete');
         Route::view('/admin','admin.index')->name('admin');
     });

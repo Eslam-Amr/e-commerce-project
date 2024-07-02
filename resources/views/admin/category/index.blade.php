@@ -39,9 +39,12 @@
                     <h4 class="card-title mg-b-0">{{ __("website/admin.category_table") }}</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
                 </div>
+                {{-- policy --}}
+                {{-- @can('create', \App\Model\Category::class) --}}
                 <div class="d-flex justify-content-between">
                     <a href="{{route('category.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.add_category')}}</a>
                 </div>
+                {{-- @endcan --}}
                 {{-- <p class="tx-12 tx-gray-500 mb-2">Example of Valex Hoverable Rows Table.. <a href="">Learn more</a></p> --}}
             </div>
             <div class="card-body">

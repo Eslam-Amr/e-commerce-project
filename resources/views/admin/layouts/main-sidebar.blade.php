@@ -41,6 +41,17 @@
                                 <span class="side-menu__label">Category</span></a>
 					</li>
                     @endauth
+					<li class="slide">
+						<a class="side-menu__item" href="{{ route('product.index') }}">
+
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon icon icon-tabler icon-tabler-menu" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <line x1="4" y1="8" x2="20" y2="8" />
+                                <line x1="4" y1="16" x2="20" y2="16" />
+                            </svg> --}}
+                            <i class="fa-brands fa-product-hunt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="side-menu__label">product</span></a>
+					</li>
 					{{-- <li class="slide">
 						<a class="side-menu__item" href="{{ url('/' . $page='icons') }}">
                             <i class="si si-menu "></i>

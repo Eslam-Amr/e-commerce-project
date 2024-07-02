@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->decimal('price');
+            $table->bigInteger('price');
+            $table->string('image');
             $table->decimal('discount')->min(0)->max(100)->defult(0);
             $table->integer('stock');
             $table->string('color');
-            $table->string('size');
-            $table->string('seller');
+            $table->string('name');
+            $table->string('size')->nullable();
+            $table->string('slug'); // Field name same as your `saveSlugsTo`
+            // $table->string('seller');
             $table->text('description');
             $table->string('additonal_information');
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();

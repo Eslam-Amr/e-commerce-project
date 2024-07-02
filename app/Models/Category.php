@@ -11,6 +11,13 @@ class Category extends Model
 {
     use HasSlug,HasFactory;
     protected $fillable = ['name'];
+
+
+public function products(){
+    return $this->hasMany(Product::class);
+}
+
+
         /**
      * Get the options for generating the slug.
      */
