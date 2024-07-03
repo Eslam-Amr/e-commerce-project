@@ -39,7 +39,9 @@ return [
 'enter_product_price' => 'أدخل سعر المنتج',
 'product_image' => 'صورة المنتج',
 'enter_product_image' => 'أدخل صورة المنتج',
-
+'color' => 'اللون',
+'seller' => 'البائع',
+'sold' => 'تم البيع',
 
 ];
 ?>

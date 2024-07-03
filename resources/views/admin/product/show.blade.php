@@ -94,19 +94,23 @@
                                 </div>
                                 <span class="review-no">41 reviews</span>
                             </div> --}}
-                            <h6 class="price">current price: <span class="h3 ml-2"><x-price-after-discount price="{{ $product->price }}" discount="{{ $product->discount }}" /></span></h6>
+                            <h6 class="price">
+                                {{ __('website/admin.product_price') }}:
+                                 <span class="h3 ml-2"><x-price-after-discount price="{{ $product->price }}" discount="{{ $product->discount }}" /></span></h6>
                             <p class="product-description">{{ $product->additonal_information }}</p>
                             {{-- <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p> --}}
-                            <div class="sizes d-flex">sizes:
+                            <div class="sizes d-flex">
+                                {{ __('website/admin.product_size') }}
+                                :
                                {{ $product->size }}
                                 {{-- <span class="size d-flex"  data-toggle="tooltip" title="small"><label class="rdiobox mb-0"><input checked="" name="rdio" type="radio"> <span class="font-weight-bold">s</span></label></span>
                                 <span class="size d-flex"  data-toggle="tooltip" title="medium"><label class="rdiobox mb-0"><input name="rdio" type="radio"> <span>m</span></label></span>
                                 <span class="size d-flex"  data-toggle="tooltip" title="large"><label class="rdiobox mb-0"><input name="rdio" type="radio"> <span>l</span></label></span>
                                 <span class="size d-flex"  data-toggle="tooltip" title="extra-large"><label class="rdiobox mb-0"><input name="rdio" type="radio"> <span>xl</span></label></span> --}}
                             </div>
-                            <div class="colors d-flex  mt-2">
+                            {{-- <div class="colors d-flex  mt-2">
                                 <span class="mt-2">colors: {{ $product->color }}</span>
-
+</div> --}}
 
                                 {{--
                                 <div class="row gutters-xs ml-4">
@@ -136,10 +140,11 @@
                                     </div>
                                 </div>
                                     --}}
-                            </div>
                             <div class="d-flex  ">
                                 {{-- @dd($product->admin) --}}
-                                <div class=" product-title">seller:
+                                <div class=" product-title">
+                                    {{ __('website/admin.seller') }}
+                                    :
                                     @if ($product->seller!=null)
                                     {{ $product->seller->name }}
 
@@ -164,7 +169,15 @@
                                 </div> --}}
                             </div>
                             <div class="d-flex  ">
-                                <div class=" product-title">stock: {{ $product->stock }}</div>
+                                <div class=" product-title">{{ __('website/admin.color') }}: {{ $product->color }}</div>
+                            </div>
+                            <div class="d-flex  ">
+                                <div class=" product-title">{{ __('website/admin.sold') }}:
+                                    {{-- {{ $product->sold }} --}}
+                                </div>
+                            </div>
+                                <div class="d-flex  ">
+                                <div class=" product-title">{{ __('website/admin.product_stock') }}: {{ $product->stock }}</div>
                                 {{-- <div class="d-flex ml-2">
                                     <ul class=" mb-0 qunatity-list">
                                         <li>
@@ -179,6 +192,21 @@
                                         </li>
                                     </ul>
                                 </div> --}}
+                            </div>
+                            <div class="d-flex  ">
+                                <div class=" product-title">
+                                    <a class="btn btn-warning"  href="{{ route('product.edit',$product) }}">edit</a>
+                                </div>
+                            </div>
+                            <div class="d-flex  ">
+                                <div class=" product-title">
+                                    <form action="{{ route('product.destroy',$product) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+
+                                        <button type="submit" class="btn btn-danger"  >delete</button>
+                                    </form>
+                                </div>
                             </div>
                             {{-- <div class="action">
                                 <button class="add-to-cart btn btn-danger" type="button">ADD TO WISHLIST</button>

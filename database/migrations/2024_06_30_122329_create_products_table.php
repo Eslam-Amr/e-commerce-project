@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('image');
             $table->decimal('discount')->min(0)->max(100)->defult(0);
             $table->integer('stock');
+            $table->integer('sold')->nullable()->default(0);
             $table->string('color');
             $table->string('name');
             $table->string('size')->nullable();

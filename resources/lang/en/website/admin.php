@@ -41,8 +41,10 @@ return [
 'product_price'=>'Product Price',
 'enter_product_price'=>'Enter Product Price',
 'product_image'=>'Product Image',
-'enter_product_image'=>'Enter Product Image'
-
+'enter_product_image'=>'Enter Product Image',
+'color'=>'Color',
+'seller'=>'Seller',
+'sold'=>'Sold',
 
 
 ];
