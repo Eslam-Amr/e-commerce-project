@@ -33,7 +33,7 @@
 
 
     <div class="d-flex justify-content-between mb-5">
-        <a href="{{route('product.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.add_product')}}</a>
+        <a href="{{route('admin.product.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.add_product')}}</a>
     </div>
     {{-- <div class="col-xl-12">
         <div class="card">
@@ -63,9 +63,9 @@
                                 <th scope="row">{{ (($categories->currentPage()-1)*15) + $i +1}}</th>
                                 <td>{{ $categories[$i]->name }}</td>
                                 <td>
-                                    <a class="modal-effect btn btn-sm btn-warning" href="{{ route('category.show',$categories[$i]) }}"><i class="far fa-eye"></i></a>
-                                    <a class="modal-effect btn btn-sm btn-info" href="{{ route('category.edit',$categories[$i]) }}"><i class="las la-pen"></i></a>
-                                    <form class="d-inline" action="{{ route('category.destroy',$categories[$i]) }}" method="post">
+                                    <a class="modal-effect btn btn-sm btn-warning" href="{{ route('admin.category.show',$categories[$i]) }}"><i class="far fa-eye"></i></a>
+                                    <a class="modal-effect btn btn-sm btn-info" href="{{ route('admin.category.edit',$categories[$i]) }}"><i class="las la-pen"></i></a>
+                                    <form class="d-inline" action="{{ route('admin.category.destroy',$categories[$i]) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button class="modal-effect btn btn-sm btn-danger " type="submit"><i class="las la-trash"></i></button>
@@ -86,7 +86,7 @@
                             @if (count($products)>0)
 
                             @foreach ($products as $product)
-                            <a href="{{ route('product.show',$product) }}">
+                            <a href="{{ route('admin.product.show',$product) }}">
 
                                 <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
                                     <div class="card">
@@ -97,7 +97,8 @@
 												<i class="mdi mdi-heart-outline ml-auto wishlist"></i>
 											</div> --}}
 											<img class="w-100" src="{{URL::asset('storage/products/'.$product->image)   }}" alt="product-image">
-											<a href="#" class="adtocart"> <i class="las la-shopping-cart "></i>
+											<a href="{{ route('admin.product.show',$product) }}" class="adtocart">
+                                                <i class="las la-shopping-cart "></i>
 											</a>
 										</div>
 										<div class="text-center pt-3">
@@ -342,7 +343,7 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <a href="{{route('doctors.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('doctors.add_doctor')}}</a>
+                        <a href="{{route('admin.doctors.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('doctors.add_doctor')}}</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -384,7 +385,7 @@
 
                                   <td>{{ $doctor->created_at->diffForHumans() }}</td>
                                   <td>
-                                      <a class="modal-effect btn btn-sm btn-info" href="{{route('doctors.edit',$doctor->id)}}"><i class="las la-pen"></i></a>
+                                      <a class="modal-effect btn btn-sm btn-info" href="{{route('admin.doctors.edit',$doctor->id)}}"><i class="las la-pen"></i></a>
                                       <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$doctor->id}}"><i class="las la-trash"></i></a>
                                   </td>
                               </tr>

@@ -47,7 +47,7 @@
                     <p class="mb-2">It is Very Easy to Customize and it uses in your website apllication.</p>
                 </div> --}}
                 <div class="card-body pt-3">
-                        @csrf
+                        {{-- @csrf --}}
                         <div class="">
                             <div class="form-group">
                                 {{-- <label for="exampleInputname1">{{ __("website/admin.category_name") }}</label>

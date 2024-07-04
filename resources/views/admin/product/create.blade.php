@@ -46,7 +46,7 @@
                 <div class="card  box-shadow-0 ">
 
                     <div class="card-body pt-3">
-                        <form method="post" action="{{ route('product.store') }}">
+                        <form method="post" action="{{ route('admin.product.store') }}">
                             @csrf
                             <div class=" col-12">
                                 <div class="form-group col-6">
@@ -142,7 +142,7 @@
                     <p class="mb-2">It is Very Easy to Customize and it uses in your website application.</p>
                 </div> --}}
                     <div class="card-body pt-3">
-                        <form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6">

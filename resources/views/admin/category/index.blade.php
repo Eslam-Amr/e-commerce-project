@@ -42,7 +42,7 @@
                 {{-- policy --}}
                 {{-- @can('create', \App\Model\Category::class) --}}
                 <div class="d-flex justify-content-between">
-                    <a href="{{route('category.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.add_category')}}</a>
+                    <a href="{{route('admin.category.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.add_category')}}</a>
                 </div>
                 {{-- @endcan --}}
                 {{-- <p class="tx-12 tx-gray-500 mb-2">Example of Valex Hoverable Rows Table.. <a href="">Learn more</a></p> --}}
@@ -72,10 +72,10 @@
                                 <td>{{ $categories[$i]->name }}</td>
                                 {{-- <td>System Architect</td> --}}
                                 <td>
-                                    {{-- <a href="{{ route('category.destroy',$categories[$i]) }}">delete</a> --}}
-                                    <a class="modal-effect btn btn-sm btn-warning" href="{{ route('category.show',$categories[$i]) }}"><i class="far fa-eye"></i></a>
-                                    <a class="modal-effect btn btn-sm btn-info" href="{{ route('category.edit',$categories[$i]) }}"><i class="las la-pen"></i></a>
-                                    <form class="d-inline" action="{{ route('category.destroy',$categories[$i]) }}" method="post">
+                                    {{-- <a href="{{ route('admin.category.destroy',$categories[$i]) }}">delete</a> --}}
+                                    <a class="modal-effect btn btn-sm btn-warning" href="{{ route('admin.category.show',$categories[$i]) }}"><i class="far fa-eye"></i></a>
+                                    <a class="modal-effect btn btn-sm btn-info" href="{{ route('admin.category.edit',$categories[$i]) }}"><i class="las la-pen"></i></a>
+                                    <form class="d-inline" action="{{ route('admin.category.destroy',$categories[$i]) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button class="modal-effect btn btn-sm btn-danger " type="submit"><i class="las la-trash"></i></button>

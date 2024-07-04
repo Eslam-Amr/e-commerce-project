@@ -31,7 +31,7 @@
                     {{-- make it for category addetion by admin  --}}
                     @auth('admin')
 					<li class="slide">
-						<a class="side-menu__item" href="{{ route('category.index') }}">
+						<a class="side-menu__item" href="{{ route('admin.category.index') }}">
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon icon icon-tabler icon-tabler-menu" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -42,7 +42,7 @@
 					</li>
                     @endauth
 					<li class="slide">
-						<a class="side-menu__item" href="{{ route('product.index') }}">
+						<a class="side-menu__item" href="{{ route('admin.product.index') }}">
 
                             {{-- <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon icon icon-tabler icon-tabler-menu" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

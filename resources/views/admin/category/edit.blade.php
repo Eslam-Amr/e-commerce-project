@@ -47,7 +47,7 @@
                     <p class="mb-2">It is Very Easy to Customize and it uses in your website apllication.</p>
                 </div> --}}
                 <div class="card-body pt-3">
-                    <form method="post" action="{{ route('category.update' , $category) }}">
+                    <form method="post" action="{{ route('admin.category.update' , $category) }}">
                         @csrf
                         @method('put')
                         <div class="">

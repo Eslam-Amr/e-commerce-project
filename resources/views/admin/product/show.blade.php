@@ -195,12 +195,12 @@
                             </div>
                             <div class="d-flex  ">
                                 <div class=" product-title">
-                                    <a class="btn btn-warning"  href="{{ route('product.edit',$product) }}">edit</a>
+                                    <a class="btn btn-warning"  href="{{ route('admin.product.edit',$product) }}">edit</a>
                                 </div>
                             </div>
                             <div class="d-flex  ">
                                 <div class=" product-title">
-                                    <form action="{{ route('product.destroy',$product) }}" method="post">
+                                    <form action="{{ route('admin.product.destroy',$product) }}" method="post">
                                         @method('delete')
                                         @csrf
 
