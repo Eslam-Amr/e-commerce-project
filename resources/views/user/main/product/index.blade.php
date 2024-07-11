@@ -486,38 +486,41 @@ search
                         @if (count($products) > 0)
 
                             @foreach ($products as $product)
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="product-card position-relative pe-3 pb-3">
-                                        <div class="image-holder">
-                                            {{-- <img src="asset/images/product-item1.jpg" alt="product-item" class="img-fluid"> --}}
-                                            {{-- @dd(asset('storage/products/'.$product->image)) --}}
-                                            <img src="{{ asset('storage/products/' . $product->image) }}" alt="product-item"
-                                                class="img-fluid">
-                                        </div>
-                                        <div class="cart-concern position-absolute">
-                                            <div class="cart-button d-flex">
-                                                <div class="btn-left">
-                                                    <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                                                    <svg class="cart-outline position-absolute">
-                                                        <use xlink:href="#cart-outline"></use>
-                                                    </svg>
+                                <a href="{{ route('user.product.show' , $product) }}">
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="product-card position-relative pe-3 pb-3">
+
+                                            <div class="image-holder">
+                                                {{-- <img src="asset/images/product-item1.jpg" alt="product-item" class="img-fluid"> --}}
+                                                {{-- @dd(asset('storage/products/'.$product->image)) --}}
+                                                <img src="{{ asset('storage/products/' . $product->image) }}"
+                                                    alt="product-item" class="img-fluid">
+                                            </div>
+                                            <div class="cart-concern position-absolute">
+                                                <div class="cart-button d-flex">
+                                                    <div class="btn-left">
+                                                        <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
+                                                        <svg class="cart-outline position-absolute">
+                                                            <use xlink:href="#cart-outline"></use>
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="card-detail d-flex justify-content-between pt-3 pb-3">
-                                            <h3 class="card-title text-uppercase">
-                                                <a href="#">{{ $product->name }}</a>
-                                            </h3>
-                                            <span class="item-price text-primary">
-                                                <x-price-after-discount price="{{ $product->price }}"
-                                                    discount="{{ $product->discount }}" />EGP
-                                                <span style="text-decoration: line-through">
-                                                    <h6> {{ $product->price }}</h6>
+                                            <div class="card-detail d-flex justify-content-between pt-3 pb-3">
+                                                <h3 class="card-title text-uppercase">
+                                                    <a href="#">{{ $product->name }}</a>
+                                                </h3>
+                                                <span class="item-price text-primary">
+                                                    <x-price-after-discount price="{{ $product->price }}"
+                                                        discount="{{ $product->discount }}" />EGP
+                                                    <span style="text-decoration: line-through">
+                                                        <h6> {{ $product->price }}</h6>
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             @endforeach
                         @endif
 

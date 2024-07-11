@@ -8,7 +8,9 @@ use App\Trait\ImageTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Interface\Product\ProductRepositoryInterface;
+use App\Interface\Admin\Product\ProductRepositoryInterface;
+
+// use App\Interface\Product\ProductRepositoryInterface;
 
 class ProductController extends Controller
 {

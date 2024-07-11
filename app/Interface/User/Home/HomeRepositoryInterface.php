@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interface\Section;
+namespace App\Interface\User\Home;
 
-interface HomeRepositoryInterface
+interface UserProductRepositoryInterface
 {
     public function index();
     // public function store($request);

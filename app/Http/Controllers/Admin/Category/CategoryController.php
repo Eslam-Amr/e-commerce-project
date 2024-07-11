@@ -6,7 +6,8 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Interface\Category\CategoryRepositoryInterface;
+use App\Interface\Admin\Category\CategoryRepositoryInterface;
+// use App\Interface\Category\CategoryRepositoryInterface;
 
 class CategoryController extends Controller
 {

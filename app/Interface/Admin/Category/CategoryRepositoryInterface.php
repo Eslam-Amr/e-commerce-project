@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interface\Category;
+namespace App\Interface\Admin\Category;
 
 interface CategoryRepositoryInterface
 {

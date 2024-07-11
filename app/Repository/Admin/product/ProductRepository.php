@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Repository\Product;
+namespace App\Repository\Admin\Product;
 
 use App\Models\Product;
 use App\Models\Category;
 use App\Trait\ImageTrait;
-use App\Interface\Product\ProductRepositoryInterface;
+use App\Interface\Admin\Product\ProductRepositoryInterface;
+// use App\Interface\Product\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface
 {

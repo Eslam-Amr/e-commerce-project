@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\Cart\CartController;
 use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\User\Wishlist\WishlistController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\User\Product\UserProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -48,5 +50,12 @@ require __DIR__ . '/auth.php';
 // Route::get('/{page}', [AdminController::class,'index']);
 
 //############################### User Product   ###############################
-Route::get('/product/show', [UserProductController::class,'show']);
+Route::get('/product/show/{product}', [UserProductController::class,'show'])->name('user.product.show');
 Route::get('/product', [UserProductController::class,'index']);
+Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
+Route::delete('/wishlist/{wishlist}', [WishlistController::class,'destroy'])->name('wishlist.destroy');
+Route::post('/wishlist/{id}', [WishlistController::class,'store'])->name('wishlist.store');
+
+
+Route::post('/cart/add/{id}', [CartController::class, 'store'])->name('cart.store');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index'); // Assuming you have an index method to display the cart
