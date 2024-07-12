@@ -8,6 +8,9 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 {{-- <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css"> --}}
+    <!-- Other head elements -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/bootstrap.min.css') }}">
 <link href="{{URL::asset('admin-asset/assets/css/icons.css')}}" rel="stylesheet">
 <link href="{{URL::asset('admin-asset/assets/css/all.min.css')}}" rel="stylesheet">

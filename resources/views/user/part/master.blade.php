@@ -10,6 +10,8 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
     @include('user.part.navbar')
+    <x-success />
+    <x-error />
     @yield('content')
     @include('user.part.subscribe')
     @include('user.part.more-category')
