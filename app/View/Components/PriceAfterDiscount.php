@@ -12,9 +12,9 @@ class PriceAfterDiscount extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $price, public $discount)
+    public function __construct(public $price, public $discount, public $quantity=1)
     {
-        $this->finalPrice = $price * (1 - ($discount / 100));
+        $this->finalPrice = ($price * (1 - ($discount / 100)) * $quantity);
     }
 
     /**

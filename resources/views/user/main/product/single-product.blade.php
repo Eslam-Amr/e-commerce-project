@@ -11,7 +11,7 @@
                             class="img-fluid">
                     </div>
                 </div>
-         
+
                 <div class="col-lg-6">
                     <div class="product-info">
                         <div class="element-header">
@@ -48,57 +48,57 @@
                                     <h4 class="item-title text-uppercase text-dark text-decoration-underline">Size: </h4>
                                     <h4> &nbsp; &nbsp;{{ $product->size }}</h4>
                                 </div>
-                             
+
                             </div>
                             <div class="product-quantity">
                                 <div class="stock-number text-dark">{{ $product->stock }} in stock</div>
 
                                 <div class="qty-button d-flex flex-wrap pt-3">
 
-                                <form action="{{ route('cart.store', $product->id) }}" method="POST">
-                                    @csrf
-                                <x-plus-minus-button stock="{{ $product->stock }}" />
-    <button type="submit" name="add-to-cart" value="1269"
-                                        class="btn btn-black btn-medium text-uppercase mt-3 me-5">Add to cart</button>
-                                </form>
+                                    <form action="{{ route('cart.store', $product->id) }}" method="POST">
+                                        @csrf
+                                        <x-plus-minus-button stock="{{ $product->stock }}" />
+                                        <button type="submit" name="add-to-cart" value="1269"
+                                            class="btn btn-black btn-medium text-uppercase mt-3 me-5">Add to cart</button>
+                                    </form>
 
-                                        @auth('web')
-                                            <h2>
-                                                @if ($wishlist === null)
-                                                    <form id="create_form" method="post"
-                                                        action="{{ route('wishlist.store', $product->id) }}">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-link text-danger">
-                                                            <i class="btn-medium text-uppercase me-3 mt-4 fa-regular fa-heart"></i>
-                                                        </button>
-                                                    </form>
-                                                @else
-                                                    <form id="delete_form" method="post"
-                                                        action="{{ route('wishlist.destroy', $wishlist) }}">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-link text-danger">
-                                                            <i class="btn-medium text-uppercase me-3 mt-4 fa-solid fa-heart"></i>
-                                                        </button>
-                                                    </form>
-                                                @endif
-    
-                                            </h2>
-                                        @endauth
+                                    @auth('web')
+                                        <h2>
+                                            @if ($wishlist === null)
+                                                <form id="create_form" method="post"
+                                                    action="{{ route('wishlist.store', $product->id) }}">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-link text-danger">
+                                                        <i class="btn-medium text-uppercase me-3 mt-4 fa-regular fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form id="delete_form" method="post"
+                                                    action="{{ route('wishlist.destroy', $wishlist) }}">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-link text-danger">
+                                                        <i class="btn-medium text-uppercase me-3 mt-4 fa-solid fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
 
-                                
+                                        </h2>
+                                    @endauth
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="meta-product py-2">
-                          <div class="meta-item d-flex align-items-baseline">
+                        <div class="meta-item d-flex align-items-baseline">
                             <div style="display:flex ; ">
                                 <h4 class="item-title no-margin pe-2">Category: &nbsp;
                                     &nbsp;{{ $product->category->name }}</h4>
                             </div>
-                           </div>
-                  
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -127,11 +127,11 @@
                             role="tabpanel" aria-labelledby="nav-home-tab">
                             <p>Product Description</p>
                             <p>{{ $product->description }}</p>
-                           
+
                         </div>
                         <div class="tab-pane fade border-top border-bottom padding-small" id="nav-information"
                             role="tabpanel" aria-labelledby="nav-information-tab">
-                          
+
                             <p>{{ $product->additonal_information }}</p>
                         </div>
                         <div class="tab-pane fade border-top border-bottom padding-small" id="nav-review" role="tabpanel"
@@ -348,4 +348,3 @@
     </section>
 
 @endsection
-

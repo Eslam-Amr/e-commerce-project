@@ -59,3 +59,6 @@ Route::post('/wishlist/{id}', [WishlistController::class,'store'])->name('wishli
 
 Route::post('/cart/add/{id}', [CartController::class, 'store'])->name('cart.store');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index'); // Assuming you have an index method to display the cart
+Route::get('/cart/increment/{id}', [CartController::class, 'increment'])->name('cart.increment'); // Assuming you have an index method to display the cart
+Route::get('/cart/decrement/{id}', [CartController::class, 'decrement'])->name('cart.decrement'); // Assuming you have an index method to display the cart
+Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy'); // Assuming you have an index method to display the cart
