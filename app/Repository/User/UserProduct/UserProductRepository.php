@@ -4,7 +4,9 @@ namespace App\Repository\User\UserProduct;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Interface\User\UserProduct\UserProductRepositoryInterface;
@@ -50,5 +52,13 @@ class UserProductRepository implements UserProductRepositoryInterface
         $totalProductsCount = $productsQuery->toBase()->getCountForPagination();
 
         return view('user.main.product.index', get_defined_vars());
+    }
+    public function show($product){
+        $wishlist=null;
+        if(Auth::check())
+        $wishlist = Wishlist::where('product_id', $product->id)
+                           ->where('user_id', auth()->user()->id)
+                           ->first();
+        return view('user.main.product.single-product',get_defined_vars());
     }
 }

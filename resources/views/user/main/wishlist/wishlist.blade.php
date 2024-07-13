@@ -1,27 +1,28 @@
-
 @extends('user.part.master')
-@section('title', 'product')
+@section('title', 'Wishlist')
 @section('content')
-{{-- @dd($wishlists) --}}
-<section class="hero-section position-relative bg-light-blue padding-medium">
-    <div class="hero-content">
-      <div class="container">
-        <div class="row">
-          <div class="text-center padding-large no-padding-bottom">
-            <h1 class="display-2 text-uppercase text-dark">wishlist</h1>
-            <div class="breadcrumbs">
-              <span class="item">
-                <a href="index.html">Home ></a>
-              </span>
-              <span class="item">wishlist</span>
+    {{-- @dd($wishlists) --}}
+    @include('user.part.hero',['name'=>'Wishlist'])
+
+    <section class="hero-section position-relative bg-light-blue padding-medium">
+        <div class="hero-content">
+            <div class="container">
+                <div class="row">
+                    <div class="text-center padding-large no-padding-bottom">
+                        <h1 class="display-2 text-uppercase text-dark">wishlist</h1>
+                        <div class="breadcrumbs">
+                            <span class="item">
+                                <a href="index.html">Home ></a>
+                            </span>
+                            <span class="item">wishlist</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <section class="shopify-cart padding-large">
-    {{-- <div class="container">
+    </section>
+    <section class="shopify-cart padding-large">
+        {{-- <div class="container">
       <div class="row">
         <div class="cart-table">
           <div class="cart-header">
@@ -33,9 +34,9 @@
           </div>
 
           @forelse ($wishlists as $wishlist)
-              
+
           <div class="cart-item border-top border-bottom padding-small">
-            <div class="row align-items-center"> 
+            <div class="row align-items-center">
               <div class="col-lg-6 col-md-5">
                 <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                   <div class="col-lg-6">
@@ -60,8 +61,8 @@
                     <div class="total-price">
                       <span class="money text-primary">$1500.00</span>
                     </div>
-                  </div>   
-                </div>             
+                  </div>
+                </div>
               </div>
               <div class="col-lg-1 col-md-2">
                 <div class="cart-remove">
@@ -74,88 +75,91 @@
               </div>
             </div>
           </div>
-          
+
           @empty
               <h1>sdafffffffffffff</h1>
           @endforelse
 
         </div>
-   
+
       </div>
     </div> --}}
-    <div class="container">
-        <div class="row">
-          <div class="cart-table">
-            <div class="cart-header">
-              <table class="table">
-                <thead>
-                  <tr class="text-uppercase">
-                    <th class="cart-title col-lg-4 pb-3">Product</th>
-                    <th class="cart-title col-lg-4 pb-3">Product name</th>
-                    <th class="cart-title col-lg-4 pb-3">Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{-- @if ($wishlists != null) --}}
-                  {{-- @dd($wishlists[0]->product) --}}
-                  @forelse ($wishlists as $wishlist)
-                  {{-- @dd($wishlist->product) --}}
-                  <tr class="cart-item border-top border-bottom padding-small">
-                    <td class="col-lg-4">
-                      <div class="cart-info d-flex flex-wrap align-items-center mb-4">
-                        <div class="card-image">
-                          <img src="{{ asset('storage/products/' . $wishlist->product->image) }}" alt="cloth" class="img-fluid">
-                        </div>
-                      </div>
-                    </td>
-                    <td class="col-lg-4">
-                      <div class="card-detail ps-3">
-                        <h3 class="card-title text-uppercase">
-                          <a href="#">{{ $wishlist->product->name }}</a>
-                        </h3>
-                      </div>
-                    </td>
-                    <td class="col-lg-4">
-                      <div class="total-price">
-                        <span class="money text-primary"><x-price-after-discount price="{{ $wishlist->product->price }}"
-                            discount="{{ $wishlist->product->discount }}" />EGP</span>
-                      </div>
-                    </td>
-                    <td class="col-lg-1 col-md-2">
-                      <div class="cart-remove">
-                        {{-- @dd($wishlist) --}}
-                        <form id="delete_form" action="{{ route('wishlist.destroy',  $wishlist) }}" method="post">
-                            @method('delete') <!-- Method spoofing for DELETE request -->
-                            @csrf <!-- CSRF token for security -->
-                        
-                            <a href="javascript:$('form#delete_form').submit();">
-                              <svg class="close" width="38px">
-                                <use xlink:href="#close"></use>
-                              </svg>
-                            </a>
+        <div class="container">
+            <div class="row">
+                <div class="cart-table">
+                    <div class="cart-header">
+                        <table class="table">
+                            <thead>
+                                <tr class="text-uppercase">
+                                    <th class="cart-title col-lg-4 pb-3">Product</th>
+                                    <th class="cart-title col-lg-4 pb-3">Product name</th>
+                                    <th class="cart-title col-lg-4 pb-3">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- @if ($wishlists != null) --}}
+                                {{-- @dd($wishlists[0]->product) --}}
+                                @forelse ($wishlists as $wishlist)
+                                    {{-- @dd($wishlist->product) --}}
+                                    <tr class="cart-item border-top border-bottom padding-small">
+                                        <td class="col-lg-4">
+                                            <div class="cart-info d-flex flex-wrap align-items-center mb-4">
+                                                <div class="card-image">
+                                                    <img src="{{ asset('storage/products/' . $wishlist->product->image) }}"
+                                                        alt="cloth" class="img-fluid">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="col-lg-4">
+                                            <div class="card-detail ps-3">
+                                                <h3 class="card-title text-uppercase">
+                                                    <a href="#">{{ $wishlist->product->name }}</a>
+                                                </h3>
+                                            </div>
+                                        </td>
+                                        <td class="col-lg-4">
+                                            <div class="total-price">
+                                                <span class="money text-primary"><x-price-after-discount
+                                                        price="{{ $wishlist->product->price }}"
+                                                        discount="{{ $wishlist->product->discount }}" />EGP</span>
+                                            </div>
+                                        </td>
+                                        <td class="col-lg-1 col-md-2">
+                                            <div class="cart-remove">
+                                                {{-- @dd($wishlist) --}}
+                                                <form id="delete_form" action="{{ route('wishlist.destroy', $wishlist) }}"
+                                                    method="post">
+                                                    @method('delete') <!-- Method spoofing for DELETE request -->
+                                                    @csrf <!-- CSRF token for security -->
 
-                            {{-- <button type="submit"></button> --}}
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                  @empty
-                  <tr>
-                    <td colspan="3">
-                      <h1>no product in wishlist </h1>
-                    </td>
-                  </tr>
-                  @endforelse
-                  {{-- @endif --}}
-                </tbody>
-              </table>
+                                                    <a href="javascript:$('form#delete_form').submit();">
+                                                        <svg class="close" width="38px">
+                                                            <use xlink:href="#close"></use>
+                                                        </svg>
+                                                    </a>
+
+                                                    {{-- <button type="submit"></button> --}}
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3">
+                                            <h1>no product in wishlist </h1>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                {{-- @endif --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      
-  </section> 
-  @endsection
+
+    </section>
+@endsection
 {{-- <!DOCTYPE html>
 <html>
   <head>
@@ -232,7 +236,7 @@
           </form>
 
           <h5 class="cat-list-title">Browse Categories</h5>
-          
+
           <ul class="cat-list">
             <li class="cat-list-item">
               <a href="#" title="Mobile Phones">Mobile Phones</a>
@@ -259,7 +263,7 @@
 
         </div>
     </div>
-    
+
     <header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
       <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
         <div class="container-fluid">
@@ -389,7 +393,7 @@
               </div>
             </div>
             <div class="cart-item border-top border-bottom padding-small">
-              <div class="row align-items-center"> 
+              <div class="row align-items-center">
                 <div class="col-lg-4 col-md-3">
                   <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                     <div class="col-lg-5">
@@ -426,8 +430,8 @@
                       <div class="total-price">
                         <span class="money text-primary">$1500.00</span>
                       </div>
-                    </div>   
-                  </div>             
+                    </div>
+                  </div>
                 </div>
                 <div class="col-lg-1 col-md-2">
                   <div class="cart-remove">
@@ -478,8 +482,8 @@
                       <div class="total-price">
                         <span class="money text-primary">$870.00</span>
                       </div>
-                    </div>   
-                  </div>             
+                    </div>
+                  </div>
                 </div>
                 <div class="col-lg-1 col-md-2">
                   <div class="cart-remove">
@@ -528,7 +532,7 @@
           </div>
         </div>
       </div>
-    </section> 
+    </section>
     <section id="subscribe" class="container-grid position-relative overflow-hidden">
       <div class="container">
         <div class="row">
@@ -759,8 +763,8 @@
     <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html> --}}
-          {{-- @endif --}}
-          {{-- <div class="cart-item border-top border-bottom padding-small">
+{{-- @endif --}}
+{{-- <div class="cart-item border-top border-bottom padding-small">
             <div class="row align-items-center">
               <div class="col-lg-4 col-md-3">
                 <div class="cart-info d-flex flex-wrap align-items-center mb-4">
@@ -798,8 +802,8 @@
                     <div class="total-price">
                       <span class="money text-primary">$870.00</span>
                     </div>
-                  </div>   
-                </div>             
+                  </div>
+                </div>
               </div>
               <div class="col-lg-1 col-md-2">
                 <div class="cart-remove">

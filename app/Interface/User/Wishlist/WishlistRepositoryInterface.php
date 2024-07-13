@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Interface\User\UserProduct;
+namespace App\Interface\User\Wishlist;
 
-interface UserProductRepositoryInterface
+interface WishlistRepositoryInterface
 {
     public function index();
-    public function show($product);
+    public function destroy($wishlist);
+    public function store($id);
     // public function store($request);
     // public function update($request);
     // public function destroy($request);

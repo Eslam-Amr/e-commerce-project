@@ -1,8 +1,9 @@
 @extends('user.part.master')
-@section('title', 'product')
+@section('title', 'Product')
 @section('content')
+@include('user.part.hero',['name'=>'Product'])
 
-    <section class="hero-section position-relative bg-light-blue padding-medium">
+    {{-- <section class="hero-section position-relative bg-light-blue padding-medium">
         <div class="hero-content">
             <div class="container">
                 <div class="row">
@@ -18,7 +19,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <div class="shopify-grid padding-large">
         <div class="container">
             <div class="row">
@@ -162,7 +163,7 @@
                                 }
                             });
                         </script>
-              
+
                     </div>
                     <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
                         <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
@@ -192,7 +193,7 @@
                                     <input class="search-field" placeholder="Search" name="filter[search]"
                                         value="{{ request('filter.search') }}" type="search">
                                     <div class="search-icon bg-dark">
-                                
+
                                         <a onclick="event.preventDefault();
                                         this.closest('form').submit();"
                                             href="#">
@@ -220,10 +221,10 @@
                                         </li>
                                     @endforeach
                                 @endif
-              
+
                             </ul>
                         </div>
-                      
+
                         <div class="widget-price-filter pt-3">
                             <h5 class="widget-titlewidget-title text-decoration-underline text-uppercase">Filter By Price
                             </h5>
@@ -232,7 +233,7 @@
                                 <x-price-range />
                             </div>
                             <ul class="product-tags sidebar-list list-unstyled">
-                            
+
                             </ul>
                         </div>
                     </div>

@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Interface\User\Cart;
+
+interface CartRepositoryInterface
+{
+    public function index();
+    // public function destroy($wishlist);
+    // public function store($id);
+    public function store($request, $id);
+    public function increment($id);
+    public function destroy($id);
+    public function decrement($id);
+    // public function update($request);
+    // public function destroy($request);
+}

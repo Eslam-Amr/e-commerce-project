@@ -8,6 +8,7 @@ use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\User\Wishlist\WishlistController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\User\Contact\UserContactController;
 use App\Http\Controllers\User\Product\UserProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Admin\Seller\Product\ProductController;
@@ -52,13 +53,17 @@ require __DIR__ . '/auth.php';
 //############################### User Product   ###############################
 Route::get('/product/show/{product}', [UserProductController::class,'show'])->name('user.product.show');
 Route::get('/product', [UserProductController::class,'index']);
+//############################### User wishlist   ###############################
 Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
 Route::delete('/wishlist/{wishlist}', [WishlistController::class,'destroy'])->name('wishlist.destroy');
 Route::post('/wishlist/{id}', [WishlistController::class,'store'])->name('wishlist.store');
 
 
+//############################### User cart   ###############################
 Route::post('/cart/add/{id}', [CartController::class, 'store'])->name('cart.store');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index'); // Assuming you have an index method to display the cart
 Route::get('/cart/increment/{id}', [CartController::class, 'increment'])->name('cart.increment'); // Assuming you have an index method to display the cart
 Route::get('/cart/decrement/{id}', [CartController::class, 'decrement'])->name('cart.decrement'); // Assuming you have an index method to display the cart
 Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy'); // Assuming you have an index method to display the cart
+//############################### User contact   ###############################
+Route::get('/contact', [UserContactController::class, 'index'])->name('contact.index'); // Assuming you have an index method to display the cart

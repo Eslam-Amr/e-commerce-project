@@ -1,27 +1,12 @@
 @extends('user.part.master')
-@section('title', 'home')
+@section('title', 'Cart')
 @section('content')
 @php
     $total=[];
     $totalPrice=0;
 @endphp
-    <section class="hero-section position-relative bg-light-blue padding-medium">
-        <div class="hero-content">
-            <div class="container">
-                <div class="row">
-                    <div class="text-center padding-large no-padding-bottom">
-                        <h1 class="display-2 text-uppercase text-dark">Cart</h1>
-                        <div class="breadcrumbs">
-                            <span class="item">
-                                <a href="index.html">Home ></a>
-                            </span>
-                            <span class="item">Cart</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+@include('user.part.hero',['name'=>'Cart'])
+
     <section class="shopify-cart padding-large">
         <div class="container">
             <div class="row">
@@ -33,6 +18,7 @@
                             <h3 class="cart-title col-lg-4 pb-3">Subtotal</h3>
                         </div>
                     </div>
+                    @if (auth()->user() != null)
                     @if (count($cart->products) > 0 && $cart != null)
                         @foreach ($cart->products as $product)
                             {{-- @dd($product) --}}
@@ -138,6 +124,7 @@
                             </div>
                         @endforeach
                     @endif
+                    @endif
                     {{-- <div class="cart-item border-top border-bottom padding-small">
                         <div class="row align-items-center">
                             <div class="col-lg-4 col-md-3">
@@ -206,7 +193,7 @@
                                                 @foreach ($total as $singlePrice)
                                                 {{ $singlePrice }}
                                                 <span class="price-currency-symbol">EGP </span>
-                                                    
+
                                                 @endforeach
                                             </bdi> --}}
                                             <bdi>
