@@ -42,7 +42,7 @@ class ProductRepository implements ProductRepositoryInterface
         $product['image']=$this->storeImage($request,'products');
         Product::create($product);
         toastr()->success('created successfully');
-        return redirect()->route('product.index')->with(['success'=>'product created successfully','products'=>$products]);
+        return redirect()->route('admin.product.index')->with(['success'=>'product created successfully','products'=>$products]);
     }
 
     /**
