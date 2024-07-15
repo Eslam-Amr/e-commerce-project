@@ -8,11 +8,13 @@ use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\User\Wishlist\WishlistController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Seller\Checkout\CheckoutController;
+use App\Http\Controllers\Admin\Seller\Order\OrderController;
 use App\Http\Controllers\User\Contact\UserContactController;
 use App\Http\Controllers\User\Product\UserProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Admin\Seller\Product\ProductController;
-use App\Http\Controllers\User\Checkout\CheckoutController;
+use App\Http\Controllers\User\Checkout\UserCheckoutController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -29,6 +31,9 @@ Route::group(
         Route::view('/test','admin.doctors.index');
      //############################### Admin Category   ###############################
         Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
+        Route::resource('/order',  OrderController::class )->except('destroy','show');
+        Route::delete('/order/{checkout}',[  OrderController::class,'destroy'] )->name('order.destroy');
+        Route::get('/order/{checkout}/show',[  OrderController::class,'show'] )->name('order.show');
      //############################### Admin Product   ###############################
         Route::resource('/product',  ProductController::class );
         Route::view('/','admin.index')->name('index');
@@ -67,9 +72,9 @@ Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('c
 //############################### User contact   ###############################
 Route::get('/contact', [UserContactController::class, 'index'])->name('contact.index'); // Assuming you have an index method to display the cart
 //############################### User checkout   ###############################
-Route::get('/checkout', [CheckoutController::class , 'create'])->name('checkout.create'); // Assuming you have an index method to display the cart
-Route::post('/checkout/store', [CheckoutController::class , 'store'])->name('checkout.store'); // Assuming you have an index method to display the cart
-// Route::resource('/checkout', CheckoutController::class ); // Assuming you have an index method to display the cart
+Route::get('/checkout', [UserCheckoutController::class , 'create'])->name('checkout.create'); // Assuming you have an index method to display the cart
+Route::post('/checkout/store', [UserCheckoutController::class , 'store'])->name('checkout.store'); // Assuming you have an index method to display the cart
+// Route::resource('/checkout', UserCheckoutController::class ); // Assuming you have an index method to display the cart
 
 //############################### Admin dashboard   ###############################
 Route::get('/{page}', [AdminController::class,'index']);

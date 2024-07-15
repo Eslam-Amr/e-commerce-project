@@ -15,4 +15,10 @@ class Checkout extends Model
                     ->withPivot('quantity')
                     ->withTimestamps();
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function info(){
+        return $this->belongsTo(CheckoutInfo::class,'checkout_info_id');
+    }
 }

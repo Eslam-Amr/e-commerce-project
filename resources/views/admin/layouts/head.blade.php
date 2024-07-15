@@ -2,6 +2,9 @@
 <title> Valex -  Premium dashboard ui bootstrap rwd admin html5 template </title>
 <!-- Favicon -->
 <link rel="icon" href="{{URL::asset('admin-asset/assets/img/brand/favicon.png')}}" type="image/x-icon"/>
+<!-- sweet alert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Icons css -->
 <link href="{{URL::asset('admin-asset/assets/css/icons.css')}}" rel="stylesheet">
 <link href="{{URL::asset('admin-asset/assets/css/all.min.css')}}" rel="stylesheet">

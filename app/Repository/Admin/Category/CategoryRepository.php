@@ -9,6 +9,8 @@ class CategoryRepository implements CategoryRepositoryInterface
 {
     public function index()
     {
+        flash()->success('Operation completed successfully.');
+
         // toastr()->success('asdadsasdasd');
         // toastr()->error('asdadsasdasd');
         $categories = Category::paginate();
@@ -20,6 +22,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
     public function create()
     {
+        flash()->success('Operation completed successfully.');
+
         // flash()->success('Your account has been re-activated.');
         // flash()->success('Your account has been re-activated.');
         // flash()->success('Your account has been re-activated.');
@@ -33,6 +37,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
     public function store($request)
     {
+        flash()->success('Operation completed successfully.');
+
         Category::create($request->validated());
         $categories = Category::paginate();
         // flash()->success('Your account has been re-activated.');
@@ -59,10 +65,12 @@ class CategoryRepository implements CategoryRepositoryInterface
         return redirect()->back()->with(['success' => 'deleted successfuly']);
     }
     public function update($request,$category){
+        flash()->success('Operation completed successfully.');
+
         $category->update($request->validated());
         $categories = Category::paginate();
 
-        return view('admin.category.index', ['categories' => $categories, 'success' => 'updated created successfuly']);
+        return view('admin.category.index', ['categories' => $categories, 'success' => 'category updated successfuly']);
 
     }
 }
