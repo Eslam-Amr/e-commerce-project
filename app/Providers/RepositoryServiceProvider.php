@@ -12,7 +12,9 @@ use App\Repository\User\UserProduct\UserProductRepository;
 use App\Interface\Admin\Product\ProductRepositoryInterface;
 use App\Interface\User\Wishlist\WishlistRepositoryInterface;
 use App\Interface\Admin\Category\CategoryRepositoryInterface;
+use App\Interface\User\Checkout\CheckoutRepositoryInterface;
 use App\Interface\User\UserProduct\UserProductRepositoryInterface;
+use App\Repository\User\Checkout\CheckoutRepository;
 
 // App\Repository\Home\UserProductRepository
 // use App\Repository\Product\ProductRepository;
@@ -32,6 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserProductRepositoryInterface::class, UserProductRepository::class);
         $this->app->bind(WishlistRepositoryInterface::class, WishlistRepository::class);
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
+        $this->app->bind(CheckoutRepositoryInterface::class, CheckoutRepository::class);
 
     }
 

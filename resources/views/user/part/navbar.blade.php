@@ -68,7 +68,7 @@
     </symbol>
   </svg>
 
-  <div class="search-popup">
+  {{-- <div class="search-popup">
       <div class="search-popup-container">
 
         <form role="search" method="get" class="search-form" action="">
@@ -103,8 +103,8 @@
         </ul>
 
       </div>
-  </div>
-
+  </div> --}}
+<x-search />
   <header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
       <div class="container-fluid">
@@ -132,7 +132,7 @@
                 <a class="nav-link me-4" href="#company-services">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="#mobile-products">Products</a>
+                <a class="nav-link me-4" href="product">Products</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="#smart-watches">Watches</a>
