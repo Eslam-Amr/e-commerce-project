@@ -1,7 +1,7 @@
 @extends('user.part.master')
 @section('title','login')
 @section('content')
-<style>
+{{-- <style>
     body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
@@ -69,25 +69,15 @@ a:hover {
     margin-top: 5px;
 }
 
-</style>
+</style> --}}
 <div class="container">
     <div class="row">
         <div class="col-6 mt-4">
 <img src="asset/images/banner-image.png" alt="">
         </div>
         <div class="col-6">
-            {{-- <x-guest-layout>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
+            <x-guest-layout>
+ 
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -133,8 +123,8 @@ a:hover {
                         </x-primary-button>
                     </div>
                 </form>
-            </x-guest-layout> --}}
-            <x-guest-layout>
+            </x-guest-layout>
+            {{-- <x-guest-layout>
                 <br>
                 <br>
                 <br>
@@ -188,7 +178,7 @@ a:hover {
                         </div>
                     </form>
                 </div>
-            </x-guest-layout>
+            </x-guest-layout> --}}
 
         </div>
     </div>

@@ -8,13 +8,13 @@ use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\User\Wishlist\WishlistController;
 use App\Http\Controllers\Admin\Category\CategoryController;
-use App\Http\Controllers\Admin\Seller\Checkout\CheckoutController;
 use App\Http\Controllers\Admin\Seller\Order\OrderController;
 use App\Http\Controllers\User\Contact\UserContactController;
 use App\Http\Controllers\User\Product\UserProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use App\Http\Controllers\Admin\Seller\Product\ProductController;
 use App\Http\Controllers\User\Checkout\UserCheckoutController;
+use App\Http\Controllers\Admin\Seller\Product\ProductController;
+use App\Http\Controllers\Admin\Seller\Checkout\CheckoutController;
 use App\Http\Controllers\User\OrderHistory\UserOrderHistoryController;
 
 // Route::get('/', function () {
@@ -64,7 +64,9 @@ Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.ind
 Route::delete('/wishlist/{wishlist}', [WishlistController::class,'destroy'])->name('wishlist.destroy');
 Route::post('/wishlist/{id}', [WishlistController::class,'store'])->name('wishlist.store');
 //############################### User order history   ###############################
-Route::resource('/orders',UserOrderHistoryController::class);
+Route::resource('/orders',UserOrderHistoryController::class)->except('show');
+Route::get('/orders/{checkout}',[UserOrderHistoryController::class,'show'])->name('user.order.show')->middleware('auth:web');
+Route::put('/orders/cancel/{checkout}',[UserOrderHistoryController::class,'cancel'])->name('user.order.cancel')->middleware('auth:web');
 
 //############################### User cart   ###############################
 Route::post('/cart/add/{id}', [CartController::class, 'store'])->name('cart.store');

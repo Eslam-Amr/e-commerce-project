@@ -158,38 +158,21 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endforeach
-                                            <div class="col-12 mt-3">
+                                    @endforeach
+                                    <div class="col-12 mt-3">
 
-                                                <h6>{{ __('website/admin.finalprice') }}</h6>
-                                                {{-- @dd($checkout) --}}
-                                                <label class="form-control">{{ $checkout->total }} </label>
-                                            </div>
+                                        <h6>{{ __('website/admin.finalprice') }}</h6>
+                                        {{-- @dd($checkout) --}}
+                                        <label class="form-control">{{ $checkout->total }} </label>
+                                    </div>
 
 
 
-                                            {{-- make status change in database for shiping or completed or pending for you and user  --}}
+                                    {{-- make status change in database for shiping or completed or pending for you and user  --}}
                                 </div>
                                 {{-- @dd($checkout->info) --}}
 
 
-                                {{--
-
-
-
-
-first_name
-last_name
-company_name
-country
-street_address
-appartment_info
-city
-state
-phone
-email
-Order_notes
---}}
                                 {{-- <label class="form-control">{{ $category->name }} </label> --}}
                             </div>
 
