@@ -27,4 +27,9 @@ class OrderController extends Controller
         // dd($checkout->info);
         return view('admin.order.show',get_defined_vars());
     }
+    public function update(Request $request,Checkout $checkout){
+    //    dd ($checkout);
+    $checkout->update($request->all());
+    return redirect()->back()->with(['success' =>"order status updated successfully"]);
+    }
 }

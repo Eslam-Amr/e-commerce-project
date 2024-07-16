@@ -15,6 +15,7 @@ use App\Http\Controllers\User\Product\UserProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Admin\Seller\Product\ProductController;
 use App\Http\Controllers\User\Checkout\UserCheckoutController;
+use App\Http\Controllers\User\OrderHistory\UserOrderHistoryController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -31,9 +32,10 @@ Route::group(
         Route::view('/test','admin.doctors.index');
      //############################### Admin Category   ###############################
         Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
-        Route::resource('/order',  OrderController::class )->except('destroy','show');
+        Route::resource('/order',  OrderController::class )->except('destroy','show','update');
         Route::delete('/order/{checkout}',[  OrderController::class,'destroy'] )->name('order.destroy');
         Route::get('/order/{checkout}/show',[  OrderController::class,'show'] )->name('order.show');
+        Route::put('/order/update/{checkout}',[  OrderController::class,'update'] )->name('order.update');
      //############################### Admin Product   ###############################
         Route::resource('/product',  ProductController::class );
         Route::view('/','admin.index')->name('index');
@@ -61,7 +63,8 @@ Route::get('/product', [UserProductController::class,'index'])->name('user.produ
 Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
 Route::delete('/wishlist/{wishlist}', [WishlistController::class,'destroy'])->name('wishlist.destroy');
 Route::post('/wishlist/{id}', [WishlistController::class,'store'])->name('wishlist.store');
-
+//############################### User order history   ###############################
+Route::resource('/orders',UserOrderHistoryController::class);
 
 //############################### User cart   ###############################
 Route::post('/cart/add/{id}', [CartController::class, 'store'])->name('cart.store');

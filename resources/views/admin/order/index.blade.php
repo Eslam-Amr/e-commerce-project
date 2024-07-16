@@ -107,10 +107,11 @@
                     <table class="table table-hover mb-0 text-md-nowrap">
                         <thead>
                             <tr>
-                                <th width="15%">#</th>
-                                <th width="20%">{{ __('website/admin.user_name') }}</th>
-                                <th width="20%">{{ __('website/admin.final_price') }}</th>
-                                <th width="15%">{{ __('website/admin.date') }}</th>
+                                <th width="4%">#</th>
+                                <th width="15%">{{ __('website/admin.user_name') }}</th>
+                                <th width="10%">{{ __('website/admin.final_price') }}</th>
+                                <th width="10%">{{ __('website/admin.date') }}</th>
+                                <th width="25%">{{ __('website/admin.update_status') }}</th>
                                 <th width="*%">{{ __('website/admin.action') }}</th>
 
                             </tr>
@@ -129,29 +130,62 @@
                                         <td>{{ $orders[$i]->total }}</td>
                                         <td>{{ $orders[$i]->created_at->format('Y-m-d') }}</td>
                                         <td>
-                                            {{-- @dd($orders[$i]) --}}
-                                            <a  class="btn btn-success " href="{{ route('admin.order.show',$orders[$i]) }}">For More Info</a>
-                                            <form class="d-inline"
-                                                action="{{ route('admin.order.destroy', $orders[$i]) }}" method="post">
+                                            {{-- <form action="{{ route('admin.order.update') }}">
+                                                <select name="status" class="form-control-color" id="status">
+                                                    <option value="Pending" {{ $orders[$i]->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                                    <option value="Processing" {{ $orders[$i]->status == 'Processing' ? 'selected' : '' }}>Processing</option>
+                                                    <option value="On Hold" {{ $orders[$i]->status == 'On Hold' ? 'selected' : '' }}>On Hold</option>
+                                                    <option value="Completed" {{ $orders[$i]->status == 'Completed' ? 'selected' : '' }}>Completed</option>
+                                                    <option value="Cancelled" {{ $orders[$i]->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                                    <option value="Refunded" {{ $orders[$i]->status == 'Refunded' ? 'selected' : '' }}>Refunded</option>
+                                                    <option value="Failed" {{ $orders[$i]->status == 'Failed' ? 'selected' : '' }}>Failed</option>
+                                                    <option value="Shipped" {{ $orders[$i]->status == 'Shipped' ? 'selected' : '' }}>Shipped</option>
+                                                    <option value="Out for Delivery" {{ $orders[$i]->status == 'Out for Delivery' ? 'selected' : '' }}>Out for Delivery</option>
+                                                    <option value="Delivered" {{ $orders[$i]->status == 'Delivered' ? 'selected' : '' }}>Delivered</option>
+                                                    <option value="Returned" {{ $orders[$i]->status == 'Returned' ? 'selected' : '' }}>Returned</option>
+                                                    <option value="Partially" {{ $orders[$i]->status == 'Partially' ? 'selected' : '' }}>Partially</option>
+                                                </select>
+
+                                            </form> --}}
+                                            <form action="{{ route('admin.order.update',$orders[$i]) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <!-- Assuming you need to send the order ID as well -->
+                                                {{-- <input type="hidden" name="order_id" value="{{ $orders[$i]->id }}"> --}}
+
+                                                <select name="status" class="form-control-color" id="status{{ $orders[$i]->id }}" onchange="submitForm(this)">
+                                                    <option value="Pending" {{ $orders[$i]->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                                    <option value="Processing" {{ $orders[$i]->status == 'Processing' ? 'selected' : '' }}>Processing</option>
+                                                    <option value="On Hold" {{ $orders[$i]->status == 'On Hold' ? 'selected' : '' }}>On Hold</option>
+                                                    <option value="Completed" {{ $orders[$i]->status == 'Completed' ? 'selected' : '' }}>Completed</option>
+                                                    <option value="Cancelled" {{ $orders[$i]->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                                    <option value="Refunded" {{ $orders[$i]->status == 'Refunded' ? 'selected' : '' }}>Refunded</option>
+                                                    <option value="Failed" {{ $orders[$i]->status == 'Failed' ? 'selected' : '' }}>Failed</option>
+                                                    <option value="Shipped" {{ $orders[$i]->status == 'Shipped' ? 'selected' : '' }}>Shipped</option>
+                                                    <option value="Out for Delivery" {{ $orders[$i]->status == 'Out for Delivery' ? 'selected' : '' }}>Out for Delivery</option>
+                                                    <option value="Delivered" {{ $orders[$i]->status == 'Delivered' ? 'selected' : '' }}>Delivered</option>
+                                                    <option value="Returned" {{ $orders[$i]->status == 'Returned' ? 'selected' : '' }}>Returned</option>
+                                                    <option value="Partially" {{ $orders[$i]->status == 'Partially' ? 'selected' : '' }}>Partially</option>
+                                                </select>
+                                            </form>
+
+                                            <script>
+                                                function submitForm(selectElement) {
+                                                    selectElement.form.submit();
+                                                }
+                                            </script>
+
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success " href="{{ route('admin.order.show', $orders[$i]) }}">For
+                                                More Info</a>
+                                            <form class="d-inline" action="{{ route('admin.order.destroy', $orders[$i]) }}"
+                                                method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button  class="p-2 modal-effect btn btn-sm btn-danger " type="submit"><i
+                                                <button class="p-2 modal-effect btn btn-sm btn-danger " type="submit"><i
                                                         class="las la-trash"></i></button>
                                             </form>
-                                            {{-- <a class="modal-effect btn btn-sm btn-warning"
-                                                href="{{ route('admin.category.show', $orders[$i]) }}"><i
-                                                    class="far fa-eye"></i></a>
-                                            <a class="modal-effect btn btn-sm btn-info"
-                                                href="{{ route('admin.category.edit', $orders[$i]) }}"><i
-                                                    class="las la-pen"></i></a>
-                                            <form class="d-inline"
-                                                action="{{ route('admin.category.destroy', $orders[$i]) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="modal-effect btn btn-sm btn-danger " type="submit"><i
-                                                        class="las la-trash"></i></button>
-                                            </form>
-                                            --}}
                                         </td>
                                     </tr>
                                 @endfor

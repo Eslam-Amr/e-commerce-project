@@ -53,8 +53,8 @@ delete from cart table
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    public function store(StoreCheckoutRequest $request)
+    public function store(Request $request)
+    // public function store(StoreCheckoutRequest $request)
     {
         return $this->CheckoutRepository->store($request);
     //     // dd('Create a new');
