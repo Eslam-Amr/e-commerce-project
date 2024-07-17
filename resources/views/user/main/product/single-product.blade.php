@@ -137,42 +137,56 @@
                         <div class="tab-pane fade border-top border-bottom padding-small" id="nav-review" role="tabpanel"
                             aria-labelledby="nav-review-tab">
                             <div class="review-box d-flex flex-wrap">
-                                <div class="col-lg-6 d-flex flex-wrap">
-                                    <div class="col-md-2">
-                                        <div class="image-holder">
-                                            <img src="asset/images/review-item1.jpg" alt="review" class="img-fluid">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="review-content">
-                                            <div class="rating-container d-flex align-items-center">
-                                                <div class="rating" data-rating="1" onclick="rate(1)">
-                                                    <i class="icon icon-star"></i>
+                                @if (count($reviews) > 0)
+
+                                    @foreach ($reviews as $review)
+                                        <div class="col-lg-6 d-flex flex-wrap">
+                                            {{-- user image  --}}
+                                            {{-- <div class="col-md-2">
+                                                <div class="image-holder">
+                                                    <img src="asset/images/review-item1.jpg" alt="review"
+                                                        class="img-fluid">
                                                 </div>
-                                                <div class="rating" data-rating="2" onclick="rate(1)">
-                                                    <i class="icon icon-star"></i>
+                                            </div> --}}
+                                            <style>
+                                                .icon-star-selected {
+                                                    color: #ffd700;
+                                                    /* Change color as needed */
+                                                }
+                                            </style>
+                                            <div class="col-md-8">
+                                                <div class="review-content">
+                                                    <div class="rating-container d-flex align-items-center">
+                                                        {{-- <div class="rating" data-rating="1" onclick="rate(1)">
+                                                            <i class="icon icon-star"></i>
+                                                        </div>
+                                                        <div class="rating" data-rating="2" onclick="rate(1)">
+                                                            <i class="icon icon-star"></i>
+                                                        </div>
+                                                        <div class="rating" data-rating="3" onclick="rate(1)">
+                                                            <i class="icon icon-star"></i>
+                                                        </div>
+                                                        <div class="rating" data-rating="4" onclick="rate(1)">
+                                                            <i class="icon icon-star-half"></i>
+                                                        </div>
+                                                        <div class="rating" data-rating="5" onclick="rate(1)">
+                                                            <i class="icon icon-star-empty"></i>
+                                                        </div> --}}
+                                                        <span class="rating-count">({{ $review->rate }} / 5)</span>
+                                                    </div>
+
+                                                    <div class="review-header">
+                                                        <span class="author-name">{{ $review->user->name }}</span>
+                                                        <span class="review-date">– {{ $review->created_at->format('Y/m/d') }}</span>
+                                                    </div>
+                                                    <p>{{ $review->comment }}</p>
                                                 </div>
-                                                <div class="rating" data-rating="3" onclick="rate(1)">
-                                                    <i class="icon icon-star"></i>
-                                                </div>
-                                                <div class="rating" data-rating="4" onclick="rate(1)">
-                                                    <i class="icon icon-star-half"></i>
-                                                </div>
-                                                <div class="rating" data-rating="5" onclick="rate(1)">
-                                                    <i class="icon icon-star-empty"></i>
-                                                </div>
-                                                <span class="rating-count">(3.5)</span>
                                             </div>
-                                            <div class="review-header">
-                                                <span class="author-name">Tina Johnson</span>
-                                                <span class="review-date">– 03/07/2023</span>
-                                            </div>
-                                            <p>Vitae tortor condimentum lacinia quis vel eros donec ac. Nam at lectus
-                                                urna duis convallis convallis</p>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 d-flex flex-wrap">
+                                    @endforeach
+                                @endif
+
+                                {{-- <div class="col-lg-6 d-flex flex-wrap">
                                     <div class="col-md-2">
                                         <div class="image-holder">
                                             <img src="asset/images/review-item2.jpg" alt="review" class="img-fluid">
@@ -206,7 +220,7 @@
                                                 urna duis convallis convallis</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -214,6 +228,11 @@
             </div>
         </div>
     </section>
+    <!-- resources/views/review-form.blade.php -->
+    {{-- <x-product-review-form  :product_id="$product->id" /> --}}
+    <!-- Usage in Blade template -->
+    <x-product-review-form :id="$product->id" />
+
     <section id="related-products" class="product-store position-relative padding-large">
         <div class="container">
             <div class="row">

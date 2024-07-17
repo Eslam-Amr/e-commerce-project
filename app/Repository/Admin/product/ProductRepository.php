@@ -16,7 +16,14 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function index()
     {
-        $products=Product::paginate();
+        // dd(auth("admin")->user());
+        if (auth('admin')->check()) {
+            $products = Product::paginate();
+        }
+        // Check if the user is authenticated as seller
+        else if (auth('seller')->check()) {
+            $products = Product::where('seller_id', auth('seller')->user()->id)->paginate();
+        } 
         return view('admin.product.index',get_defined_vars());
     }
 

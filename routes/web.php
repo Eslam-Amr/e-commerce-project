@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Home\AdminHomePageController;
+use App\Http\Controllers\User\Review\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -38,7 +40,8 @@ Route::group(
         Route::put('/order/update/{checkout}',[  OrderController::class,'update'] )->name('order.update');
      //############################### Admin Product   ###############################
         Route::resource('/product',  ProductController::class );
-        Route::view('/','admin.index')->name('index');
+        // Route::view('/','admin.index')->name('index');
+        Route::get('/',AdminHomePageController::class)->name('index');
     });
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -63,6 +66,8 @@ Route::get('/product', [UserProductController::class,'index'])->name('user.produ
 Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
 Route::delete('/wishlist/{wishlist}', [WishlistController::class,'destroy'])->name('wishlist.destroy');
 Route::post('/wishlist/{id}', [WishlistController::class,'store'])->name('wishlist.store');
+//############################### User product review   ###############################
+Route::resource('/review',ReviewController::class)->except('show');
 //############################### User order history   ###############################
 Route::resource('/orders',UserOrderHistoryController::class)->except('show');
 Route::get('/orders/{checkout}',[UserOrderHistoryController::class,'show'])->name('user.order.show')->middleware('auth:web');

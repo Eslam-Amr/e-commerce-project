@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Interface\User\UserProduct\UserProductRepositoryInterface;
+use App\Models\Review;
 
 class UserProductRepository implements UserProductRepositoryInterface
 {
@@ -59,6 +60,7 @@ class UserProductRepository implements UserProductRepositoryInterface
         $wishlist = Wishlist::where('product_id', $product->id)
                            ->where('user_id', auth()->user()->id)
                            ->first();
+        $reviews=Review::where('product_id', $product->id)->get();
         return view('user.main.product.single-product',get_defined_vars());
     }
 }

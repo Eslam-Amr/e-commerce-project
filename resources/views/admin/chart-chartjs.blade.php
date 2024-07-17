@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('css')
 @endsection
 @section('page-header')
@@ -205,11 +205,11 @@
 @endsection
 @section('js')
 <!--Internal  Datepicker js -->
-<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
 <!--Internal  Chart.bundle js -->
-<script src="{{URL::asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 <!-- Internal Select2 js-->
-<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/plugins/select2/js/select2.min.js')}}"></script>
 <!--Internal Chartjs js -->
-<script src="{{URL::asset('assets/js/chart.chartjs.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/js/chart.chartjs.js')}}"></script>
 @endsection

@@ -28,8 +28,15 @@ class OrderController extends Controller
         return view('admin.order.show',get_defined_vars());
     }
     public function update(Request $request,Checkout $checkout){
-    //    dd ($checkout);
-    $checkout->update($request->all());
+        $checkout->update($request->all());
+        if($request->all()['status'] == 'Completed'){
+            $products = $checkout->products;
+            foreach ($products as $product) {
+                $product->sold += $product->pivot->quantity;
+                $product->save();
+            }
+
+        }
     return redirect()->back()->with(['success' =>"order status updated successfully"]);
     }
 }

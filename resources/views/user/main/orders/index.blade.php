@@ -55,9 +55,10 @@
                                         <div class="col-3">
                                             <a href="{{ route('user.order.show',$order) }}" class="btn btn-secondary">more information</a>
                                             {{-- <a href="{{  }}" class="btn btn-secondary">cancel</a> --}}
-{{-- <x-cancel-button /> --}}
+                                            {{-- @dd($order) --}}
+<x-cancel-button :order="$order"/>
 {{--
-cancel button make component if date not exced day can cancel and return amout to table of product 
+cancel button make component if date not exced day can cancel and return amout to table of product
 --}}
                                         </div>
 

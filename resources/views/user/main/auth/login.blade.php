@@ -76,8 +76,15 @@ a:hover {
 <img src="asset/images/banner-image.png" alt="">
         </div>
         <div class="col-6">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <x-guest-layout>
- 
+
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 

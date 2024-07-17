@@ -17,4 +17,15 @@ class UserOrderHistoryController extends Controller
         abort(403);
     return view('user.main.orders.show',get_defined_vars());
     }
+    public function cancel(Checkout $checkout){
+        // dd($checkout->products);
+        $products = $checkout->products;
+ foreach ($products as $product) {
+     $product->stock += $product->pivot->quantity;
+     $product->save();
+ }
+        $checkout->status = "cancelled";
+        $checkout->save();
+        return redirect()->back()->with('success','order canceled');
+    }
 }

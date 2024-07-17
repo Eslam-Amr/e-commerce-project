@@ -40,6 +40,7 @@
     <!-- row -->
     <div class="row row-sm">
         <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+            {{-- day earn  week earn  month earn  this week to last week earn  --}}
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
@@ -380,7 +381,7 @@
     <!-- row close -->
 
     <!-- row opened -->
-    <div class="row row-sm row-deck">
+    {{-- <div class="row row-sm row-deck">
         <div class="col-md-12 col-lg-4 col-xl-4">
             <div class="card card-dashboard-eight pb-2">
                 <h6 class="card-title">Your Top Countries</h6><span class="d-block mg-b-10 text-muted tx-12">Sales
@@ -466,7 +467,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- /row -->
     </div>
     <!-- /Container -->
