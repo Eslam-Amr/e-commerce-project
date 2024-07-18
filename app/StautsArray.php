@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use App\Models\Checkout;
 use App\Models\Profit;
+use DateTime;
 
 trait StautsArray
 {
@@ -76,7 +77,44 @@ public function getPendingOrderStatusForAdmin()
 
     return $pendingCounts;
 }
+public function getProfitForYear(){
+    $data = array_fill(0, 12, 0);
+    if(auth('seller')->user()!=null)
+    $profits=Profit::select('profit','date')->where('seller_id',auth()->user()->id)->whereYear('date','2024')->get();
+else
+$profits=Profit::select('profit','date')->whereYear('date','2024')->get();
 
+    foreach($profits as $profit){
+        $date = new DateTime($profit->date);
+        $date=$date->format('m');
+        if($date == '01')
+        $data[0]+=$profit->profit;
+    else if($date == '02')
+    $data[1]+=$profit->profit;
+else if($date == '03')
+$data[2]+=$profit->profit;
+else if($date == '04')
+$data[3]+=$profit->profit;
+else if($date == '05')
+$data[4]+=$profit->profit;
+else if($date == '06')
+$data[5]+=$profit->profit;
+else if($date == '07')
+$data[6]+=$profit->profit;
+else if($date == '08')
+$data[7]+=$profit->profit;
+else if($date == '09')
+$data[8]+=$profit->profit;
+else if($date == '10')
+$data[9]+=$profit->profit;
+else if($date == '11')
+$data[10]+=$profit->profit;
+else if($date == '12')
+$data[11]+=$profit->profit;
+    }
+    return $data;
+
+}
 // public function getOrderStatusData()
 // {
 //     $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
