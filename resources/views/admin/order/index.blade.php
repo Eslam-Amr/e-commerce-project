@@ -111,7 +111,14 @@
                                 <th width="15%">{{ __('website/admin.user_name') }}</th>
                                 <th width="10%">{{ __('website/admin.final_price') }}</th>
                                 <th width="10%">{{ __('website/admin.date') }}</th>
+                                @auth('admin')
+
+                                <th width="25%"></th>
+                                @endauth
+                                @auth('seller')
+
                                 <th width="25%">{{ __('website/admin.update_status') }}</th>
+                                @endauth
                                 <th width="*%">{{ __('website/admin.action') }}</th>
 
                             </tr>
@@ -147,6 +154,8 @@
                                                 </select>
 
                                             </form> --}}
+                                            @auth('seller')
+
                                             <form action="{{ route('admin.order.update',$orders[$i]) }}" method="POST">
                                                 @csrf
                                                 @method('put')
@@ -174,18 +183,23 @@
                                                     selectElement.form.submit();
                                                 }
                                             </script>
+                                            @endauth
+
 
                                         </td>
                                         <td>
                                             <a class="btn btn-success " href="{{ route('admin.order.show', $orders[$i]) }}">For
                                                 More Info</a>
-                                            <form class="d-inline" action="{{ route('admin.order.destroy', $orders[$i]) }}"
+                                                @auth('seller')
+
+                                                <form class="d-inline" action="{{ route('admin.order.destroy', $orders[$i]) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="p-2 modal-effect btn btn-sm btn-danger " type="submit"><i
-                                                        class="las la-trash"></i></button>
-                                            </form>
+                                                    class="las la-trash"></i></button>
+                                                </form>
+                                                @endauth
                                         </td>
                                     </tr>
                                 @endfor

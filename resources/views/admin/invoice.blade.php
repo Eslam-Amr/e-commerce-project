@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('css')
 @endsection
 @section('page-header')
@@ -161,5 +161,5 @@
 @endsection
 @section('js')
 <!--Internal  Chart.bundle js -->
-<script src="{{URL::asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 @endsection

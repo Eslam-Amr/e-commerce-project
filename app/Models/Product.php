@@ -32,6 +32,10 @@ class Product extends Model
 
         // return $this->belongsTo(User::class,'seller_id','id','one-to-many');
     }
+    public function profits()
+    {
+        return $this->hasMany(Profit::class);
+    }
     public function review()
     {
         return $this->hasMany(Review::class);

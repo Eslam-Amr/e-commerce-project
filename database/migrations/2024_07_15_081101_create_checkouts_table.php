@@ -33,6 +33,7 @@ Partially Shipped: Some items in the order have been shipped, while others are s
             $table->decimal('total');
             $table->enum('status',['Pending','Processing','On Hold','Completed','Cancelled','Refunded','Failed','Shipped','Out for Delivery','Delivered','Returned','Partially'])->default('pending');
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             // $table->foreignId('cart_id')->references('id')->on('carts')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('checkout_info_id')->references('id')->on('checkout_infos')->cascadeOnDelete()->cascadeOnUpdate();
 

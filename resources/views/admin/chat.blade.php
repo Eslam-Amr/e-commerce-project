@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('css')
 @endsection
 @section('page-header')
@@ -331,7 +331,7 @@
 @endsection
 @section('js')
 <!--Internal  lightslider js -->
-<script src="{{URL::asset('assets/plugins/lightslider/js/lightslider.min.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/plugins/lightslider/js/lightslider.min.js')}}"></script>
 <!--Internal  Chat js -->
-<script src="{{URL::asset('assets/js/chat.js')}}"></script>
+<script src="{{URL::asset('admin-asset/assets/js/chat.js')}}"></script>
 @endsection

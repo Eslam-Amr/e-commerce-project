@@ -4,6 +4,7 @@
     <link href="{{ URL::asset('admin-asset/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet" />
     <!-- Maps css -->
     <link href="{{ URL::asset('admin-asset/assets/plugins/jqvmap/jqvmap.min.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @endsection
 @section('page-header')
     {{-- @dd(auth()->user()) --}}
@@ -44,18 +45,18 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">TODAY ORDERS</h6>
+                        <h6 class="mb-3 tx-12 text-white">TODAY EARNINGS</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$5,74.12</h4>
-                                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfDay }}EGP</h4>
+                                {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
-                            <span class="float-right my-auto ml-auto">
+                            {{-- <span class="float-right my-auto ml-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
                                 <span class="text-white op-7"> +427</span>
-                            </span>
+                            </span> --}}
                         </div>
                     </div>
                 </div>
@@ -66,18 +67,18 @@
             <div class="card overflow-hidden sales-card bg-danger-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">TODAY EARNINGS</h6>
+                        <h6 class="mb-3 tx-12 text-white">MONTH EARNINGS</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$1,230.17</h4>
-                                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfMonth }}EGP</h4>
+                                {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
-                            <span class="float-right my-auto ml-auto">
+                            {{-- <span class="float-right my-auto ml-auto">
                                 <i class="fas fa-arrow-circle-down text-white"></i>
                                 <span class="text-white op-7"> -23.09%</span>
-                            </span>
+                            </span> --}}
                         </div>
                     </div>
                 </div>
@@ -88,18 +89,18 @@
             <div class="card overflow-hidden sales-card bg-success-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">TOTAL EARNINGS</h6>
+                        <h6 class="mb-3 tx-12 text-white">YEAR EARNINGS</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$7,125.70</h4>
-                                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfYear }}EGP</h4>
+                                {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
-                            <span class="float-right my-auto ml-auto">
+                            {{-- <span class="float-right my-auto ml-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
                                 <span class="text-white op-7"> 52.09%</span>
-                            </span>
+                            </span> --}}
                         </div>
                     </div>
                 </div>
@@ -110,18 +111,18 @@
             <div class="card overflow-hidden sales-card bg-warning-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">PRODUCT SOLD</h6>
+                        <h6 class="mb-3 tx-12 text-white">TOTAL EARNINGS</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$4,820.50</h4>
-                                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $sumOfProfit }}</h4>
+                                {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
-                            <span class="float-right my-auto ml-auto">
+                            {{-- <span class="float-right my-auto ml-auto">
                                 <i class="fas fa-arrow-circle-down text-white"></i>
                                 <span class="text-white op-7"> -152.3</span>
-                            </span>
+                            </span> --}}
                         </div>
                     </div>
                 </div>
@@ -133,7 +134,61 @@
 
     <!-- row opened -->
     <div class="row row-sm">
-        <div class="col-md-12 col-lg-12 col-xl-7">
+        <div class="col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title mb-0">Order status</h4>
+                        <i class="mdi mdi-dots-horizontal text-gray"></i>
+                    </div>
+                    <p class="tx-12 text-muted mb-0">Order Status and Tracking. Track order if completed or pending .</p>
+                </div>
+                <div class="card-body">
+                    <div class="total-revenue">
+                        <div>
+                            {{-- <h4>120,750</h4> --}}
+                            <h4>{{ $checkoutCompleted }}</h4>
+                            <label><span class="bg-primary"></span>Success</label>
+                        </div>
+                        <div>
+                            {{-- <h4>56,108</h4> --}}
+                            <h4>{{ $checkoutPending }}</h4>
+
+                            <label><span class="bg-danger"></span>Pending</label>
+                        </div>
+                        {{-- <div>
+                            <h4>32,895</h4>
+                            <label><span class="bg-warning"></span>Failed</label>
+                        </div> --}}
+                    </div>
+                    <canvas id="orderStatusChart" class="sales-bar mt-4"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{-- <div class="col-md-12 col-lg-12 col-xl-7">
             <div class="card">
                 <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
                     <div class="d-flex justify-content-between">
@@ -161,8 +216,8 @@
                     <div id="bar" class="sales-bar mt-4"></div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-12 col-xl-5">
+        </div> --}}
+        {{-- <div class="col-lg-12 col-xl-5">
             <div class="card card-dashboard-map-one">
                 <label class="main-content-label">Sales Revenue by Customers in USA</label>
                 <span class="d-block mg-b-20 text-muted tx-12">Sales Performance of all states in the United States</span>
@@ -170,12 +225,65 @@
                     <div class="vmap-wrapper ht-180" id="vmap2"></div>
                 </div>
             </div>
+        </div> --}}
+    </div>
+
+
+    <div class="row row-sm">
+        <div class="col-lg-12 col-md-12">
+            <div class="card mg-b-20">
+                <div class="card-body">
+                    <div class="main-content-label mg-b-5">
+                        Year Profit
+                    </div>
+                    <p class="mg-b-20">compare profit for this year and last four year .</p>
+                    <div id="echart2" class="ht-300"></div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
+
+    {{-- <div class="row row-sm">
+
+    <div class="col-sm-12 col-md-6">
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <div class="main-content-label mg-b-5">
+                    Line Chart
+                </div>
+                <p class="mg-b-20">Basic Charts Of Valex template.</p>
+                <div class="chartjs-wrapper-demo">
+                    <canvas id="chartLine1"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div> --}}
+    <div class="row row-sm">
+        <div class="col-sm-12 col-md-12">
+            <div class="card overflow-hidden">
+                <div class="card-body">
+                    <div class="main-content-label mg-b-5">
+This Year Profit
+                    </div>
+                    <p class="mg-b-20">this year profit , profit for each month .</p>
+                    <div class="chartjs-wrapper-demo">
+                        <canvas id="chartLine1"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- row closed -->
 
     <!-- row opened -->
-    <div class="row row-sm">
+    {{-- <div class="row row-sm">
         <div class="col-xl-4 col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header pb-1">
@@ -377,7 +485,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- row close -->
 
     <!-- row opened -->
@@ -475,6 +583,9 @@
     <!-- /main-content -->
 @endsection
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
     <!--Internal  Chart.bundle js -->
     <script src="{{ URL::asset('admin-asset/assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
     <!-- Moment js -->
@@ -495,4 +606,299 @@
     <!--Internal  index js -->
     <script src="{{ URL::asset('admin-asset/assets/js/index.js') }}"></script>
     <script src="{{ URL::asset('admin-asset/assets/js/jquery.vmap.sampledata.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/echart/echart.js') }}"></script>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('orderStatusChart').getContext('2d');
+
+            const data = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                    'October', 'November', 'December'
+                ],
+                datasets: [{
+                        label: 'Completed',
+                        data: @json($completedArray),
+                        backgroundColor: 'rgba(0, 123, 255, 0.7)', // Blue
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Pending',
+                        data: @json($pendingArray),
+                        backgroundColor: 'rgba(220, 53, 69, 0.7)', // Red
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 1
+                    },
+
+                ]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            max: 2000, // Set this value according to your data range
+                            ticks: {
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : '';
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // Initialize ECharts instance
+        var echart2 = echarts.init(document.getElementById('echart2'));
+        var currentYear = new Date().getFullYear();
+        var xAxisData = [
+            @foreach($salesData as $year => $data)
+                "{{ $year }}",
+            @endforeach
+        ];
+        var yAxisData = [
+            @foreach($salesData as $year )
+                "{{ $year }}",
+            @endforeach
+        ];
+        console.log(xAxisData);
+        // Specify options and data
+        var option = {
+            // Your ECharts options here
+            xAxis: {
+                type: 'category',
+                // data: [currentYear-4,currentYear-3,currentYear-2,currentYear-1,currentYear]
+                data: xAxisData
+                // data: [
+                //     @php
+                //         foreach($salesData as $key)
+                //         {{ $key }}
+                //     @endphp
+                // ]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+//                 data: [{{ $years[0] }},
+// {{ $years[0] }},
+// {{ $years[0] }},
+// {{ $years[0] }},
+// {{ $years[0] }},],
+data : yAxisData,
+                type: 'line'
+            }]
+        };
+
+        // Set options and render chart
+        echart2.setOption(option);
+    </script>
+
+
+
+
+
+
+
+{{--
+<script>
+    // Example data (replace with your actual data)
+    var labels = ['January', 'February', 'March', 'April', 'May', 'June',
+              'July', 'August', 'September', 'October', 'November', 'December'];
+    var data = [65, 59, 80, 81, 56, 55,0];
+
+    // Get the canvas element
+    var ctx = document.getElementById('chartLine1').getContext('2d');
+
+    // Initialize Chart.js chart
+    var chartLine1 = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sales Data',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: data,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+ --}}
+
+ <script>
+    // Example data (replace with your actual data)
+    var labels = ['January', 'February', 'March', 'April', 'May', 'June',
+                  'July', 'August', 'September', 'October', 'November', 'December'];
+    var data = @json($yearGraph);
+
+    // Get the canvas element
+    var ctx = document.getElementById('chartLine1').getContext('2d');
+
+    // Set the height of the canvas (in pixels)
+    ctx.canvas.height = 70; // Adjust this value as needed
+
+    // Initialize Chart.js chart
+    var chartLine1 = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sales Data',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: data,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMin: 0, // Minimum value will be 0
+                    suggestedMax: 90000, // Maximum value will be 100
+
+                }
+            }
+        }
+    });
+</script>
+
+
+
+
+
+
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('orderStatusChart').getContext('2d');
+
+            const data = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [
+                    {
+                        label: 'Completed',
+                        data: @json($completedArray),
+                        backgroundColor: 'rgba(0, 123, 255, 0.7)', // Blue
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Pending',
+                        data: @json($pendingArray),
+                        backgroundColor: 'rgba(220, 53, 69, 0.7)', // Red
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 1
+                    },
+
+                ]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            max: 10000 // Set this value according to your data range
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script> --}}
+
+
+
+    {{-- <script>
+        const ctx = document.getElementById('orderStatusChart').getContext('2d');
+
+        const data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+                'November', 'December'
+            ],
+            datasets: [{
+                    label: 'Completed',
+                    // data: [1000, 1500, 1200, 1300, 1100, 1400, 1500, 1600, 1700, 1800, 1900, 2000],
+                    data: @json($completedArray),
+                    backgroundColor: 'rgba(0, 123, 255, 0.7)', // Blue
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Pending',
+                    data: [500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600],
+                    backgroundColor: 'rgba(220, 53, 69, 0.7)', // Red
+                    borderColor: 'rgba(220, 53, 69, 1)',
+                    borderWidth: 1
+                },
+                // {
+                //     label: 'Failed',
+                //     data: [200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300],
+                //     backgroundColor: 'rgba(255, 193, 7, 0.7)', // Yellow
+                //     borderColor: 'rgba(255, 193, 7, 1)',
+                //     borderWidth: 1
+                // }
+            ]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, config);
+    </script> --}}
 @endsection

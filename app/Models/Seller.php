@@ -21,4 +21,9 @@ class Seller extends Authenticatable
             $bulder->where('role','seller');
         });
     }
+
+    public function profits()
+    {
+        return $this->hasMany(Profit::class);
+    }
 }

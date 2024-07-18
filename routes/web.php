@@ -35,11 +35,11 @@ Route::group(
      //############################### Admin Category   ###############################
         Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
         Route::resource('/order',  OrderController::class )->except('destroy','show','update');
-        Route::delete('/order/{checkout}',[  OrderController::class,'destroy'] )->name('order.destroy');
+        Route::delete('/order/{checkout}',[  OrderController::class,'destroy'] )->name('order.destroy')->middleware('auth:seller');
         Route::get('/order/{checkout}/show',[  OrderController::class,'show'] )->name('order.show');
-        Route::put('/order/update/{checkout}',[  OrderController::class,'update'] )->name('order.update');
+        Route::put('/order/update/{checkout}',[  OrderController::class,'update'] )->name('order.update')->middleware('auth:seller');
      //############################### Admin Product   ###############################
-        Route::resource('/product',  ProductController::class );
+        Route::resource('/product',  ProductController::class )->middleware('auth:seller');
         // Route::view('/','admin.index')->name('index');
         Route::get('/',AdminHomePageController::class)->name('index');
     });

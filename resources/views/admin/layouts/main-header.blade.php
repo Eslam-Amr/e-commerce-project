@@ -133,7 +133,14 @@
                                 </div>
                                 <div class="wd-90p">
                                     <div class="d-flex">
-                                        <h5 class="mb-1 name">{{ auth()->user()->name }}</h5>
+                                        @auth('seller')
+
+                                        <h5 class="mb-1 name">{{ auth('seller')->user()->name }}</h5>
+                                        @endauth
+                                        @auth('admin')
+
+                                        <h5 class="mb-1 name">{{ auth('admin')->user()->name }}</h5>
+                                        @endauth
                                     </div>
                                     <p class="mb-0 desc">I'm sorry but i'm not sure how to help you with that......</p>
                                     <p class="time mb-0 text-left float-left ml-2 mt-2">Mar 15 3:55 PM</p>
