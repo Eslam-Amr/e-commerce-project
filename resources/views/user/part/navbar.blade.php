@@ -108,7 +108,7 @@
   <header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{ route('home') }}">
           <img src="{{ asset('asset/images/main-logo.png') }}" class="logo">
         </a>
         <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,7 +118,7 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
           <div class="offcanvas-header px-4 pb-0">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ route('home') }}">
               <img src="{{ asset('asset/images/main-logo.png') }}" class="logo">
             </a>
             <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
@@ -126,24 +126,47 @@
           <div class="offcanvas-body">
             <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link me-4 active" href="#billboard">Home</a>
+                <a class="nav-link me-4 active" href="{{ route('home') }}">Home</a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link me-4" href="#company-services">Services</a>
-              </li>
+              </li> --}}
               <li class="nav-item">
-                <a class="nav-link me-4" href="product">Products</a>
+                <a class="nav-link me-4" href="{{ route('user.product.index') }}">Products</a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link me-4" href="#smart-watches">Watches</a>
+              </li> --}}
+              <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('cart.index') }}">Cart</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="#yearly-sale">Sale</a>
+                <a class="nav-link me-4" href="{{ route('orders.index') }}">orders</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="#latest-blog">Blog</a>
+                <a class="nav-link me-4" href="{{ route('wishlist.index') }}">Wishlist</a>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item">
+                <a class="nav-link me-4" href="">Contact</a>
+              </li>
+              @auth
+              <li class="nav-item d-inline">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-link nav-link me-4 p-0" style="background: none; border: none; text-decoration: none;">Logout</button>
+                </form>
+              </li>
+              @endauth
+              @guest
+              <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('register') }}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('login') }}">login</a>
+              </li>
+
+              @endguest
+              {{-- <li class="nav-item dropdown">
                 <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                 <ul class="dropdown-menu">
                   <li>
@@ -171,7 +194,7 @@
                     <a href="contact.html" class="dropdown-item">Contact</a>
                   </li>
                 </ul>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <div class="user-items ps-5">
                   <ul class="d-flex justify-content-end list-unstyled">
@@ -190,7 +213,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="cart.html">
+                      <a href="{{ route('cart.index') }}">
                         <svg class="cart">
                           <use xlink:href="#cart"></use>
                         </svg>

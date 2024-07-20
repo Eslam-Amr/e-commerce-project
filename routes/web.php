@@ -32,6 +32,12 @@ Route::view('/te','test');
 // Route::view('/test','user.main.auth.register');
 // Route::resource('/category',  CategoryController::class );
 // Route::resource('/category/delete',  CategoryController::class )->name('category.delete');
+
+
+/*
+make seller review 
+*/
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale() . '/admin',
@@ -94,4 +100,4 @@ Route::post('/checkout/store', [UserCheckoutController::class , 'store'])->name(
 // Route::resource('/checkout', UserCheckoutController::class ); // Assuming you have an index method to display the cart
 
 //############################### Admin dashboard   ###############################
-// Route::get('/{page}', [AdminController::class,'index']);
+Route::get('/{page}', [AdminController::class,'index']);

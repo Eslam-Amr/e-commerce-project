@@ -47,4 +47,47 @@ return [
 'sold'=>'Sold',
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// sidebar
+
+
+
+
+'Main'=>'Main',
+'Index'=>'Index',
+'General'=>'General',
+'Category'=>'Category',
+'Product'=>'Product',
+'Contact'=>'Contact',
+'Orders'=>'Orders',
+'Seller'=>'Seller',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ];

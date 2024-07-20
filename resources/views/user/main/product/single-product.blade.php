@@ -55,14 +55,27 @@
 
                                 <div class="qty-button d-flex flex-wrap pt-3">
 
-                                    <form action="{{ route('cart.store', $product->id) }}" method="POST">
+                                    {{-- <form action="{{ route('cart.store', $product->id) }}" method="POST">
                                         @csrf
                                         <x-plus-minus-button stock="{{ $product->stock }}" />
                                         <button type="submit" name="add-to-cart" value="1269"
                                             class="btn btn-black btn-medium text-uppercase mt-3 me-5">Add to cart</button>
-                                    </form>
+                                    </form> --}}
+
+
+
+                                    <livewire:cart.add-to-cart  :productId="$product->id" />
 
                                     @auth('web')
+                                        <h2>
+                                            @if ($wishlist === null)
+                                                <livewire:add-to-wishlist :wishlist="$wishlist" :productId="$product->id" />
+                                            @else
+                                                <livewire:add-to-wishlist :wishlist="$wishlist" :productId="$product->id" />
+                                            @endif
+                                        </h2>
+                                    @endauth
+                                    {{-- @auth('web')
                                         <h2>
                                             @if ($wishlist === null)
                                                 <form id="create_form" method="post"
@@ -72,6 +85,7 @@
                                                         <i class="btn-medium text-uppercase me-3 mt-4 fa-regular fa-heart"></i>
                                                     </button>
                                                 </form>
+
                                             @else
                                                 <form id="delete_form" method="post"
                                                     action="{{ route('wishlist.destroy', $wishlist) }}">
@@ -81,10 +95,11 @@
                                                         <i class="btn-medium text-uppercase me-3 mt-4 fa-solid fa-heart"></i>
                                                     </button>
                                                 </form>
+
                                             @endif
 
                                         </h2>
-                                    @endauth
+                                    @endauth --}}
 
 
                                 </div>
@@ -177,7 +192,8 @@
 
                                                     <div class="review-header">
                                                         <span class="author-name">{{ $review->user->name }}</span>
-                                                        <span class="review-date">– {{ $review->created_at->format('Y/m/d') }}</span>
+                                                        <span class="review-date">–
+                                                            {{ $review->created_at->format('Y/m/d') }}</span>
                                                     </div>
                                                     <p>{{ $review->comment }}</p>
                                                 </div>
