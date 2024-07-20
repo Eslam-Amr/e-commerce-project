@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\Home\AdminHomePageController;
-use App\Http\Controllers\User\Review\ReviewController;
+// use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\Cart\CartController;
 use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\User\Review\ReviewController;
 use App\Http\Controllers\User\Wishlist\WishlistController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Home\AdminHomePageController;
 use App\Http\Controllers\Admin\Seller\Order\OrderController;
 use App\Http\Controllers\User\Contact\UserContactController;
 use App\Http\Controllers\User\Product\UserProductController;
@@ -17,7 +18,13 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\User\Checkout\UserCheckoutController;
 use App\Http\Controllers\Admin\Seller\Product\ProductController;
 use App\Http\Controllers\Admin\Seller\Checkout\CheckoutController;
+
+
 use App\Http\Controllers\User\OrderHistory\UserOrderHistoryController;
+
+// Route::get('/counter', Counter::class);
+Route::view('/te','test');
+// Route::livewire('/te','test');
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -87,4 +94,4 @@ Route::post('/checkout/store', [UserCheckoutController::class , 'store'])->name(
 // Route::resource('/checkout', UserCheckoutController::class ); // Assuming you have an index method to display the cart
 
 //############################### Admin dashboard   ###############################
-Route::get('/{page}', [AdminController::class,'index']);
+// Route::get('/{page}', [AdminController::class,'index']);

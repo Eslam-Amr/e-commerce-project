@@ -112,9 +112,14 @@
   </section>
   <section id="mobile-products" class="product-store position-relative padding-large no-padding-top">
     <div class="container">
+        {{-- <livewire:counter /> --}}
+
       <div class="row">
         <div class="display-header d-flex justify-content-between pb-3">
           <h2 class="display-7 text-dark text-uppercase">Mobile Products</h2>
+
+          {{-- <livewire:counter /> --}}
+
           <div class="btn-right">
             <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
           </div>

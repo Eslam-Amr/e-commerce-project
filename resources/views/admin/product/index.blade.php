@@ -1,16 +1,18 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{trans('main-sidebar_trans.doctors')}}
+    {{ trans('main-sidebar_trans.doctors') }}
 @stop
 @section('css')
-    <link href="{{URL::asset('admin-asset/assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
-    <link href="{{URL::asset('admin-asset/assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('admin-asset/assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
-    <link href="{{URL::asset('admin-asset/assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('admin-asset/assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('admin-asset/assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('admin-asset/assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}"
+        rel="stylesheet" />
+    <link href="{{ URL::asset('admin-asset/assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin-asset/assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet" />
+    <link href="{{ URL::asset('admin-asset/assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin-asset/assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin-asset/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
     <!--Internal   Notify -->
-    <link href="{{URL::asset('admin-asset/assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <link href="{{ URL::asset('admin-asset/assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
 @endsection
 
 
@@ -19,9 +21,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{trans('main-sidebar_trans.doctors')}}</h4>
+                <h4 class="content-title mb-0 my-auto">{{ trans('main-sidebar_trans.doctors') }}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    {{trans('main-sidebar_trans.view_all')}}</span>
+                    {{ trans('main-sidebar_trans.view_all') }}</span>
             </div>
         </div>
     </div>
@@ -31,10 +33,12 @@
     {{-- @include('admin-asset/assets.messages_alert') --}}
     <!-- row opened -->
 
-
-    <div class="d-flex justify-content-between mb-5">
-        <a href="{{route('admin.product.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.add_product')}}</a>
-    </div>
+    @auth('seller')
+        <div class="d-flex justify-content-between mb-5">
+            <a href="{{ route('admin.product.create') }}" class="btn btn-primary" role="button"
+                aria-pressed="true">{{ trans('website/admin.add_product') }}</a>
+        </div>
+    @endauth
     {{-- <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
@@ -82,44 +86,49 @@
         </div>
     </div>
  --}}
-						<div class="row row-sm">
-                            @if (count($products)>0)
+    <div class="row row-sm">
+        @if (count($products) > 0)
 
-                            @foreach ($products as $product)
-                            <a href="{{ route('admin.product.show',$product) }}">
+            @foreach ($products as $product)
+                <a href="{{ route('admin.product.show', $product) }}">
 
-                                <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
-                                    <div class="card">
-									<div class="card-body">
-										<div class="pro-img-box">
-											{{-- <div class="d-flex product-sale">
+                    <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="pro-img-box">
+                                    {{-- <div class="d-flex product-sale">
 												<div class="badge bg-pink">New</div>
 												<i class="mdi mdi-heart-outline ml-auto wishlist"></i>
 											</div> --}}
-											<img class="w-100" src="{{URL::asset('storage/products/'.$product->image)   }}" alt="product-image">
-											<a href="{{ route('admin.product.show',$product) }}" class="adtocart">
-                                                <i class="las la-shopping-cart "></i>
-											</a>
-										</div>
-										<div class="text-center pt-3">
-                                            <h3 class="h6 mb-2 mt-4 font-weight-bold text-uppercase">{{ $product->name }}</h3>
-											{{-- <span class="tx-15 ml-auto">
+                                    <img class="w-100" src="{{ URL::asset('storage/products/' . $product->image) }}"
+                                        alt="product-image">
+                                    <a href="{{ route('admin.product.show', $product) }}" class="adtocart">
+                                        <i class="las la-shopping-cart "></i>
+                                    </a>
+                                </div>
+                                <div class="text-center pt-3">
+                                    <h3 class="h6 mb-2 mt-4 font-weight-bold text-uppercase">{{ $product->name }}</h3>
+                                    {{-- <span class="tx-15 ml-auto">
 												<i class="ion ion-md-star text-warning"></i>
 												<i class="ion ion-md-star text-warning"></i>
 												<i class="ion ion-md-star text-warning"></i>
 												<i class="ion ion-md-star-half text-warning"></i>
 												<i class="ion ion-md-star-outline text-warning"></i>
 											</span> --}}
-											<h4 class="h5 mb-0 mt-2 text-center font-weight-bold text-danger"><x-price-after-discount price="{{ $product->price }}" discount="{{ $product->discount }}" />EGP <span class="text-secondary font-weight-normal tx-13 ml-1 prev-price">{{ $product->price }}EGP</span></h4>
-										</div>
-									</div>
-								</div>
-							</div>
-                        </a>
-                            @endforeach
-                            @endif
-                            {{ $products->links() }}
-							{{-- <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
+                                    <h4 class="h5 mb-0 mt-2 text-center font-weight-bold text-danger">
+                                        <x-price-after-discount price="{{ $product->price }}"
+                                            discount="{{ $product->discount }}" />EGP <span
+                                            class="text-secondary font-weight-normal tx-13 ml-1 prev-price">{{ $product->price }}EGP</span>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        @endif
+        {{ $products->links() }}
+        {{-- <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
 								<div class="card">
 									<div class="card-body">
 										<div class="pro-img-box">
@@ -323,7 +332,7 @@
 									</div>
 								</div>
 							</div> --}}
-							{{-- <ul class="pagination product-pagination ml-auto float-right">
+        {{-- <ul class="pagination product-pagination ml-auto float-right">
 								<li class="page-item page-prev disabled">
 									<a class="page-link" href="#" tabindex="-1">Prev</a>
 								</li>
@@ -336,7 +345,7 @@
 									<a class="page-link" href="#">Next</a>
 								</li>
 							</ul> --}}
-						</div>
+    </div>
     {{-- <div class="row row-sm">
         <!--div-->
         <div class="col-xl-12">
@@ -368,7 +377,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                          @foreach($doctors as $doctor)
+                          @foreach ($doctors as $doctor)
                           @dd($doctor->section)
                               <tr>
                                   <td>{{ $loop->iteration }}</td>
@@ -407,26 +416,26 @@
 @endsection
 @section('js')
     <!-- Internal Data tables -->
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/jszip.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
-    <script src="{{URL::asset('admin-asset/assets/js/table-data.js')}}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/js/table-data.js') }}"></script>
 
     <!--Internal  Notify js -->
-    <script src="{{URL::asset('admin-asset/assets/plugins/notify/js/notifIt.js')}}"></script>
-    <script src="{{URL::asset('admin-asset/assets/plugins/notify/js/notifit-custom.js')}}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('admin-asset/assets/plugins/notify/js/notifit-custom.js') }}"></script>
 @endsection

@@ -23,7 +23,7 @@ class AdminHomePageController extends Controller
      * Handle the incoming request.
      */
     /*
-    optimize query 
+    optimize query
     */
 
     public function __invoke()
@@ -68,8 +68,8 @@ $yearGraph=$this->getProfitForYear();
             $profitOfYear = $profitQuery->whereYear('date', Carbon::now()->format('Y'))->sum('profit');
             $profitOfMonth= $profitQuery->whereYear('date', Carbon::now()->format('Y'))->whereMonth('date', Carbon::now()->format('m'))->sum('profit');
             $profitOfDay= $profitQuery->whereYear('date', Carbon::now()->format('Y'))->whereMonth('date', Carbon::now()->format('m'))->whereDay('date', Carbon::now()->format('d'))->sum('profit');
-            $checkoutCompleted = Checkout::where('seller_id',auth()->user()->id)->where('status', 'Completed')->count();
-            $checkoutPending = Checkout::where('seller_id',auth()->user()->id)->where('status', 'Pending')->count();
+            $checkoutCompleted = Checkout::where('seller_id',auth('seller')->user()->id)->where('status', 'Completed')->count();
+            $checkoutPending = Checkout::where('seller_id',auth('seller')->user()->id)->where('status', 'Pending')->count();
             $completedArray=$this->getCompletedOrderStatusForSeller();
             $pendingArray=$this->getPendingOrderStatusForSeller();
 

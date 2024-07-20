@@ -7,3 +7,4 @@
 <script type="text/javascript" src="{{ asset('asset/js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('asset/js/plugins.js') }}"></script>
 <script type="text/javascript" src="{{ asset('asset/js/script.js') }}"></script>
+{{-- @livewireScripts --}}

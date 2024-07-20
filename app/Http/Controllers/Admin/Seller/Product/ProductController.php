@@ -8,12 +8,24 @@ use App\Trait\ImageTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use App\Interface\Admin\Product\ProductRepositoryInterface;
 
 // use App\Interface\Product\ProductRepositoryInterface;
 
-class ProductController extends Controller
+class ProductController extends Controller  implements HasMiddleware
 {
+
+
+    public static function middleware(): array
+    {
+        return [
+            // 'auth',
+            new Middleware('auth:seller', except: ['index','show']),
+            // new Middleware('subscribed', except: ['store']),
+        ];
+    }
     use ImageTrait;
     private $productRepository;
 

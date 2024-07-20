@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="main-header-right">
-            <ul class="nav">
+            {{-- <ul class="nav">
                 <li class="">
                     <div class="dropdown  nav-itemd-none d-md-flex">
                         <a href="#" class="d-flex  nav-item nav-link pr-0 country-flag1" data-toggle="dropdown"
@@ -80,6 +80,42 @@
                                     <span class="mt-2">spain</span>
                                 </div>
                             </a>
+                        </div>
+                    </div>
+                </li>
+            </ul> --}}
+            <ul class="nav">
+                <li class="">
+                    <div class="dropdown  nav-itemd-none d-md-flex">
+                        <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
+                           aria-expanded="false">
+                            @if (App::getLocale() == 'ar')
+                                <span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img
+                                        src="{{URL::asset('admin-asset/assets/img/flags/egypt_flag.jpg')}}" alt="img"></span>
+                                <strong
+                                    class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+                            @else
+                                <span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img
+                                        src="{{URL::asset('admin-asset/assets/img/flags/us_flag.jpg')}}" alt="img"></span>
+                                <strong
+                                    class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+                            @endif
+                            <div class="my-auto">
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
+                                   href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                   {{-- @dump($localeCode , $properties) --}}
+                                    @if($properties['native'] == "English")
+                                        <i class="flag-icon flag-icon-us"></i>
+                                    @elseif($properties['native'] == "العربية")
+                                        <i class="flag-icon flag-icon-eg"></i>
+                                    @endif
+                                    {{ $properties['native'] }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </li>
