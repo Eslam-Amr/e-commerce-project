@@ -36,12 +36,14 @@ Route::view('/te','test');
 
 
 /*
-user => and his history 
+user => and his history
 make seller review
 contact page
 page for all seller in admin
 best seller
-
+make user can be seller in profile page and admin can accept or reject
+make bolck for user seller and make delete seller
+make admin can accept or reject products
 */
 
 Route::group(
