@@ -20,4 +20,15 @@ class AuthController extends Controller
         //     return redirect()->route('home');
         return back()->with('message', 'invalid email or password');
     }
+    public function adminLogout()
+    {
+        if (Auth::guard("admin"))
+        Auth::guard('admin')->logout();
+else
+        Auth::guard('seller')->logout();
+
+
+
+        return redirect('/');
+    }
 }

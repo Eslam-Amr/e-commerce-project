@@ -35,7 +35,7 @@ Route::view('/te','test');
 
 
 /*
-make seller review 
+make seller review
 */
 
 Route::group(
@@ -52,6 +52,7 @@ Route::group(
         Route::get('/order/{checkout}/show',[  OrderController::class,'show'] )->name('order.show');
         Route::put('/order/update/{checkout}',[  OrderController::class,'update'] )->name('order.update')->middleware('auth:seller');
      //############################### Admin Product   ###############################
+        Route::post('/logout',  [AuthController::class, 'adminLogout'] )->name('logout');
         Route::resource('/product',  ProductController::class )->middleware('auth:seller');
         // Route::view('/','admin.index')->name('index');
         Route::get('/',AdminHomePageController::class)->name('index');
@@ -93,7 +94,8 @@ Route::get('/cart/increment/{id}', [CartController::class, 'increment'])->name('
 Route::get('/cart/decrement/{id}', [CartController::class, 'decrement'])->name('cart.decrement'); // Assuming you have an index method to display the cart
 Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy'); // Assuming you have an index method to display the cart
 //############################### User contact   ###############################
-Route::get('/contact', [UserContactController::class, 'index'])->name('contact.index'); // Assuming you have an index method to display the cart
+// Route::get('/contact', [UserContactController::class, 'index'])->name('contact.index'); // Assuming you have an index method to display the cart
+Route::resource('/contact', UserContactController::class)->only('index','store'); // Assuming you have an index method to display the cart
 //############################### User checkout   ###############################
 Route::get('/checkout', [UserCheckoutController::class , 'create'])->name('checkout.create'); // Assuming you have an index method to display the cart
 Route::post('/checkout/store', [UserCheckoutController::class , 'store'])->name('checkout.store'); // Assuming you have an index method to display the cart

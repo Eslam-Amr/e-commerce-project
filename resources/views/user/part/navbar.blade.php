@@ -147,7 +147,7 @@
                 <a class="nav-link me-4" href="{{ route('wishlist.index') }}">Wishlist</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="">Contact</a>
+                <a class="nav-link me-4" href="{{ route('contact.index') }}">Contact</a>
               </li>
               @auth
               <li class="nav-item d-inline">

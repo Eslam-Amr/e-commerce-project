@@ -21,10 +21,10 @@
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
                 <a class="close-toggle" href="#"><i class="header-icons fe fe-x"></i></a>
             </div>
-            <div class="main-header-center ml-3 d-sm-none d-md-none d-lg-block">
+            {{-- <div class="main-header-center ml-3 d-sm-none d-md-none d-lg-block">
                 <input class="form-control" placeholder="Search for anything..." type="search"> <button
                     class="btn"><i class="fas fa-search d-none d-md-block"></i></button>
-            </div>
+            </div> --}}
         </div>
         <div class="main-header-right">
             {{-- <ul class="nav">
@@ -142,7 +142,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="dropdown nav-item main-header-message ">
+                {{-- <div class="dropdown nav-item main-header-message ">
                     <a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -239,8 +239,8 @@
                             <a href="text-center">VIEW ALL</a>
                         </div>
                     </div>
-                </div>
-                <div class="dropdown nav-item main-header-notification">
+                </div> --}}
+                {{-- <div class="dropdown nav-item main-header-notification">
                     <a class="new nav-link" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -337,7 +337,7 @@
                             <a href="">VIEW ALL</a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="nav-item full-screen fullscreen-button">
                     <a class="new nav-link full-screen-link" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -348,7 +348,21 @@
                             </path>
                         </svg></a>
                 </div>
-                <div class="dropdown main-profile-menu nav nav-item nav-link">
+                <div class="nav-item ">
+                    {{-- <a class="new nav-link full-screen-link" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                            class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-maximize">
+                            <path
+                                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+                            </path>
+                        </svg></a> --}}
+                        <form method="POST" action="{{ route('admin.logout') }}">
+@csrf
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>&ensp;&ensp; {{ __('website/admin.logout') }}</button>
+                        </form>
+                </div>
+                {{-- <div class="dropdown main-profile-menu nav nav-item nav-link">
                     <a class="profile-user d-flex" href=""><img alt=""
                             src="{{ URL::asset('admin-asset/assets/img/faces/6.jpg') }}"></a>
                     <div class="dropdown-menu">
@@ -371,10 +385,10 @@
                             @csrf
                             <button type="submit">logout</button>
                         </form>
-                        {{-- <a class="dropdown-item" href="{{ url('/' . $page='page-signin') }}"><i class="bx bx-log-out"></i> Sign Out</a> --}}
+                        <a class="dropdown-item" href="{{ url('/' . $page='page-signin') }}"><i class="bx bx-log-out"></i> Sign Out</a>
                     </div>
-                </div>
-                <div class="dropdown main-header-message right-toggle">
+                </div> --}}
+                {{-- <div class="dropdown main-header-message right-toggle">
                     <a class="nav-link pr-0" data-toggle="sidebar-right" data-target=".sidebar-right">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -384,7 +398,7 @@
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

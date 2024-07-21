@@ -80,14 +80,29 @@ return [
 
 
 
+//admin home page
+'admin_welcome'=>'Hi, welcome back!',
+'admin_dashboard_welcome'=>'Sales monitoring dashboard template.',
+'TODAY_EARNINGS'=>'TODAY EARNINGS',
+'MONTH_EARNINGS'=>'MONTH EARNINGS',
+'YEAR_EARNINGS'=>'YEAR EARNINGS',
+'TOTAL_EARNINGS'=>'TOTAL EARNINGS',
+'ُEGP' => 'EGP',
 
+'order_status'=>'ORDER STATUS',
+'order_status_paragraph'=>'Order Status and Tracking. Track order if completed or pending',
+'pending'=>'Pending',
+'completed'=>'Completed',
+'months' => [
+    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+    'October', 'November', 'December'
+],
 
-
-
-
-
-
-
-
+'YEAR_PROFIT'=>'YEAR PROFIT',
+'YEAR_PROFIT_status'=>'compare profit for this year and last four year .',
+'Sales_Data'=>'Sales Data',
+'month_year_profit'=>'this year profit , profit for each month .',
+'logout'=>'Logout',
+'copyright' => 'Copyright © 2020 <a href="#">Valex</a>. Designed by <a href="https://www.spruko.com/">Spruko</a> All rights reserved.',
 
 ];

@@ -12,8 +12,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-                <p class="mg-b-0">Sales monitoring dashboard template.</p>
+                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{ __('website/admin.admin_welcome') }}</h2>
+                <p class="mg-b-0">{{ __('website/admin.admin_dashboard_welcome') }}</p>
             </div>
         </div>
         <div class="main-dashboard-header-right">
@@ -45,12 +45,12 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">TODAY EARNINGS</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{ __('website/admin.TODAY_EARNINGS') }}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfDay }}EGP</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfDay }}{{ __('website/admin.ُEGP') }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -67,12 +67,12 @@
             <div class="card overflow-hidden sales-card bg-danger-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">MONTH EARNINGS</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{ __('website/admin.MONTH_EARNINGS') }}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfMonth }}EGP</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfMonth }}{{ __('website/admin.ُEGP') }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -89,12 +89,12 @@
             <div class="card overflow-hidden sales-card bg-success-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">YEAR EARNINGS</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{ __('website/admin.YEAR_EARNINGS') }}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfYear }}EGP</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfYear }}{{ __('website/admin.ُEGP') }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -111,12 +111,12 @@
             <div class="card overflow-hidden sales-card bg-warning-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">TOTAL EARNINGS</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{ __('website/admin.TOTAL_EARNINGS') }}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $sumOfProfit }}</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $sumOfProfit }}{{ __("website/admin.ُEGP") }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -138,23 +138,23 @@
             <div class="card">
                 <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mb-0">Order status</h4>
+                        <h4 class="card-title mb-0">{{ __('website/admin.order_status') }}</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <p class="tx-12 text-muted mb-0">Order Status and Tracking. Track order if completed or pending .</p>
+                    <p class="tx-12 text-muted mb-0">{{ __('website/admin.order_status_paragraph') }}</p>
                 </div>
                 <div class="card-body">
                     <div class="total-revenue">
                         <div>
                             {{-- <h4>120,750</h4> --}}
                             <h4>{{ $checkoutCompleted }}</h4>
-                            <label><span class="bg-primary"></span>Success</label>
+                            <label><span class="bg-primary"></span>{{ __('website/admin.completed') }}</label>
                         </div>
                         <div>
                             {{-- <h4>56,108</h4> --}}
                             <h4>{{ $checkoutPending }}</h4>
 
-                            <label><span class="bg-danger"></span>Pending</label>
+                            <label><span class="bg-danger"></span>{{ __('website/admin.pending') }}</label>
                         </div>
                         {{-- <div>
                             <h4>32,895</h4>
@@ -234,9 +234,8 @@
             <div class="card mg-b-20">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-                        Year Profit
-                    </div>
-                    <p class="mg-b-20">compare profit for this year and last four year .</p>
+{{ __("website/admin.YEAR_PROFIT") }}                    </div>
+                    <p class="mg-b-20">{{ __("website/admin.YEAR_PROFIT_status") }} </p>
                     <div id="echart2" class="ht-300"></div>
                 </div>
             </div>
@@ -268,9 +267,8 @@
             <div class="card overflow-hidden">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-This Year Profit
-                    </div>
-                    <p class="mg-b-20">this year profit , profit for each month .</p>
+{{ __('website/admin.YEAR_PROFIT') }}                    </div>
+                    <p class="mg-b-20">{!! __("website/admin.month_year_profit") !!}</p>
                     <div class="chartjs-wrapper-demo">
                         <canvas id="chartLine1"></canvas>
                     </div>
@@ -615,18 +613,29 @@ This Year Profit
             const ctx = document.getElementById('orderStatusChart').getContext('2d');
 
             const data = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-                    'October', 'November', 'December'
-                ],
+                labels: [
+        "{{ __('website/admin.months.0') }}",  // January
+        "{{ __('website/admin.months.1') }}",  // February
+        "{{ __('website/admin.months.2') }}",  // March
+        "{{ __('website/admin.months.3') }}",  // April
+        "{{ __('website/admin.months.4') }}",  // May
+        "{{ __('website/admin.months.5') }}",  // June
+        "{{ __('website/admin.months.6') }}",  // July
+        "{{ __('website/admin.months.7') }}",  // August
+        "{{ __('website/admin.months.8') }}",  // September
+        "{{ __('website/admin.months.9') }}",  // October
+        "{{ __('website/admin.months.10') }}", // November
+        "{{ __('website/admin.months.11') }}"  // December
+    ],
                 datasets: [{
-                        label: 'Completed',
+                        label: "{{ __('website/admin.completed') }}",
                         data: @json($completedArray),
                         backgroundColor: 'rgba(0, 123, 255, 0.7)', // Blue
                         borderColor: 'rgba(0, 123, 255, 1)',
                         borderWidth: 1
                     },
                     {
-                        label: 'Pending',
+                        label: "{{ __('website/admin.pending') }}",
                         data: @json($pendingArray),
                         backgroundColor: 'rgba(220, 53, 69, 0.7)', // Red
                         borderColor: 'rgba(220, 53, 69, 1)',
@@ -763,8 +772,20 @@ data : yAxisData,
 
  <script>
     // Example data (replace with your actual data)
-    var labels = ['January', 'February', 'March', 'April', 'May', 'June',
-                  'July', 'August', 'September', 'October', 'November', 'December'];
+    var labels = [
+        "{{ __('website/admin.months.0') }}",  // January
+        "{{ __('website/admin.months.1') }}",  // February
+        "{{ __('website/admin.months.2') }}",  // March
+        "{{ __('website/admin.months.3') }}",  // April
+        "{{ __('website/admin.months.4') }}",  // May
+        "{{ __('website/admin.months.5') }}",  // June
+        "{{ __('website/admin.months.6') }}",  // July
+        "{{ __('website/admin.months.7') }}",  // August
+        "{{ __('website/admin.months.8') }}",  // September
+        "{{ __('website/admin.months.9') }}",  // October
+        "{{ __('website/admin.months.10') }}", // November
+        "{{ __('website/admin.months.11') }}"  // December
+    ];;
     var data = @json($yearGraph);
 
     // Get the canvas element
@@ -779,7 +800,7 @@ data : yAxisData,
         data: {
             labels: labels,
             datasets: [{
-                label: 'Sales Data',
+                label: "{{ __('website/admin.Sales_Data') }}",
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,

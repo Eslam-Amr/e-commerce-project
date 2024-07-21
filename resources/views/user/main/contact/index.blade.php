@@ -57,25 +57,36 @@
                 <div class="inquiry-item col-lg-6">
                     <h2 class="display-7 text-uppercase text-dark">Any questions?</h2>
                     <p>Use the form below to get in touch with us.</p>
-                    <form id="form" class="form-group flex-wrap">
+                    <form id="form" class="form-group flex-wrap" method="POST" action="{{ route('contact.store') }}">
+                        @csrf
                         <div class="form-input col-lg-12 d-flex mb-3">
-                            <input type="text" name="email" placeholder="Write Your Name Here"
+                            <input type="text" name="name" placeholder="Write Your Name Here"
                                 class="form-control ps-3 me-3 mb-3">
-                            <input type="text" name="email" placeholder="Write Your Email Here"
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+
+                                <input type="text" name="email" placeholder="Write Your Email Here"
                                 class="form-control ps-3 mb-3">
-                        </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+                            </div>
                         <div class="col-lg-12 mb-3">
-                            <input type="text" name="email" placeholder="Phone Number" class="form-control ps-3">
+                            <input type="text" name="phone" placeholder="Phone Number" class="form-control ps-3">
                         </div>
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+
                         <div class="col-lg-12 mb-3">
-                            <input type="text" name="email" placeholder="Write Your Subject Here"
+                            <input type="text" name="subject" placeholder="Write Your Subject Here"
                                 class="form-control ps-3">
-                        </div>
+            <x-input-error :messages="$errors->get('subject')" class="mt-2" />
+
+                            </div>
                         <div class="col-lg-12 mb-3">
-                            <textarea placeholder="Write Your Message Here" class="form-control ps-3" style="height:150px;"></textarea>
+                            <textarea name="message" placeholder="Write Your Message Here" class="form-control ps-3" style="height:150px;"></textarea>
+            <x-input-error :messages="$errors->get('message')" class="mt-2" />
+
                         </div>
+                        <button type="submit" class="btn btn-dark btn-medium text-uppercase btn-rounded-none">Submit</button>
                     </form>
-                    <button class="btn btn-dark btn-medium text-uppercase btn-rounded-none">Submit</button>
                 </div>
             </div>
         </div>
