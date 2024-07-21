@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('subject');
             $table->text('message');
+            $table->boolean('read')->default(0);
             // $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();

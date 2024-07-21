@@ -19,7 +19,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{trans('website/admin.Category')}}</h4>
+                <h4 class="content-title mb-0 my-auto">{{trans('website/admin.Contact')}}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                     {{trans('website/admin.view_all')}}</span>
             </div>
@@ -35,10 +35,10 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
+                {{-- <div class="d-flex justify-content-between">
                     <h4 class="card-title mg-b-0">{{ __("website/admin.category_create") }}</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
-                </div>
+                </div> --}}
          </div>
          <div class=" p-5  col-lg-12 col-xl-12 col-md-12 col-sm-12">
             <div class="card  box-shadow-0 ">
@@ -47,19 +47,34 @@
                     <p class="mb-2">It is Very Easy to Customize and it uses in your website apllication.</p>
                 </div> --}}
                 <div class="card-body pt-3">
-                    <form method="post" action="{{ route('admin.category.store') }}">
-                        @csrf
-                        <div class="">
-                            <div class="form-group">
-                                <label for="exampleInputname1">{{ __("website/admin.category_name") }}</label>
-                                <input name="name" type="name" class="form-control" id="exampleInputname1" placeholder="{{ __('website/admin.enter_category_name') }}">
-                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-
+                        {{-- @csrf --}}
+                        <div class="row">
+                            {{-- <label for="exampleInputname1">{{ __("website/admin.category_name") }}</label>
+                            <input name="name" type="name" class="form-control" id="exampleInputname1" placeholder="{{ __('website/admin.enter_category_name') }}">
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" /> --}}
+                                    <div class="form-group col-6">
+<h6>{{ __("website/admin.contact_name") }}</h6>
+                                    <label class="form-control">{{ $contact->name }} </label>
+                            </div>
+                                    <div class="form-group col-6">
+<h6>{{ __("website/admin.contact_email") }}</h6>
+                                    <label class="form-control">{{ $contact->email }} </label>
+                            </div>
+                                    <div class="form-group col-6">
+<h6>{{ __("website/admin.contact_phone") }}</h6>
+                                    <label class="form-control">{{ $contact->phone }} </label>
+                            </div>
+                                    <div class="form-group col-6">
+<h6>{{ __("website/admin.contact_subject") }}</h6>
+                                    <label class="form-control">{{ $contact->subject }} </label>
+                            </div>
+                                    <div class="form-group col-12">
+<h6>{{ __("website/admin.contact_message") }}</h6>
+                                    {{-- <label class="form-control">{{ $contact->message }} </label> --}}
+                                    <textarea width='100%' disabled class="form-control">{{ $contact->message }} </textarea>
                             </div>
 
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3 mb-0">{{ __('website/admin.submit') }}</button>
-                    </form>
                 </div>
             </div>
         </div>

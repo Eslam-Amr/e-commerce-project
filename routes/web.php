@@ -1,6 +1,7 @@
 <?php
 
 // use App\Livewire\Counter;
+use App\Http\Controllers\Admin\Contact\AdminContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -35,7 +36,12 @@ Route::view('/te','test');
 
 
 /*
+user => and his history 
 make seller review
+contact page
+page for all seller in admin
+best seller
+
 */
 
 Route::group(
@@ -46,6 +52,8 @@ Route::group(
     ], function(){ //...
         Route::view('/test','admin.doctors.index');
      //############################### Admin Category   ###############################
+     Route::get('/contact/all' , [AdminContactController::class,'displayAll'])->name('contact.all');
+        Route::resource('/contact',  AdminContactController::class);
         Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
         Route::resource('/order',  OrderController::class )->except('destroy','show','update');
         Route::delete('/order/{checkout}',[  OrderController::class,'destroy'] )->name('order.destroy')->middleware('auth:seller');
@@ -53,7 +61,7 @@ Route::group(
         Route::put('/order/update/{checkout}',[  OrderController::class,'update'] )->name('order.update')->middleware('auth:seller');
      //############################### Admin Product   ###############################
         Route::post('/logout',  [AuthController::class, 'adminLogout'] )->name('logout');
-        Route::resource('/product',  ProductController::class )->middleware('auth:seller');
+        Route::resource('/product',  ProductController::class );
         // Route::view('/','admin.index')->name('index');
         Route::get('/',AdminHomePageController::class)->name('index');
     });

@@ -67,7 +67,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{trans('website/admin.category')}}</h4>
+                <h4 class="content-title mb-0 my-auto">{{trans('website/admin.Contact')}}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                     {{trans('website/admin.view_all')}}</span>
             </div>
@@ -83,14 +83,16 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">{{ __("website/admin.category_table") }}</h4>
+                {{-- <div class="d-flex justify-content-between">
+                    <h4 class="card-title mg-b-0">{{ __("website/admin.Contact") }}</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
-                </div>
+                </div> --}}
                 {{-- policy --}}
                 {{-- @can('create', \App\Model\Category::class) --}}
                 <div class="d-flex justify-content-between">
-                    <a href="{{route('admin.category.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.add_category')}}</a>
+                    {{-- <a href="{{route('admin.contact.all')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.display_all')}}</a> --}}
+                    {{-- <a href="{}"  class="btn btn-primary" role="button" aria-pressed="true">{{trans('website/admin.display_all')}}</a> --}}
+               <a href="{{ route('admin.contact.all') }}" class="btn btn-primary">{{ __("website/admin.display_all") }}</a>
                 </div>
                 {{-- @endcan --}}
                 {{-- <p class="tx-12 tx-gray-500 mb-2">Example of Valex Hoverable Rows Table.. <a href="">Learn more</a></p> --}}
@@ -100,9 +102,12 @@
                     <table class="table table-hover mb-0 text-md-nowrap">
                         <thead>
                             <tr>
-                                <th width="15%">#</th>
-                                <th width="65%">{{ __('website/admin.name') }}</th>
-                                <th width="*%">{{ __('website/admin.action') }}</th>
+                                <th >#</th>
+                                <th >{{ __('website/admin.name') }}</th>
+                                <th >{{ __('website/admin.email') }}</th>
+                                <th >{{ __('website/admin.phone') }}</th>
+                                <th >{{ __('website/admin.subject') }}</th>
+                                <th >{{ __('website/admin.action') }}</th>
 
                             </tr>
                         </thead>
@@ -110,23 +115,30 @@
                             {{-- @dd( count($categories)) --}}
                             {{-- @if (count($categories) > 0) --}}
                             {{-- @if ( ($categories)!=null) --}}
-@isset($categories)
+@isset($contacts)
 
 
-                            @for ($i = 0; $i < count($categories); $i++)
+                            @for ($i = 0; $i < count($contacts); $i++)
 
                             <tr>
-                                <th scope="row">{{ (($categories->currentPage()-1)*15) + $i +1}}</th>
-                                <td>{{ $categories[$i]->name }}</td>
+                                <th scope="row">{{ (($contacts->currentPage()-1)*15) + $i +1}}</th>
+                                <td>{{ $contacts[$i]->name }}</td>
+                                <td>{{ $contacts[$i]->email }}</td>
+                                <td>{{ $contacts[$i]->phone }}</td>
+                                <td>{{ $contacts[$i]->subject }}</td>
                                 {{-- <td>System Architect</td> --}}
                                 <td>
                                     {{-- <a href="{{ route('admin.category.destroy',$categories[$i]) }}">delete</a> --}}
-                                    <a class="modal-effect btn btn-sm btn-warning" href="{{ route('admin.category.show',$categories[$i]) }}"><i class="far fa-eye"></i></a>
-                                    <a class="modal-effect btn btn-sm btn-info" href="{{ route('admin.category.edit',$categories[$i]) }}"><i class="las la-pen"></i></a>
-                                    <form class="d-inline" action="{{ route('admin.category.destroy',$categories[$i]) }}" method="post">
+                                    {{-- <a class="modal-effect btn btn-sm btn-warning" href="{{ route('admin.category.show',$contacts[$i]) }}"><i class="far fa-eye"></i></a> --}}
+                                    <a class="modal-effect btn btn-sm btn-success" href="{{ route('admin.contact.show',$contacts[$i]) }}">{{ __('website/admin.For_More_Info') }}</a>
+                                    {{-- <a class="modal-effect btn btn-sm btn-info" href="{{ route('admin.category.edit',$contacts[$i]) }}"><i class="las la-pen"></i></a> --}}
+                                    <form class="d-inline" action="{{ route('admin.contact.update',$contacts[$i]) }}" method="post">
                                         @csrf
-                                        @method('delete')
-                                        <button class="modal-effect btn btn-sm btn-danger " type="submit"><i class="las la-trash"></i></button>
+                                        @method('put')
+                                        <button class="modal-effect btn btn-sm btn-danger " type="submit">
+                                            {{-- <i class="las la-trash"></i> --}}
+                                            {{ __("website/admin.mark_as_read") }}
+                                        </button>
                                     </form>
                                  </td>
                             </tr>
@@ -136,7 +148,7 @@
 
                         </tbody>
                     </table>
-                    {{ $categories->links() }}
+                    {{ $contacts->links() }}
                 </div>
             </div>
         </div>

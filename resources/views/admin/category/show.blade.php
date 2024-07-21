@@ -19,9 +19,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{trans('main-sidebar_trans.doctors')}}</h4>
+                <h4 class="content-title mb-0 my-auto">{{trans('website/admin.Category')}}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    {{trans('main-sidebar_trans.view_all')}}</span>
+                    {{trans('website/admin.view_all')}}</span>
             </div>
         </div>
     </div>
@@ -35,10 +35,10 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
+                {{-- <div class="d-flex justify-content-between">
                     <h4 class="card-title mg-b-0">{{ __("website/admin.category_create") }}</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
-                </div>
+                </div> --}}
          </div>
          <div class=" p-5  col-lg-12 col-xl-12 col-md-12 col-sm-12">
             <div class="card  box-shadow-0 ">

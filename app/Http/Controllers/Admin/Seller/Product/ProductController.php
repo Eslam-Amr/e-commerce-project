@@ -22,7 +22,8 @@ class ProductController extends Controller  implements HasMiddleware
     {
         return [
             // 'auth',
-            new Middleware('auth:seller', except: ['index','show']),
+            // new Middleware('auth:seller', except: ['index','show','destroy','edit','update']),
+            new Middleware('auth:seller', only: ['store','create']),
             // new Middleware('subscribed', except: ['store']),
         ];
     }

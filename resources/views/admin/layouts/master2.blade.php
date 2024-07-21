@@ -15,6 +15,8 @@
 		<div id="global-loader">
 			<img src="{{URL::asset('admin-asset/assets/img/loader.svg')}}" class="loader-img" alt="Loader">
 		</div>
+        <x-success />
+        <x-error />
 		<!-- /Loader -->
 		@yield('content')
 		@include('admin.layouts.footer-scripts')

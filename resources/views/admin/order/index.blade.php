@@ -73,9 +73,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ trans('main-sidebar_trans.order') }}</h4>
+                <h4 class="content-title mb-0 my-auto">{{ trans('website/admin.Orders') }}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    {{ trans('main-sidebar_trans.view_all') }}</span>
+                    {{ trans('website/admin.view_all') }}</span>
             </div>
         </div>
     </div>
@@ -107,19 +107,22 @@
                     <table class="table table-hover mb-0 text-md-nowrap">
                         <thead>
                             <tr>
-                                <th width="4%">#</th>
-                                <th width="15%">{{ __('website/admin.user_name') }}</th>
-                                <th width="10%">{{ __('website/admin.final_price') }}</th>
-                                <th width="10%">{{ __('website/admin.date') }}</th>
-                                @auth('admin')
+                                <th >#</th>
+                                <th >{{ __('website/admin.user_name') }}</th>
+                                <th >{{ __('website/admin.final_price') }}</th>
+                                <th >{{ __('website/admin.date') }}</th>
+                                {{-- @auth('admin')
 
-                                <th width="25%"></th>
+                                <th ></th>
+                                @endauth --}}
+
+                                @auth('admin')
+                                <th >{{ __('website/admin.status') }}</th>
                                 @endauth
                                 @auth('seller')
-
-                                <th width="25%">{{ __('website/admin.update_status') }}</th>
+                                <th >{{ __('website/admin.update_status') }}</th>
                                 @endauth
-                                <th width="*%">{{ __('website/admin.action') }}</th>
+                                <th >{{ __('website/admin.action') }}</th>
 
                             </tr>
                         </thead>
@@ -136,6 +139,7 @@
                                         <td>{{ $orders[$i]->user->name }}</td>
                                         <td>{{ $orders[$i]->total }}</td>
                                         <td>{{ $orders[$i]->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ $orders[$i]->status }}</td>
                                         <td>
                                             {{-- <form action="{{ route('admin.order.update') }}">
                                                 <select name="status" class="form-control-color" id="status">
@@ -188,8 +192,7 @@
 
                                         </td>
                                         <td>
-                                            <a class="btn btn-success " href="{{ route('admin.order.show', $orders[$i]) }}">For
-                                                More Info</a>
+                                            <a class="btn btn-success m-0" href="{{ route('admin.order.show', $orders[$i]) }}">{{__("website/admin.For_More_Info")}}</a>
                                                 @auth('seller')
 
                                                 <form class="d-inline" action="{{ route('admin.order.destroy', $orders[$i]) }}"
