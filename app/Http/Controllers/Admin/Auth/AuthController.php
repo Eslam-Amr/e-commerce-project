@@ -12,20 +12,16 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $validator = $request->validated();
-        // dd($validator);
-        // dd(auth()->guard('admin')->user());
         if (Auth::guard("admin")->attempt($validator)||Auth::guard("seller")->attempt($validator))
             return redirect()->route('admin.index');
-        // if (Auth::guard("seller")->attempt($validator))
-        //     return redirect()->route('home');
         return back()->with('message', 'invalid email or password');
     }
     public function adminLogout()
     {
         if (Auth::guard("admin"))
-        Auth::guard('admin')->logout();
+        Auth::logout();
 else
-        Auth::guard('seller')->logout();
+        Auth::logout();
 
 
 

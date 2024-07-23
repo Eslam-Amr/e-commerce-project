@@ -1,6 +1,9 @@
 <?php
 
 // use App\Livewire\Counter;
+
+use App\Http\Controllers\Admin\AdminControlOnSeller\AdminSellerController;
+use App\Http\Controllers\Admin\AdminControlOnUser\AdminUserController;
 use App\Http\Controllers\Admin\Contact\AdminContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -12,6 +15,7 @@ use App\Http\Controllers\User\Review\ReviewController;
 use App\Http\Controllers\User\Wishlist\WishlistController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Home\AdminHomePageController;
+use App\Http\Controllers\Admin\Seller\AdminSellerRequestController;
 use App\Http\Controllers\Admin\Seller\Order\OrderController;
 use App\Http\Controllers\User\Contact\UserContactController;
 use App\Http\Controllers\User\Product\UserProductController;
@@ -36,14 +40,17 @@ Route::view('/te','test');
 
 
 /*
-user => and his history
+// user => and his history
+make no product added to cart when user blocked ro no checkout
 make seller review
+for seller request make table to catch new seller id when admin confirm role change in database and coumlb delete
 contact page
 page for all seller in admin
 best seller
 make user can be seller in profile page and admin can accept or reject
 make bolck for user seller and make delete seller
 make admin can accept or reject products
+block and unblock seller and user in admin page
 */
 
 Route::group(
@@ -64,6 +71,13 @@ Route::group(
      //############################### Admin Product   ###############################
         Route::post('/logout',  [AuthController::class, 'adminLogout'] )->name('logout');
         Route::resource('/product',  ProductController::class );
+        Route::resource('/seller',  AdminSellerController::class );
+        Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');
+        Route::put('/seller/unblock/{seller}',  [AdminSellerController::class,'unblock'] )->name('seller.unblock');
+        Route::resource('/seller-request',  AdminSellerRequestController::class );
+        Route::resource('/user',  AdminUserController::class );
+        Route::put('/user/block/{user}',  [AdminUserController::class,'block'] )->name('user.block');
+        Route::put('/user/unblock/{user}',  [AdminUserController::class,'unblock'] )->name('user.unblock');
         // Route::view('/','admin.index')->name('index');
         Route::get('/',AdminHomePageController::class)->name('index');
     });

@@ -32,13 +32,17 @@
 @section('content')
     {{-- @include('admin-asset/assets.messages_alert') --}}
     <!-- row opened -->
+@if (auth('seller')->check() )
+@if (auth('seller')->user()->block == 0)
 
-    @auth('seller')
-        <div class="d-flex justify-content-between mb-5">
-            <a href="{{ route('admin.product.create') }}" class="btn btn-primary" role="button"
-                aria-pressed="true">{{ trans('website/admin.add_product') }}</a>
-        </div>
-    @endauth
+{{-- @auth('seller') --}}
+<div class="d-flex justify-content-between mb-5">
+    <a href="{{ route('admin.product.create') }}" class="btn btn-primary" role="button"
+    aria-pressed="true">{{ trans('website/admin.add_product') }}</a>
+</div>
+{{-- @endauth --}}
+@endif
+@endif
     {{-- <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">

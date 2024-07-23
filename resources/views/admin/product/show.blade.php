@@ -67,8 +67,9 @@
                     <div class="row row-sm ">
                         <div class=" col-xl-5 col-lg-12 col-md-12">
                             <div class="preview-pic tab-content">
-                              <div class="tab-pane active" id="pic-1"><img src="{{URL::asset('storage/products/'.$product->image)}}" alt="image"/></div>
-                              {{-- <div class="tab-pane" id="pic-2"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-2.png')}}" alt="image"/></div>
+                                <div class="tab-pane active" id="pic-1"><img
+                                        src="{{ URL::asset('storage/products/' . $product->image) }}" alt="image" /></div>
+                                {{-- <div class="tab-pane" id="pic-2"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-2.png')}}" alt="image"/></div>
                               <div class="tab-pane" id="pic-3"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-3.png')}}" alt="image"/></div>
                               <div class="tab-pane" id="pic-4"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-4.png')}}" alt="image"/></div>
                               <div class="tab-pane" id="pic-5"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-1.png')}}" alt="image"/></div> --}}
@@ -96,13 +97,15 @@
                             </div> --}}
                             <h6 class="price">
                                 {{ __('website/admin.product_price') }}:
-                                 <span class="h3 ml-2"><x-price-after-discount price="{{ $product->price }}" discount="{{ $product->discount }}" /></span></h6>
+                                <span class="h3 ml-2"><x-price-after-discount price="{{ $product->price }}"
+                                        discount="{{ $product->discount }}" /></span>
+                            </h6>
                             <p class="product-description">{{ $product->additonal_information }}</p>
                             {{-- <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p> --}}
                             <div class="sizes d-flex">
                                 {{ __('website/admin.product_size') }}
                                 :
-                               {{ $product->size }}
+                                {{ $product->size }}
                                 {{-- <span class="size d-flex"  data-toggle="tooltip" title="small"><label class="rdiobox mb-0"><input checked="" name="rdio" type="radio"> <span class="font-weight-bold">s</span></label></span>
                                 <span class="size d-flex"  data-toggle="tooltip" title="medium"><label class="rdiobox mb-0"><input name="rdio" type="radio"> <span>m</span></label></span>
                                 <span class="size d-flex"  data-toggle="tooltip" title="large"><label class="rdiobox mb-0"><input name="rdio" type="radio"> <span>l</span></label></span>
@@ -112,7 +115,7 @@
                                 <span class="mt-2">colors: {{ $product->color }}</span>
 </div> --}}
 
-                                {{--
+                            {{--
                                 <div class="row gutters-xs ml-4">
                                     <div class="mr-2">
                                         <label class="colorinput">
@@ -145,14 +148,13 @@
                                 <div class=" product-title">
                                     {{ __('website/admin.seller') }}
                                     :
-                                    @if ($product->seller!=null)
-                                    {{ $product->seller->name }}
-
+                                    @if ($product->seller != null)
+                                        {{ $product->seller->name }}
                                     @else
-                                    {{ $product->admin->name }}
+                                        {{ $product->admin->name }}
                                     @endif
                                     {{-- {{ $product->seller }} --}}
-                                    </div>
+                                </div>
                                 {{-- <div class="d-flex ml-2">
                                     <ul class=" mb-0 qunatity-list">
                                         <li>
@@ -176,8 +178,9 @@
                                     {{-- {{ $product->sold }} --}}
                                 </div>
                             </div>
-                                <div class="d-flex  ">
-                                <div class=" product-title">{{ __('website/admin.product_stock') }}: {{ $product->stock }}</div>
+                            <div class="d-flex  ">
+                                <div class=" product-title">{{ __('website/admin.product_stock') }}: {{ $product->stock }}
+                                </div>
                                 {{-- <div class="d-flex ml-2">
                                     <ul class=" mb-0 qunatity-list">
                                         <li>
@@ -193,21 +196,43 @@
                                     </ul>
                                 </div> --}}
                             </div>
-                            <div class="d-flex  ">
-                                <div class=" product-title">
-                                    <a class="btn btn-warning"  href="{{ route('admin.product.edit',$product) }}">edit</a>
-                                </div>
-                            </div>
-                            <div class="d-flex  ">
-                                <div class=" product-title">
-                                    <form action="{{ route('admin.product.destroy',$product) }}" method="post">
-                                        @method('delete')
-                                        @csrf
+                            @if (auth('seller')->check())
+                                @if (auth('seller')->user()->block == 0)
+                                    <div class="d-flex  ">
+                                        <div class=" product-title">
+                                            <a class="btn btn-warning"
+                                                href="{{ route('admin.product.edit', $product) }}">edit</a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex  ">
+                                        <div class=" product-title">
+                                            <form action="{{ route('admin.product.destroy', $product) }}" method="post">
+                                                @method('delete')
+                                                @csrf
 
-                                        <button type="submit" class="btn btn-danger"  >delete</button>
-                                    </form>
+                                                <button type="submit" class="btn btn-danger">delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="d-flex  ">
+                                    <div class=" product-title">
+                                        <a class="btn btn-warning"
+                                            href="{{ route('admin.product.edit', $product) }}">edit</a>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="d-flex  ">
+                                    <div class=" product-title">
+                                        <form action="{{ route('admin.product.destroy', $product) }}" method="post">
+                                            @method('delete')
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-danger">delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endif
                             {{-- <div class="action">
                                 <button class="add-to-cart btn btn-danger" type="button">ADD TO WISHLIST</button>
                                 <button class="add-to-cart btn btn-success" type="button">ADD TO CART</button>

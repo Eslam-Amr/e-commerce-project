@@ -105,16 +105,35 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ __('website/admin.Orders') }}
                     </span></a>
             </li>
+            @auth('admin')
+
             <li class="side-item side-item-category">{{ __('website/admin.Seller') }}</li>
 
             <li class="slide">
-                <a class="side-menu__item" href="{{ route('admin.order.index') }}">
+                <a class="side-menu__item" href="{{ route('admin.seller.index') }}">
                     {{-- <i class="si si-menu "></i> --}}
                     <i class="si si-people"></i>
                     <span class=" side-menu__label">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ __('website/admin.Seller') }}
                     </span></a>
+                <a class="side-menu__item" href="">
+                    {{-- <i class="si si-menu "></i> --}}
+                    <i class="si si-people"></i>
+                    <span class=" side-menu__label">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ __('website/admin.seller_request') }}
+                    </span></a>
             </li>
+            <li class="side-item side-item-category">{{ __('website/admin.user') }}</li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('admin.user.index') }}">
+                    {{-- <i class="si si-menu "></i> --}}
+                    <i class="si si-people"></i>
+                    <span class=" side-menu__label">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ __('website/admin.user') }}
+                    </span></a>
+            </li>
+            @endauth
             {{-- <li class="slide">
 						<a class="side-menu__item" href="{{ url('/' . $page='icons') }}">
                             <i class="si si-menu "></i>

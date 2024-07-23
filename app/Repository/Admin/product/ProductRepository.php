@@ -23,7 +23,7 @@ class ProductRepository implements ProductRepositoryInterface
         // Check if the user is authenticated as seller
         else if (auth('seller')->check()) {
             $products = Product::where('seller_id', auth('seller')->user()->id)->paginate();
-        } 
+        }
         return view('admin.product.index',get_defined_vars());
     }
 
@@ -34,7 +34,7 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $categories = Category::all();
         return view('admin.product.create',get_defined_vars());
-
+// return response()->json();
     }
 
     /**

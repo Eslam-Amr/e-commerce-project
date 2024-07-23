@@ -119,6 +119,9 @@ return [
 'checkout_name' => 'اسم الدفع',
 'company_name' => 'اسم الشركة',
 'order_data' => 'بيانات الطلب',
+'block' => 'حظر',
+'unblock' => 'فك الحظر',
+'user' => 'مستخجم',
 
 
 

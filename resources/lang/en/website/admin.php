@@ -133,4 +133,8 @@ return [
 'Order_notes'=>'Order Notes',
 'order_data'=>'Order Data',
 // 'action'=>'action',
+'block' => 'Block',
+'unblock' => 'unblock',
+'user' => 'User',
+
 ];

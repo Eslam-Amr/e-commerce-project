@@ -49,8 +49,8 @@ class UserProductRepository implements UserProductRepositoryInterface
                 }
             });
 
-        $products = $productsQuery->paginate()->appends(request()->query());
-        $totalProductsCount = $productsQuery->toBase()->getCountForPagination();
+        $products = $productsQuery->where('stock','>',0)->paginate()->appends(request()->query());
+        $totalProductsCount = $productsQuery->where('stock','>',0)->toBase()->getCountForPagination();
 
         return view('user.main.product.index', get_defined_vars());
     }

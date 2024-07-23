@@ -21,12 +21,14 @@ class ProductController extends Controller  implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            // 'auth',
-            // new Middleware('auth:seller', except: ['index','show','destroy','edit','update']),
             new Middleware('auth:seller', only: ['store','create']),
-            // new Middleware('subscribed', except: ['store']),
+            new Middleware('IsBlockedSeller', except: ['index','show']),
         ];
     }
+    // 'auth',
+    // new Middleware('auth:seller', except: ['index','show','destroy','edit','update']),
+    // new Middleware('IsBlockedSeller', only: ['store','create','destroy','update','edit']),
+    // new Middleware('subscribed', except: ['store']),
     use ImageTrait;
     private $productRepository;
 
