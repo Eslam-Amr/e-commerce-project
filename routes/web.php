@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Seller\Checkout\CheckoutController;
 
 
 use App\Http\Controllers\User\OrderHistory\UserOrderHistoryController;
+use App\Http\Controllers\User\Settings\SettingsCotroller;
 
 // Route::get('/counter', Counter::class);
 Route::view('/te','test');
@@ -94,6 +95,8 @@ Route::middleware('auth')->group(function () {
 Route::post('/admin/login',[AuthController::class , 'login'])->name('admin.login');
 //############################### User Home Page   ###############################
 Route::get('/', HomeController::class)->name('home');
+//############################### User settings Page   ###############################
+Route::get('/settings', [SettingsCotroller::class,'index'])->name('settings.index');
 //############################### User Auth   ###############################
 require __DIR__ . '/auth.php';
 
