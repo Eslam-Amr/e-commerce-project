@@ -73,7 +73,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ trans('website/admin.Orders') }}</h4>
+                <h4 class="content-title mb-0 my-auto">{{ trans('website/admin.seller-request') }}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                     {{ trans('website/admin.view_all') }}</span>
             </div>
@@ -90,7 +90,7 @@
         <div class="card">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">{{ __('website/admin.order_table') }}</h4>
+                    <h4 class="card-title mg-b-0">{{ __('website/admin.selelr-request_table') }}</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
                 </div>
                 {{-- policy --}}
@@ -111,6 +111,7 @@
                                 <th>{{ __('website/admin.user') }}</th>
                                 <th>{{ __('website/admin.email') }}</th>
 
+                                <th>{{ __('website/admin.completed_order') }}</th>
                                 <th>{{ __('website/admin.action') }}</th>
 
                             </tr>
@@ -119,21 +120,37 @@
                             {{-- @dd( count($categories)) --}}
                             {{-- @if (count($categories) > 0) --}}
                             {{-- @if ($categories != null) --}}
-                            @isset($users)
+                            {{-- @dd($requests) --}}
+                            @isset($requests)
 
 
-                                @for ($i = 0; $i < count($users); $i++)
+                                @for ($i = 0; $i < count($requests); $i++)
                                     <tr>
-                                        <th scope="row">{{ ($users->currentPage() - 1) * 15 + $i + 1 }}</th>
-                                        <td>{{ $users[$i]->name }}</td>
-                                        <td>{{ $users[$i]->email }}</td>
+                                        <th scope="row">{{ ($requests->currentPage() - 1) * 15 + $i + 1 }}</th>
+                                        <td>{{ $requests[$i]->user->name }}</td>
+                                        <td>{{ $requests[$i]->user->email }}</td>
                                         {{-- completed orders   --}}
-                                        {{-- <td>{{ $users[$i]->checkouts->where('status', 'Completed')->count() }}</td> --}}
+                                        <td>{{ $requests[$i]->user->orders->where('status', 'Completed')->count() }}</td>
+                                        <td class="d-flex">
+                                            <form style="margin-left: 20px;" id="destroy"
+                                            action="{{ route('admin.seller-request.destroy', $requests[$i]) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <a class="btn btn-danger"
+                                                href="javascript:$('form#destroy').submit();">{{ __('website/admin.reject') }}</a>
+                                        </form>
+                                            <form style="margin-left: 20px;" id="accept"
+                                            action="{{ route('admin.seller-request.accept', $requests[$i]) }}" method="POST">
+                                            @csrf
+                                            <a class="btn btn-success"
+                                                href="javascript:$('form#accept').submit();">{{ __('website/admin.accept') }}</a>
+                                        </form>
+                                        </td>
                                         {{-- Pending orders   --}}
                                         {{-- <td>{{ $users[$i]->checkouts->where('status', 'Pending')->count() }}</td> --}}
                                         {{-- total profit   --}}
                                         {{-- <td>{{ $users[$i]->profits->sum('profit') }}</td> --}}
-                                        <td>
+                                        {{-- <td>
                                             <div style="display: flex;">
                                                 @if ($users[$i]->block)
                                                 <form id="unblock"
@@ -161,7 +178,7 @@
                                                 </form>
 
                                             </div>
-                                        </td>
+                                        </td> --}}
                                         {{-- <td>{{ $sellers[$i]->status }}</td> --}}
                                         {{-- <td>
                                             <form action="{{ route('admin.order.update') }}">
@@ -254,7 +271,7 @@
 
                         </tbody>
                     </table>
-                    {{ $users->links() }}
+                    {{ $requests->links() }}
                 </div>
             </div>
         </div>

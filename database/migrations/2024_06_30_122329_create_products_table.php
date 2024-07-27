@@ -21,7 +21,11 @@ return new class extends Migration
             $table->string('color');
             $table->string('name');
             $table->string('size')->nullable();
-            $table->string('slug'); // Field name same as your `saveSlugsTo`
+            $table->string('slug');
+            // 0 no 1 accept 
+            $table->boolean('admin-acceptance')->default(0);
+            // 0 show 1 hide  
+            $table->boolean('hide')->default(0);
             // $table->string('seller');
             $table->text('description');
             $table->string('additonal_information');

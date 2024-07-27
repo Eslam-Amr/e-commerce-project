@@ -77,6 +77,7 @@ Route::group(
         Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');
         Route::put('/seller/unblock/{seller}',  [AdminSellerController::class,'unblock'] )->name('seller.unblock');
         Route::resource('/seller-request',  AdminSellerRequestController::class );
+        Route::post('/seller-request/{seller_request}/accept',  [AdminSellerRequestController::class,'accept'] )->name('seller-request.accept');
         Route::resource('/user',  AdminUserController::class );
         Route::put('/user/block/{user}',  [AdminUserController::class,'block'] )->name('user.block');
         Route::put('/user/unblock/{user}',  [AdminUserController::class,'unblock'] )->name('user.unblock');
