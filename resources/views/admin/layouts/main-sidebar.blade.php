@@ -116,7 +116,7 @@
                     <span class=" side-menu__label">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ __('website/admin.Seller') }}
                     </span></a>
-                <a class="side-menu__item" href="">
+                <a class="side-menu__item" href="{{ route('admin.seller-request.index') }}">
                     {{-- <i class="si si-menu "></i> --}}
                     <i class="si si-people"></i>
                     <span class=" side-menu__label">
