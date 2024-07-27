@@ -2,9 +2,6 @@
 
 // use App\Livewire\Counter;
 
-use App\Http\Controllers\Admin\AdminControlOnSeller\AdminSellerController;
-use App\Http\Controllers\Admin\AdminControlOnUser\AdminUserController;
-use App\Http\Controllers\Admin\Contact\AdminContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -12,21 +9,25 @@ use App\Http\Controllers\User\Cart\CartController;
 use App\Http\Controllers\User\Home\HomeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\User\Review\ReviewController;
+use App\Http\Controllers\User\Settings\SettingsCotroller;
 use App\Http\Controllers\User\Wishlist\WishlistController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Home\AdminHomePageController;
-use App\Http\Controllers\Admin\Seller\AdminSellerRequestController;
 use App\Http\Controllers\Admin\Seller\Order\OrderController;
 use App\Http\Controllers\User\Contact\UserContactController;
 use App\Http\Controllers\User\Product\UserProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Admin\Contact\AdminContactController;
 use App\Http\Controllers\User\Checkout\UserCheckoutController;
 use App\Http\Controllers\Admin\Seller\Product\ProductController;
 use App\Http\Controllers\Admin\Seller\Checkout\CheckoutController;
+use App\Http\Controllers\Admin\Seller\AdminSellerRequestController;
+use App\Http\Controllers\Admin\AdminControlOnUser\AdminUserController;
 
 
 use App\Http\Controllers\User\OrderHistory\UserOrderHistoryController;
-use App\Http\Controllers\User\Settings\SettingsCotroller;
+use App\Http\Controllers\User\Settings\UserSellerRegisterationController;
+use App\Http\Controllers\Admin\AdminControlOnSeller\AdminSellerController;
 
 // Route::get('/counter', Counter::class);
 Route::view('/te','test');
@@ -96,7 +97,8 @@ Route::post('/admin/login',[AuthController::class , 'login'])->name('admin.login
 //############################### User Home Page   ###############################
 Route::get('/', HomeController::class)->name('home');
 //############################### User settings Page   ###############################
-Route::get('/settings', [SettingsCotroller::class,'index'])->name('settings.index');
+Route::get('/settings', [SettingsCotroller::class,'index'])->name('settings.index')->middleware('auth:web');
+Route::post('/settings/seller-registeration', UserSellerRegisterationController::class)->name('user.seller-request')->middleware('auth:web');
 //############################### User Auth   ###############################
 require __DIR__ . '/auth.php';
 

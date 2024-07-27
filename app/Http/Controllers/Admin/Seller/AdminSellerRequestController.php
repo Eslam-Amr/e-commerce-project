@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Seller;
 
-use App\Http\Controllers\Controller;
-use App\Models\SellerRequest;
 use Illuminate\Http\Request;
+use App\Models\SellerRequest;
+use App\Http\Controllers\Controller;
 
 class AdminSellerRequestController extends Controller
 {
@@ -12,6 +12,7 @@ class AdminSellerRequestController extends Controller
         // return ;
         // return seller-request view and handel it
         $request= SellerRequest::get();
-        dd(($request[0])->user);
+        dd(($request));
+        // return ;
     }
 }
