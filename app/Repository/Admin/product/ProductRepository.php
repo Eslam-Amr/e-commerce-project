@@ -18,11 +18,11 @@ class ProductRepository implements ProductRepositoryInterface
     {
         // dd(auth("admin")->user());
         if (auth('admin')->check()) {
-            $products = Product::paginate();
+            $products = Product::where('hide',0)->where('admin-acceptance',1)->where('status','accepted')->paginate();
         }
         // Check if the user is authenticated as seller
         else if (auth('seller')->check()) {
-            $products = Product::where('seller_id', auth('seller')->user()->id)->paginate();
+            $products = Product::where('hide',0)->where('admin-acceptance',1)->where('status','accepted')->where('seller_id', auth('seller')->user()->id)->paginate();
         }
         return view('admin.product.index',get_defined_vars());
     }

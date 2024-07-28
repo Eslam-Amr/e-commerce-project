@@ -68,8 +68,7 @@
                         <div class=" col-xl-5 col-lg-12 col-md-12">
                             <div class="preview-pic tab-content">
                                 <div class="tab-pane active" id="pic-1"><img
-                                        src="{{ URL::asset('storage/products/' . $product->image) }}" alt="image" />
-                                </div>
+                                        src="{{ URL::asset('storage/products/' . $product->image) }}" alt="image" /></div>
                                 {{-- <div class="tab-pane" id="pic-2"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-2.png')}}" alt="image"/></div>
                               <div class="tab-pane" id="pic-3"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-3.png')}}" alt="image"/></div>
                               <div class="tab-pane" id="pic-4"><img src="{{URL::asset('admin-asset/assets/img/ecommerce/shirt-4.png')}}" alt="image"/></div>
@@ -215,18 +214,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                    {{-- <div class="d-flex  ">
-                                        <div class=" product-title">
-                                            <form id="hide" method="post" class="d-inline"
-                                                action="{{ route('admin.product-request.hide', $product) }}">
-                                                @csrf
-                                                <a href="javascript:$('form#hide').submit();"
-                                                    class="btn btn-danger mx-2 ">{{ __('website/admin.hide') }}</a>
-                                            </form>
-                                        </div>
-                                    </div> --}}
-                                <x-product-hide-button-in-show :product="$product" />
-
                                 @endif
                             @else
                                 <div class="d-flex  ">
@@ -245,18 +232,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="d-flex  ">
-                                    <div class=" product-title">
-                                        <form id="hide" method="post" class="d-inline"
-                                            action="{{ route('admin.product-request.hide', $product) }}">
-                                            @csrf
-                                            <a href="javascript:$('form#hide').submit();"
-                                                class="btn btn-danger mx-2 ">{{ __('website/admin.hide') }}</a>
-                                        </form>
-                                    </div>
-                                </div>
-                                {{-- <x-product-hide-button-in-show /> --}}
-
                             @endif
                             {{-- <div class="action">
                                 <button class="add-to-cart btn btn-danger" type="button">ADD TO WISHLIST</button>

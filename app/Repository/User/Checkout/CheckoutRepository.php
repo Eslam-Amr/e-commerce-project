@@ -21,7 +21,7 @@ class CheckoutRepository implements CheckoutRepositoryInterface
         // dd('Create a new');
         if(!Auth::check())
         return redirect()->route('login')->with(['error'=>'please login first']);
-        if(!Cart::where('user_id', auth()->user()->id)->first())
+        if(!Cart::where('user_id', auth()->user()->id)->first() && Cart::where('user_id', auth()->user()->id)->first()->products->where('hide',0)->where('admin-acceptance',1)->count()>0)
         return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
 
     try {
@@ -29,7 +29,7 @@ class CheckoutRepository implements CheckoutRepositoryInterface
 
 $cart = Cart::where('user_id', auth()->user()->id)->first();
 
-foreach ($cart->products as $product) {
+foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $product) {
     if ($product->stock < $product->pivot->quantity) {
         return redirect()->back()->with(['error' => 'stock amount doesn\'t match the quantity']);
     }
@@ -41,7 +41,7 @@ $checkoutInfo = CheckoutInfo::create($request->all());
 
 $sellerCheckouts = []; // Array to track totals per seller
 
-foreach ($cart->products as $product) {
+foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $product) {
     // Ensure there is a checkout for the seller
     $checkout = Checkout::firstOrCreate(
         [
@@ -203,9 +203,12 @@ return redirect()->route('home')->with(['success' => 'Checkout created successfu
 // }
 public function create()
     {
+        // dd(Cart::where('user_id', auth()->user()->id)->first()->products()->where('hide',0)->where('admin-acceptance',1)->get());
         if(!Auth::check())
         return redirect()->route('login')->with(['error'=>'please login first']);
         if(!Cart::where('user_id', auth()->user()->id)->first())
+        return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
+        if(!Cart::where('user_id', auth()->user()->id)->first()->products()->where('hide',0)->where('admin-acceptance',1)->count()>0)
         return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
         return view('user.main.checkout.index');
 

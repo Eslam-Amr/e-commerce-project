@@ -22,11 +22,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('size')->nullable();
             $table->string('slug');
-            // 0 no 1 accept 
+            // 0 no 1 accept
             $table->boolean('admin-acceptance')->default(0);
-            // 0 show 1 hide  
+            // 0 show 1 hide
             $table->boolean('hide')->default(0);
             // $table->string('seller');
+            // $table->enum('status',['pending','accepted','rejected'])->default('pending');
             $table->text('description');
             $table->string('additonal_information');
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();

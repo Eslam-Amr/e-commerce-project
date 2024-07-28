@@ -18,7 +18,7 @@ class CartRepository implements CartRepositoryInterface
         $cart = Cart::where('user_id', auth()->user()->id)->first();
         if ($cart == null)
             $cart = Cart::create(['user_id' => auth()->user()->id]);
-            $cartProduct = $cart->products()->where('product_id', $id)->first();
+            $cartProduct = $cart->products()->where('product_id', $id)->where('hide',0)->where('admin-acceptance',1)->first();
             $product=Product::select('stock')->findOrFail($id);
             if ($cartProduct) {
                 $quantity +=$cartProduct->pivot->quantity;

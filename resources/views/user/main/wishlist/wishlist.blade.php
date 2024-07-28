@@ -100,7 +100,8 @@
                                 {{-- @if ($wishlists != null) --}}
                                 {{-- @dd($wishlists[0]->product) --}}
                                 @forelse ($wishlists as $wishlist)
-                                    {{-- @dd($wishlist->product) --}}
+                                    @if($wishlist->product['admin-acceptance'] ==1 && $wishlist->product->hide == 0)
+
                                     <tr class="cart-item border-top border-bottom padding-small">
                                         <td class="col-lg-4">
                                             <div class="cart-info d-flex flex-wrap align-items-center mb-4">
@@ -143,6 +144,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @endif
                                 @empty
                                     <tr>
                                         <td colspan="3">

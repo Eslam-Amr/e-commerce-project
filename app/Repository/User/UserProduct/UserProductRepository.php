@@ -48,9 +48,12 @@ class UserProductRepository implements UserProductRepositoryInterface
                     $query->orderBy('effective_price', 'desc');
                 }
             });
-
-        $products = $productsQuery->where('stock','>',0)->paginate()->appends(request()->query());
-        $totalProductsCount = $productsQuery->where('stock','>',0)->toBase()->getCountForPagination();
+                            // 0 no 1 accept
+            // $table->boolean('admin-acceptance')->default(0);
+            // 0 show 1 hide
+            // $table->boolean('hide')->default(0);
+        $products = $productsQuery->where('stock','>',0)->where('admin-acceptance',1)->where('hide',0)->paginate()->appends(request()->query());
+        $totalProductsCount = $productsQuery->where('stock','>',0)->where('admin-acceptance',1)->where('hide',0)->toBase()->getCountForPagination();
 
         return view('user.main.product.index', get_defined_vars());
     }

@@ -132,11 +132,14 @@
                             @foreach ($products as $product)
                                 <div class="swiper-slide">
                                     <div class="product-card position-relative">
-                                        <div class="image-holder">
-                                            {{-- <img src="{{ asset('storage/products/' . $product->image) }}"
-                                            alt="product-item" class="img-fluid"> --}}
-                                            <img src="{{ asset('storage/products/' . $product->image) }}" alt="product-item" class="img-fluid">
-                                        </div>
+                                        <a href="{{ route('user.product.show' ,$product ) }}">
+
+                                            <div class="image-holder">
+                                                {{-- <img src="{{ asset('storage/products/' . $product->image) }}"
+                                                alt="product-item" class="img-fluid"> --}}
+                                                <img src="{{ asset('storage/products/' . $product->image) }}" alt="product-item" class="img-fluid">
+                                            </div>
+                                        </a>
                                         @auth
 
                                         <div class="cart-concern position-absolute">

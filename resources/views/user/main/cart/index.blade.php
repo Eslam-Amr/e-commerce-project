@@ -21,8 +21,8 @@
                     @if (auth()->user() != null)
                         @if ($cart != null)
 
-                            @if (count($cart->products) > 0)
-                                @foreach ($cart->products as $product)
+                            @if (count($cart->products->where('hide',0)->where('admin-acceptance',1)) > 0)
+                                @foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $product)
                                     {{-- @dd($product) --}}
                                     <div class="cart-item border-top border-bottom padding-small">
                                         <div class="row align-items-center">
@@ -246,9 +246,16 @@
                         <a class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none"
                             style="text-decoration: none" href="{{ route('user.product.index') }}">Continue
                             Shopping</a>
-                        <a href="{{ route('checkout.create') }}"
+<x-checkout-button />
+                            {{-- @if (!Cart::where('user_id', auth()->user()->id)->first())
+                            @if(!Cart::where('user_id', auth()->user()->id)->first()->products()->where('hide',0)->where('admin-acceptance',1)->count()>0)
+
+
+                            <a href="{{ route('checkout.create') }}"
                             class="btn btn-black btn-medium text-uppercase mb-3 btn-rounded-none">Proceed to
                             checkout</a>
+                            @endif
+                            @endif --}}
                         {{-- <button class="btn btn-black btn-medium text-uppercase mb-3 btn-rounded-none">Proceed to
                             checkout</button> --}}
                     </div>

@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\AdminControlOnUser\AdminUserController;
 use App\Http\Controllers\User\OrderHistory\UserOrderHistoryController;
 use App\Http\Controllers\User\Settings\UserSellerRegisterationController;
 use App\Http\Controllers\Admin\AdminControlOnSeller\AdminSellerController;
+use App\Http\Controllers\Admin\Seller\Product\ProductRequestController;
 
 // Route::get('/counter', Counter::class);
 Route::view('/te','test');
@@ -73,6 +74,12 @@ Route::group(
      //############################### Admin Product   ###############################
         Route::post('/logout',  [AuthController::class, 'adminLogout'] )->name('logout');
         Route::resource('/product',  ProductController::class );
+        Route::resource('/product-requests',  ProductRequestController::class );
+        Route::post('/product-requests/accept/{product}',  [ProductRequestController::class,'accept'] )->name('product-request.accept')->middleware('auth:admin');
+        Route::post('/product-requests/reject/{product}',  [ProductRequestController::class ,'reject'])->name('product-request.reject')->middleware('auth:admin');
+        Route::put('/product-requests/hide/{product}',  [ProductRequestController::class ,'hide'])->name('product-request.hide');
+        Route::put('/product-requests/unhide/{product}',  [ProductRequestController::class ,'unhide'])->name('product-request.unhide');
+        Route::post('/product-requests/show/{product}',  [ProductRequestController::class ,'show'])->name('product-request.show')->middleware('auth:admin');
         Route::resource('/seller',  AdminSellerController::class );
         Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');
         Route::put('/seller/unblock/{seller}',  [AdminSellerController::class,'unblock'] )->name('seller.unblock');

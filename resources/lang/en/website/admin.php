@@ -136,5 +136,7 @@ return [
 'block' => 'Block',
 'unblock' => 'unblock',
 'user' => 'User',
-
+'reject'=>'Reject',
+'accept'=>'Accept',
+'hide'=>'Hide',
 ];

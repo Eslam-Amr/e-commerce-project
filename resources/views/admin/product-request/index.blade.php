@@ -32,17 +32,16 @@
 @section('content')
     {{-- @include('admin-asset/assets.messages_alert') --}}
     <!-- row opened -->
-@if (auth('seller')->check() )
-@if (auth('seller')->user()->block == 0)
-
-{{-- @auth('seller') --}}
-<div class="d-flex justify-content-between mb-5">
-    <a href="{{ route('admin.product.create') }}" class="btn btn-primary" role="button"
-    aria-pressed="true">{{ trans('website/admin.add_product') }}</a>
-</div>
-{{-- @endauth --}}
-@endif
-@endif
+    @if (auth('seller')->check())
+        @if (auth('seller')->user()->block == 0)
+            {{-- @auth('seller') --}}
+            <div class="d-flex justify-content-between mb-5">
+                <a href="{{ route('admin.product.create') }}" class="btn btn-primary" role="button"
+                    aria-pressed="true">{{ trans('website/admin.add_product') }}</a>
+            </div>
+            {{-- @endauth --}}
+        @endif
+    @endif
     {{-- <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
@@ -124,8 +123,42 @@
                                             discount="{{ $product->discount }}" />EGP <span
                                             class="text-secondary font-weight-normal tx-13 ml-1 prev-price">{{ $product->price }}EGP</span>
                                     </h4>
-                                            <x-show-hide-label :product="$product" />
+                                    @auth('admin')
+                                        {{-- <form id="unblock"
+                                    action="{{ route('admin.seller.unblock', $sellers[$i]) }}" method="POST">
+                                    @method('put')
+                                    @csrf
+                                    <a class="btn btn-danger"
+                                        href="javascript:$('form#unblock').submit();">{{ __('website/admin.unblock') }}</a>
+                                </form> --}}
+                                        <div class="mt-3">
+                                            <div class="d-inline">
+                                                <form id="reject" method="post" class="d-inline"
+                                                    action="{{ route('admin.product-request.reject', $product) }}">
+                                                    @csrf
+                                                    <a href="javascript:$('form#reject').submit();"
+                                                        class="btn btn-danger mx-2 ">{{ __('website/admin.reject') }}</a>
+                                                </form>
+                                                <form method="post" id="accept" class="d-inline"
+                                                    action="{{ route('admin.product-request.accept', $product) }}">
+                                                    @csrf
+                                                    <a href="javascript:$('form#accept').submit();"
+                                                        class="btn btn-success">{{ __('website/admin.accept') }}</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endauth
+                                    {{-- @auth('seller') --}}
+                                    {{-- <center>
 
+                                        <div>
+                                            <h2>
+                                                {{ $product->status }}
+                                            </h2>
+                                        </div>
+                                    </center> --}}
+                                    <x-product-request-status :status="$product->status" />
+                                    {{-- @endauth --}}
                                 </div>
                             </div>
                         </div>
