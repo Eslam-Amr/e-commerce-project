@@ -1,0 +1,8 @@
+<?php
+
+namespace App\Repositories;
+
+class {{class}}
+{
+    // Your repository methods here
+}

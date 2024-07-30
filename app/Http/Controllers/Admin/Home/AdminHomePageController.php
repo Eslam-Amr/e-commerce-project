@@ -3,17 +3,32 @@
 namespace App\Http\Controllers\Admin\Home;
 
 use App\Http\Controllers\Controller;
+use App\Interface\Admin\Home\AdminHomePageRepositoryInterface;
 use App\Models\Checkout;
 use App\Models\Product;
 use App\Models\Profit;
+use App\Services\Admin\Home\AdminHomePageService;
 use App\StautsArray;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminHomePageController extends Controller
 {
     use StautsArray;
+    private $adminRepository;
+
+    public function __construct(AdminHomePageRepositoryInterface $adminRepository)
+    {
+        $this->adminRepository = $adminRepository;
+    }
+    // protected $profitService;
+
+    // public function __construct(AdminHomePageService $profitService)
+    // {
+    //     $this->profitService = $profitService;
+    // }
     /*
     public function __invoke()
     {
@@ -26,121 +41,104 @@ class AdminHomePageController extends Controller
     optimize query
     */
 
-    public function __invoke()
-    {
-        if (auth('admin')->check()) {
-           $sumOfProfit = Profit::select('profit')->sum('profit');
-            $profitOfYear = Profit::whereYear('date', Carbon::now()->format('Y'))->sum('profit');
-            $profitOfMonth= Profit::whereYear('date', Carbon::now()->format('Y'))->whereMonth('date', Carbon::now()->format('m'))->sum('profit');
-            $profitOfDay= Profit::whereYear('date', Carbon::now()->format('Y'))->whereMonth('date', Carbon::now()->format('m'))->whereDay('date', Carbon::now()->format('d'))->sum('profit');
-            $checkoutCompleted = Checkout::where('status', 'Completed')->count();
-            $checkoutPending = Checkout::where('status', 'Pending')->count();
-            $completedArray=$this->getCompletedOrderStatusForAdmin();
-            $pendingArray=$this->getPendingOrderStatusForAdmin();
-            $currentYear = date('Y');
-            $years = [$currentYear - 4, $currentYear - 3, $currentYear - 2, $currentYear - 1, $currentYear];
-$yearGraph=$this->getProfitForYear();
-// $yearGraph=[
-//     $this->getProfitValue($currentYear,'*','01'),
-//     $this->getProfitValue($currentYear,'*','02'),
-//     $this->getProfitValue($currentYear,'*','03'),
-//     $this->getProfitValue($currentYear,'*','04'),
-//     $this->getProfitValue($currentYear,'*','05'),
-//     $this->getProfitValue($currentYear,'*','06'),
-//     $this->getProfitValue($currentYear,'*','07'),
-//     $this->getProfitValue($currentYear,'*','08'),
-//     $this->getProfitValue($currentYear,'*','09'),
-//     $this->getProfitValue($currentYear,'*','10'),
-//     $this->getProfitValue($currentYear,'*','11'),
-//     $this->getProfitValue($currentYear,'*','12')
-// ];
-            $salesData = [
-                $years[0] => $this->getProfitValue($currentYear-4)
-                ,$years[1] => $this->getProfitValue($currentYear-3),
-                $years[2] => $this->getProfitValue($currentYear-2),
-                $years[3] => $this->getProfitValue($currentYear-1),
-                $years[4] => $profitOfYear, // Replace with your actual logic to fetch sales data for each year
-            ];
-        }
-        else if (auth('seller')->check()) {
-            $profitQuery = Profit::select('profit')->where('seller_id', auth('seller')->user()->id);
-            $sumOfProfit = $profitQuery->sum('profit');
-            $profitOfYear = $profitQuery->whereYear('date', Carbon::now()->format('Y'))->sum('profit');
-            $profitOfMonth= $profitQuery->whereYear('date', Carbon::now()->format('Y'))->whereMonth('date', Carbon::now()->format('m'))->sum('profit');
-            $profitOfDay= $profitQuery->whereYear('date', Carbon::now()->format('Y'))->whereMonth('date', Carbon::now()->format('m'))->whereDay('date', Carbon::now()->format('d'))->sum('profit');
-            $checkoutCompleted = Checkout::where('seller_id',auth('seller')->user()->id)->where('status', 'Completed')->count();
-            $checkoutPending = Checkout::where('seller_id',auth('seller')->user()->id)->where('status', 'Pending')->count();
-            $completedArray=$this->getCompletedOrderStatusForSeller();
-            $pendingArray=$this->getPendingOrderStatusForSeller();
-
-            $currentYear = date('Y');
-            $years = [$currentYear - 4, $currentYear - 3, $currentYear - 2, $currentYear - 1, $currentYear];
-$yearGraph=$this->getProfitForYear();
-
-            // $yearGraph=[
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'01'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'02'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'03'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'04'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'05'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'06'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'07'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'08'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'09'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'10'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'11'),
-            //     $this->getProfitValue($currentYear,auth('seller')->user()->id,'12')
-            // ];
-            $salesData = [
-                $years[0] => $this->getProfitValue($currentYear-4,auth('seller')->user()->id)
-               , $years[1] => $this->getProfitValue($currentYear-3,auth('seller')->user()->id),
-                $years[2] => $this->getProfitValue($currentYear-2,auth('seller')->user()->id),
-                $years[3] => $this->getProfitValue($currentYear-1,auth('seller')->user()->id),
-                $years[4] => $profitOfYear, // Replace with your actual logic to fetch sales data for each year
-            ];
-        }
-//         $data = array_fill(0, 12, 0);
-//         foreach(Profit::select('profit','date')->where('seller_id',auth()->user()->id)->whereYear('date','2024')->get() as $profit){
-//             $date = new DateTime($profit->date);
-//             $date=$date->format('m');
-//             if($date == '01')
-//             $data[0]+=$profit->profit;
-//         else if($date == '02')
-//         $data[1]+=$profit->profit;
-//     else if($date == '03')
-//     $data[2]+=$profit->profit;
-// else if($date == '04')
-// $data[3]+=$profit->profit;
-// else if($date == '05')
-// $data[4]+=$profit->profit;
-// else if($date == '06')
-// $data[5]+=$profit->profit;
-// else if($date == '07')
-// $data[6]+=$profit->profit;
-// else if($date == '08')
-// $data[7]+=$profit->profit;
-// else if($date == '09')
-// $data[8]+=$profit->profit;
-// else if($date == '10')
-// $data[9]+=$profit->profit;
-// else if($date == '11')
-// $data[10]+=$profit->profit;
-// else if($date == '12')
-// $data[11]+=$profit->profit;
+//     public function __invoke()
+//     {
+//         $currentDate = Carbon::now();
+//         $currentYear = $currentDate->year;
+//         $currentMonth = $currentDate->month;
+//         $currentDay = $currentDate->day;
+//         $profits = Profit::select('profit')->whereYear('date', $currentYear)->get();
+//         if (auth('admin')->check()) {
+// $sumOfProfit = $profits->sum('profit');
+// $profitOfYear = $profits->sum('profit');
+// $profitOfMonth = $profits->filter(function ($profit) use ($currentMonth) {
+//     return $profit->date->month == $currentMonth;
+// })->sum('profit');
+// $profitOfDay = $profits->filter(function ($profit) use ($currentMonth, $currentDay) {
+//     return $profit->date->month == $currentMonth && $profit->date->day == $currentDay;
+// })->sum('profit');
+//             $checkoutStats = Checkout::select(DB::raw('
+//         SUM(CASE WHEN status = "Completed" THEN 1 ELSE 0 END) as completed_count,
+//         SUM(CASE WHEN status = "Pending" THEN 1 ELSE 0 END) as pending_count
+//     '))
+//     ->first();
+// $checkoutCompleted = $checkoutStats->completed_count;
+// $checkoutPending = $checkoutStats->pending_count;
+//             $completedArray=$this->getCompletedOrderStatusForAdmin();
+//             $pendingArray=$this->getPendingOrderStatusForAdmin();
+//             $years = [$currentYear - 4, $currentYear - 3, $currentYear - 2, $currentYear - 1, $currentYear];
+// $yearGraph=$this->getProfitForYear();
+//             $salesData = $this->getSalesDataForFiveYear($years,$currentYear,$profitOfYear);
 //         }
-        // $date = new DateTime(Profit::select('profit','date')->whereYear('date','2024')->get()[0]->date);
-// dd($this->getProfitForYear() , $yearGraph);
-// dd( Profit::select('profit')->whereYear('date','*')->whereMonth('date','06')->sum('profit'));
-    return view('admin.index',get_defined_vars());
-    }
+//         else if (auth('seller')->check()) {
+//       $sumOfProfit = $profits->where('seller_id',auth('seller')->user()->id)->sum('profit');
+//             $profitOfYear = $profits->where('seller_id',auth('seller')->user()->id)->sum('profit');
+//             $profitOfMonth = $profits->where('seller_id',auth('seller')->user()->id)->filter(function ($profit) use ($currentMonth) {
+//                 return $profit->date->month == $currentMonth;
+//             })->sum('profit');
+//             $profitOfDay = $profits->where('seller_id',auth('seller')->user()->id)->filter(function ($profit) use ($currentMonth, $currentDay) {
+//                 return $profit->date->month == $currentMonth && $profit->date->day == $currentDay;
+//             })->sum('profit');
+//          $checkoutStats = Checkout::where('seller_id',auth('seller')->user()->id)->select(DB::raw('
+//             SUM(CASE WHEN status = "Completed" THEN 1 ELSE 0 END) as completed_count,
+//             SUM(CASE WHEN status = "Pending" THEN 1 ELSE 0 END) as pending_count
+//         '))
+//         ->first();
+
+//     $checkoutCompleted = $checkoutStats->completed_count;
+//     $checkoutPending = $checkoutStats->pending_count;
+
+//             $completedArray=$this->getCompletedOrderStatusForSeller();
+//             $pendingArray=$this->getPendingOrderStatusForSeller();
+
+//             $currentYear = date('Y');
+//             $years = [$currentYear - 4, $currentYear - 3, $currentYear - 2, $currentYear - 1, $currentYear];
+// $yearGraph=$this->getProfitForYear();
+//             $salesData = $this->getSalesDataForFiveYear($years,$currentYear,$profitOfYear);
+//         }
+//     return view('admin.index',get_defined_vars());
+//     }
+// public function __invoke(){
+    // dd($this->adminRepository->index());
+//  $this->adminRepository->index();
+// return $this->adminRepository->index();
+    // return view('admin.index',get_defined_vars());
+    // return view('admin.index',$this->adminRepository->index());
+
+// }
+// public function __invoke(){
+//     // dd($this->profitService->currentMonth);
+//     $user = auth()->user();
+//     $sellerId = null;
+
+//     if (auth('seller')->check()) {
+//         $sellerId = auth('seller')->user()->id;
+//         $completedArray = $this->getCompletedOrderStatusForSeller();
+//         $pendingArray = $this->getPendingOrderStatusForSeller();
+//     }
+//     else{
+//         $completedArray = $this->getCompletedOrderStatusForAdmin();
+//         $pendingArray = $this->getPendingOrderStatusForAdmin();
+
+//     }
+
+//     $profitData = $this->profitService->getProfitData($sellerId);
+//     $checkoutStats = $this->profitService->getCheckoutStats($sellerId);
+//     $years = $this->profitService->getYears();
+
+//     // Handle additional logic if needed
+//     $yearGraph = $this->getProfitForYear();
+//     $salesData = $this->getSalesDataForFiveYear($years, $this->profitService->currentYear, $profitData['profitOfYear']);
+
+//     return view('admin.index', array_merge($profitData, $checkoutStats, [
+//         'completedArray' => $completedArray,
+//         'pendingArray' => $pendingArray,
+//         'years' => $years,
+//         'yearGraph' => $yearGraph,
+//         'salesData' => $salesData
+//     ]));
+// }
+public function __invoke(){
+ return   $this->adminRepository->index();
 }
-/*
-// Current month
-echo Carbon::now()->format('m'); // Outputs: 07 (for July)
-
-// Current year
-echo Carbon::now()->format('Y'); // Outputs: 2024
-
-// Current day
-echo Carbon::now()->format('d'); // Outputs: 18 (for the 18th day of the month)
-*/
+}

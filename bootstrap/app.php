@@ -31,6 +31,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->append(IsBlockedSeller::class);
         // $middleware->web([IsBlockedSeller::class]);
 
+    //     $commands = [
+    //        \App\Console\Commands\MakeRepository::class,
+    //    ];
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

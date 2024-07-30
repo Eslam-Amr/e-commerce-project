@@ -4,6 +4,7 @@ return [
     'create'=>'Create',
     'name'=>'Name',
     'category'=>'Category',
+    'Categories'=>'Categories',
     'add_category'=>'Add Category',
     'action'=>'Action',
     'category_table'=>'Category Table',
@@ -44,6 +45,7 @@ return [
 'enter_product_image'=>'Enter Product Image',
 'color'=>'Color',
 'seller'=>'Seller',
+'sellers'=>'Sellers',
 'sold'=>'Sold',
 
 
@@ -69,7 +71,9 @@ return [
 'General'=>'General',
 'Category'=>'Category',
 'Product'=>'Product',
+'Products'=>'Products',
 'Contact'=>'Contact',
+'Contacts'=>'Contacts',
 'Orders'=>'Orders',
 'Seller'=>'Seller',
 
@@ -136,7 +140,16 @@ return [
 'block' => 'Block',
 'unblock' => 'unblock',
 'user' => 'User',
+'users' => 'Users',
 'reject'=>'Reject',
 'accept'=>'Accept',
 'hide'=>'Hide',
+'unhide'=>'unHide',
+'edit'=>'Edit',
+'seller-request'=>'Seller Request',
+'product-request'=>'Product Request',
+'sellers-requests'=>'Sellers Requests',
+'products-requests'=>'Products Requests',
+'hided'=>'Hided',
+'not-hided'=>'Not Hided',
 ];

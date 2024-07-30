@@ -1,5 +1,5 @@
 
-<?php
+<!--
 return [
     // category
     'create' => 'إنشاء',
@@ -129,9 +129,142 @@ return [
 
 
 
+'seller-request' => 'طلب البائع',
+'product-request' => 'طلب المنتج',
 
 
 
+
+]; -->
+
+
+
+
+
+
+
+
+
+<?php
+
+return [
+    // category
+    'create' => 'إنشاء',
+    'name' => 'الاسم',
+    'category' => 'الفئة',
+    'Categories' => 'الفئات',
+    'add_category' => 'إضافة فئة',
+    'action' => 'الإجراء',
+    'category_table' => 'جدول الفئات',
+    'category_create' => 'إنشاء فئة',
+    'category_name' => 'اسم الفئة',
+    'enter_category_name' => 'أدخل اسم الفئة',
+    'submit' => 'إرسال',
+    'add_product' => 'إضافة منتج',
+    'product_name' => 'اسم المنتج',
+    'enter_product_name' => 'أدخل اسم المنتج',
+    'product_discount' => 'خصم المنتج',
+    'enter_product_discount' => 'أدخل خصم المنتج',
+    'product_stock' => 'مخزون المنتج',
+    'enter_product_stock' => 'أدخل مخزون المنتج',
+    'product_color' => 'لون المنتج',
+    'enter_product_color' => 'أدخل لون المنتج',
+    'product_size' => 'حجم المنتج',
+    'enter_product_size' => 'أدخل حجم المنتج',
+    'product_category' => 'فئة المنتج',
+    'choose_product_category' => 'اختر فئة المنتج',
+    'product_additonal_information' => 'معلومات إضافية عن المنتج',
+    'enter_product_additonal_information' => 'أدخل معلومات إضافية عن المنتج',
+    'product_description' => 'وصف المنتج',
+    'enter_product_description' => 'أدخل وصف المنتج',
+    'product_create' => 'إنشاء منتج',
+    'product_price' => 'سعر المنتج',
+    'enter_product_price' => 'أدخل سعر المنتج',
+    'product_image' => 'صورة المنتج',
+    'enter_product_image' => 'أدخل صورة المنتج',
+    'color' => 'اللون',
+    'seller' => 'البائع',
+    'sellers' => 'البائعين',
+    'sold' => 'تم البيع',
+
+    // sidebar
+    'Main' => 'الرئيسية',
+    'Index' => 'فهرس',
+    'General' => 'عام',
+    'Category' => 'فئة',
+    'Product' => 'منتج',
+    'Products' => 'منتجات',
+    'Contact' => 'اتصال',
+    'Contacts' => 'جهات الاتصال',
+    'Orders' => 'الطلبات',
+    'Seller' => 'البائع',
+
+    // admin home page
+    'admin_welcome' => 'مرحباً، أهلاً بعودتك!',
+    'admin_dashboard_welcome' => 'قالب لوحة مراقبة المبيعات.',
+    'TODAY_EARNINGS' => 'أرباح اليوم',
+    'MONTH_EARNINGS' => 'أرباح الشهر',
+    'YEAR_EARNINGS' => 'أرباح السنة',
+    'TOTAL_EARNINGS' => 'إجمالي الأرباح',
+    'ُEGP' => 'جنيه',
+    'order_status' => 'حالة الطلب',
+    'order_status_paragraph' => 'حالة الطلب والتتبع. تتبع الطلب إذا كان مكتملًا أو معلقًا',
+    'pending' => 'معلق',
+    'completed' => 'مكتمل',
+    'months' => [
+        'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر',
+        'أكتوبر', 'نوفمبر', 'ديسمبر'
+    ],
+    'YEAR_PROFIT' => 'ربح السنة',
+    'YEAR_PROFIT_status' => 'قارن الربح لهذا العام والسنوات الأربع الماضية.',
+    'Sales_Data' => 'بيانات المبيعات',
+    'month_year_profit' => 'ربح هذا العام، الربح لكل شهر.',
+    'logout' => 'تسجيل خروج',
+    'copyright' => 'حقوق النشر © 2020 <a href="#">Valex</a>. مصمم بواسطة <a href="https://www.spruko.com/">Spruko</a> جميع الحقوق محفوظة.',
+    'view_all' => 'عرض الكل',
+    'email' => 'البريد الإلكتروني',
+    'phone' => 'الهاتف',
+    'subject' => 'الموضوع',
+    'For_More_Info' => 'لمزيد من المعلومات',
+    'mark_as_read' => 'وضع علامة كمقروء',
+    'contact_name' => 'اسم جهة الاتصال',
+    'contact_email' => 'البريد الإلكتروني لجهة الاتصال',
+    'contact_phone' => 'هاتف جهة الاتصال',
+    'contact_subject' => 'موضوع جهة الاتصال',
+    'contact_message' => 'رسالة جهة الاتصال',
+    'delete' => 'حذف',
+    'display_all' => 'عرض الكل',
+    'user_name' => 'اسم المستخدم',
+    'final_price' => 'السعر النهائي',
+    'date' => 'التاريخ',
+    'status' => 'الحالة',
+    'update_status' => 'تحديث الحالة',
+    'order_table' => 'جدول الطلبات',
+    'checkout_name' => 'اسم الدفع',
+    'company_name' => 'اسم الشركة',
+    'country' => 'البلد',
+    'street_address' => 'عنوان الشارع',
+    'appartment_info' => 'معلومات الشقة',
+    'city' => 'المدينة',
+    'state' => 'الولاية',
+    'Order_notes' => 'ملاحظات الطلب',
+    'order_data' => 'بيانات الطلب',
+    // 'action' => 'الإجراء',
+    'block' => 'حظر',
+    'unblock' => 'رفع الحظر',
+    'user' => 'المستخدم',
+    'users' => 'المستخدمين',
+    'reject' => 'رفض',
+    'accept' => 'قبول',
+    'hide' => 'إخفاء',
+    'unhide' => 'اظهار',
+    'edit' => 'تعديل',
+    'seller-request' => 'طلب البائع',
+    'product-request' => 'طلب المنتج',
+    'sellers-requests' => 'طلبات البائعين',
+    'products-requests' => 'طلبات المنتجات',
+    'hided' => 'مخفى',
+'not-hided' => 'غير مخفى'
 
 ];
-?>
+

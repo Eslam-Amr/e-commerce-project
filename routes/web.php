@@ -77,8 +77,8 @@ Route::group(
         Route::resource('/product-requests',  ProductRequestController::class );
         Route::post('/product-requests/accept/{product}',  [ProductRequestController::class,'accept'] )->name('product-request.accept')->middleware('auth:admin');
         Route::post('/product-requests/reject/{product}',  [ProductRequestController::class ,'reject'])->name('product-request.reject')->middleware('auth:admin');
-        Route::put('/product-requests/hide/{product}',  [ProductRequestController::class ,'hide'])->name('product-request.hide');
-        Route::put('/product-requests/unhide/{product}',  [ProductRequestController::class ,'unhide'])->name('product-request.unhide');
+        Route::post('/product-requests/hide/{product}',  [ProductRequestController::class ,'hide'])->name('product-request.hide');
+        Route::post('/product-requests/unhide/{product}',  [ProductRequestController::class ,'unhide'])->name('product-request.unhide');
         Route::post('/product-requests/show/{product}',  [ProductRequestController::class ,'show'])->name('product-request.show')->middleware('auth:admin');
         Route::resource('/seller',  AdminSellerController::class );
         Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');

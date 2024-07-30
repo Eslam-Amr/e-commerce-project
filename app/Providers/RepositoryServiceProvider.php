@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+// use App\Admin\Home\AdminHomePageRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\User\Cart\CartRepository;
 use App\Repository\Admin\Product\ProductRepository;
@@ -12,8 +13,10 @@ use App\Repository\User\UserProduct\UserProductRepository;
 use App\Interface\Admin\Product\ProductRepositoryInterface;
 use App\Interface\User\Wishlist\WishlistRepositoryInterface;
 use App\Interface\Admin\Category\CategoryRepositoryInterface;
+use App\Interface\Admin\Home\AdminHomePageRepositoryInterface;
 use App\Interface\User\Checkout\CheckoutRepositoryInterface;
 use App\Interface\User\UserProduct\UserProductRepositoryInterface;
+use App\Repository\Admin\Home\AdminHomePageRepository;
 use App\Repository\User\Checkout\CheckoutRepository;
 
 // App\Repository\Home\UserProductRepository
@@ -35,6 +38,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(WishlistRepositoryInterface::class, WishlistRepository::class);
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
         $this->app->bind(CheckoutRepositoryInterface::class, CheckoutRepository::class);
+        $this->app->bind(AdminHomePageRepositoryInterface::class, AdminHomePageRepository::class);
 
     }
 

@@ -202,7 +202,7 @@
                                     <div class="d-flex  ">
                                         <div class=" product-title">
                                             <a class="btn btn-warning"
-                                                href="{{ route('admin.product.edit', $product) }}">edit</a>
+                                                href="{{ route('admin.product.edit', $product) }}">{{ __('website/admin.edit') }}</a>
                                         </div>
                                     </div>
                                     <div class="d-flex  ">
@@ -211,7 +211,7 @@
                                                 @method('delete')
                                                 @csrf
 
-                                                <button type="submit" class="btn btn-danger">delete</button>
+                                                <button type="submit" class="btn btn-danger">{{ __('website/admin.delete') }}</button>
                                             </form>
                                         </div>
                                     </div>
@@ -232,7 +232,7 @@
                                 <div class="d-flex  ">
                                     <div class=" product-title">
                                         <a class="btn btn-warning"
-                                            href="{{ route('admin.product.edit', $product) }}">edit</a>
+                                            href="{{ route('admin.product.edit', $product) }}">{{ __('website/admin.edit') }}</a>
                                     </div>
                                 </div>
                                 <div class="d-flex  ">
@@ -241,11 +241,11 @@
                                             @method('delete')
                                             @csrf
 
-                                            <button type="submit" class="btn btn-danger">delete</button>
+                                            <button type="submit" class="btn btn-danger">{{ __('website/admin.delete') }}</button>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="d-flex  ">
+                                {{-- <div class="d-flex  ">
                                     <div class=" product-title">
                                         <form id="hide" method="post" class="d-inline"
                                             action="{{ route('admin.product-request.hide', $product) }}">
@@ -254,7 +254,9 @@
                                                 class="btn btn-danger mx-2 ">{{ __('website/admin.hide') }}</a>
                                         </form>
                                     </div>
-                                </div>
+                                </div> --}}
+                                <x-product-hide-button-in-show :product="$product" />
+
                                 {{-- <x-product-hide-button-in-show /> --}}
 
                             @endif

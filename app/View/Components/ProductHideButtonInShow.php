@@ -18,7 +18,7 @@ class ProductHideButtonInShow extends Component
      $this->hide=false;
     else
     $this->hide=true;
-
+// dd($this->hide);
     }
 
     /**
