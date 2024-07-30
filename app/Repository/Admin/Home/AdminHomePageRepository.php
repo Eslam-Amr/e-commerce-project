@@ -20,12 +20,18 @@ class AdminHomePageRepository implements AdminHomePageRepositoryInterface
         $currentYear = $currentDate->year;
         $currentMonth = $currentDate->month;
         $currentDay = $currentDate->day;
-        $profits = Profit::select('profit')->whereYear('date', $currentYear)->get();
+        $profits = Profit::select('profit','date','seller_id')->whereYear('date', $currentYear)->get();
+        // dd($profits->sum('profit'));
         if (auth('admin')->check()) {
 $sumOfProfit = $profits->sum('profit');
+// dd($sumOfProfit);
 $profitOfYear = $profits->sum('profit');
 $profitOfMonth = $profits->filter(function ($profit) use ($currentMonth) {
-    return $profit->date->month == $currentMonth;
+    // dd($profit->date);
+    // if ($profit->date instanceof Carbon) {
+        return $profit->date->month == $currentMonth;
+    // }
+    // return $profit->date->month == $currentMonth;
 })->sum('profit');
 $profitOfDay = $profits->filter(function ($profit) use ($currentMonth, $currentDay) {
     return $profit->date->month == $currentMonth && $profit->date->day == $currentDay;
@@ -67,7 +73,9 @@ $yearGraph=$this->getProfitForYear();
             $currentYear = date('Y');
             $years = [$currentYear - 4, $currentYear - 3, $currentYear - 2, $currentYear - 1, $currentYear];
 $yearGraph=$this->getProfitForYear();
+
             $salesData = $this->getSalesDataForFiveYear($years,$currentYear,$profitOfYear);
+            // dd($salesData);
         }
         // return get_defined_vars();
     return view('admin.index',get_defined_vars());

@@ -32,7 +32,7 @@ if (auth()->check()) {
     } else {
         $hasProducts = $cart->products()
             ->where('hide', 0)
-            ->where('admin_acceptance', 1)
+            ->where('admin-acceptance', 1)
             ->count() > 0;
 
         if (!$hasProducts) {

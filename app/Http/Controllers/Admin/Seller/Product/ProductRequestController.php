@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 class ProductRequestController extends Controller
 {
     public function index(){
+        if(auth('admin')->check())
         $products =Product::where('hide',0)->where('admin-acceptance',0)->whereNot('status','accepted')->paginate();
+        else
+        $products =Product::where('seller_id',auth('seller')->user()->id)->where('hide',0)->where('admin-acceptance',0)->whereNot('status','accepted')->paginate();
         return view('admin.product-request.index',get_defined_vars());
     }
     public function accept(Product $product){

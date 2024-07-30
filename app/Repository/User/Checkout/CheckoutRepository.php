@@ -62,7 +62,8 @@ foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $produ
     $product->save();
 
     // Calculate total for seller's checkout
-    $productTotal = $product->pivot->quantity * $product->price; // Assuming price is a property of the product
+    // 1-(dis/100)
+    $productTotal = $product->pivot->quantity * ((1-($product->discount/100))*$product->price); // Assuming price is a property of the product
 
     if (!isset($sellerCheckouts[$product->seller_id])) {
         $sellerCheckouts[$product->seller_id] = $checkout;

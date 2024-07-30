@@ -20,11 +20,12 @@ trait StautsArray
 //     return Profit::select('profit')->where('seller_id',$seller_id)->whereYear('date',$year)->whereMonth('date',$month)->sum('profit');
 
 // }
-public function getProfitValue($year, $seller_id = '*', $month = '*')
+public function getProfitValue($year,  $month = '*')
 {
+    $seller_id = Auth::guard('seller')->check() ? Auth::guard('seller')->user()->id : null;
+    // dd($seller_id);
     $query = Profit::query();
-
-    if ($seller_id !== '*') {
+    if ($seller_id != null) {
         $query->where('seller_id', $seller_id);
     }
 

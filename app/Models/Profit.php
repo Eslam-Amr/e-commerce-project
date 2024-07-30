@@ -10,7 +10,9 @@ class Profit extends Model
     use HasFactory;
 
     protected $fillable = ['seller_id', 'product_id', 'profit', 'date','quantity'];
-
+    protected $casts = [
+        'date' => 'datetime',
+    ];
     public function seller()
     {
         return $this->belongsTo(Seller::class);

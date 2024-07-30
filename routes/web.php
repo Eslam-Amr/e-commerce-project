@@ -54,6 +54,7 @@ make user can be seller in profile page and admin can accept or reject
 make bolck for user seller and make delete seller
 make admin can accept or reject products
 block and unblock seller and user in admin page
+checkout total not ok 
 */
 
 Route::group(

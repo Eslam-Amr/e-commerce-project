@@ -200,19 +200,11 @@
                                     <th>Subtotal</th>
                                     <td data-title="Subtotal">
                                         <span class="price-amount amount text-primary ps-5">
-                                            {{-- <bdi>
-                                                @dd($total)
-                                                @foreach ($total as $singlePrice)
-                                                {{ $singlePrice }}
-                                                <span class="price-currency-symbol">EGP </span>
 
-                                                @endforeach
-                                            </bdi> --}}
                                             <bdi>
-                                                {{-- Loop through the $total array --}}
                                                 @foreach ($total as $key => $singlePrice)
+                                                {{-- @dd($total,$singlePrice) --}}
                                                     {{ $singlePrice }} EGP
-                                                    {{-- Display "+" after each price except the last one --}}
                                                     @if ($loop->remaining > 0)
                                                         +
                                                     @endif
