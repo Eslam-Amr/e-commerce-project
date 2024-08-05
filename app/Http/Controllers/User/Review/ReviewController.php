@@ -10,13 +10,8 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
     // public function store(Request $request){
-    public function store(StoreReviewRequest $request){
-// dd($request->all());
-// $request->validate([
-//     'product_id' => 'required|exists:products,id',
-//     'review' => 'string',
-//     'rating' => 'required|integer|min:1|max:5',
-// ]);
+    public function __invoke(StoreReviewRequest $request){
+
 $review=$request->validated();
 $review['user_id']=auth()->user()->id;
 Review::create($review);

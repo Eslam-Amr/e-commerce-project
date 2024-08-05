@@ -264,7 +264,15 @@ return [
     'sellers-requests' => 'طلبات البائعين',
     'products-requests' => 'طلبات المنتجات',
     'hided' => 'مخفى',
-'not-hided' => 'غير مخفى'
+'not-hided' => 'غير مخفى',
+'customer_ratings'=>'تقيمات العملاء',
+'rate'=>'تقييم',
+'comment'=>'تعليق',
+'product_review' => 'مراجعة المنتج',
+'product_review_table' => 'جدول مراجعات المنتج',
+'seller_review' => 'مراجعة البائع',
+'seller_review_table' => 'جدول مراجعات البائع',
+'seller_table'=>'جدول البائعين ',
 
 ];
 

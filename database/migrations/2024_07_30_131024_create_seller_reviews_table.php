@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('seller_reviews', function (Blueprint $table) {
             $table->id();
+            $table->decimal('rate');
+            $table->string('comment');
+
+            $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+
             $table->timestamps();
         });
     }

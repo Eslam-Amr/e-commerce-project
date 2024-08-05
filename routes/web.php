@@ -2,6 +2,7 @@
 
 // use App\Livewire\Counter;
 
+use App\Http\Controllers\Admin\AdminControlOnSeller\ShowSellerReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,8 @@ use App\Http\Controllers\User\OrderHistory\UserOrderHistoryController;
 use App\Http\Controllers\User\Settings\UserSellerRegisterationController;
 use App\Http\Controllers\Admin\AdminControlOnSeller\AdminSellerController;
 use App\Http\Controllers\Admin\Seller\Product\ProductRequestController;
+use App\Http\Controllers\Admin\Seller\Product\ShowProductReviewController;
+use App\Http\Controllers\User\Review\SellerReviewController;
 
 // Route::get('/counter', Counter::class);
 Route::view('/te','test');
@@ -54,7 +57,12 @@ make user can be seller in profile page and admin can accept or reject
 make bolck for user seller and make delete seller
 make admin can accept or reject products
 block and unblock seller and user in admin page
-checkout total not ok 
+checkout total not ok
+*/
+/*
+reposaiory => command or interface and class
+migartion files
+
 */
 
 Route::group(
@@ -75,20 +83,25 @@ Route::group(
      //############################### Admin Product   ###############################
         Route::post('/logout',  [AuthController::class, 'adminLogout'] )->name('logout');
         Route::resource('/product',  ProductController::class );
+        Route::get('/product/{product}/review',  ShowProductReviewController::class )->name('product.review');
         Route::resource('/product-requests',  ProductRequestController::class );
         Route::post('/product-requests/accept/{product}',  [ProductRequestController::class,'accept'] )->name('product-request.accept')->middleware('auth:admin');
         Route::post('/product-requests/reject/{product}',  [ProductRequestController::class ,'reject'])->name('product-request.reject')->middleware('auth:admin');
         Route::post('/product-requests/hide/{product}',  [ProductRequestController::class ,'hide'])->name('product-request.hide');
         Route::post('/product-requests/unhide/{product}',  [ProductRequestController::class ,'unhide'])->name('product-request.unhide');
         Route::post('/product-requests/show/{product}',  [ProductRequestController::class ,'show'])->name('product-request.show')->middleware('auth:admin');
-        Route::resource('/seller',  AdminSellerController::class );
-        Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');
-        Route::put('/seller/unblock/{seller}',  [AdminSellerController::class,'unblock'] )->name('seller.unblock');
-        Route::resource('/seller-request',  AdminSellerRequestController::class );
-        Route::post('/seller-request/{seller_request}/accept',  [AdminSellerRequestController::class,'accept'] )->name('seller-request.accept');
-        Route::resource('/user',  AdminUserController::class );
-        Route::put('/user/block/{user}',  [AdminUserController::class,'block'] )->name('user.block');
-        Route::put('/user/unblock/{user}',  [AdminUserController::class,'unblock'] )->name('user.unblock');
+Route::middleware('auth:admin')->group(function (){
+
+    Route::resource('/seller',  AdminSellerController::class );
+    Route::get('/seller/{seller}/review',  ShowSellerReviewController::class )->name('seller.review');
+    Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');
+    Route::put('/seller/unblock/{seller}',  [AdminSellerController::class,'unblock'] )->name('seller.unblock');
+    Route::resource('/seller-request',  AdminSellerRequestController::class );
+    Route::post('/seller-request/{seller_request}/accept',  [AdminSellerRequestController::class,'accept'] )->name('seller-request.accept');
+    Route::resource('/user',  AdminUserController::class );
+    Route::put('/user/block/{user}',  [AdminUserController::class,'block'] )->name('user.block');
+    Route::put('/user/unblock/{user}',  [AdminUserController::class,'unblock'] )->name('user.unblock');
+});
         // Route::view('/','admin.index')->name('index');
         Route::get('/',AdminHomePageController::class)->name('index');
     });
@@ -119,7 +132,9 @@ Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.ind
 Route::delete('/wishlist/{wishlist}', [WishlistController::class,'destroy'])->name('wishlist.destroy');
 Route::post('/wishlist/{id}', [WishlistController::class,'store'])->name('wishlist.store');
 //############################### User product review   ###############################
-Route::resource('/review',ReviewController::class)->except('show');
+Route::post('/review',ReviewController::class)->name('review.store')->middleware('auth:web');
+//############################### User seller review   ###############################
+Route::post('/seller-review',SellerReviewController::class)->name('seller-review.store')->middleware('auth:web');
 //############################### User order history   ###############################
 Route::resource('/orders',UserOrderHistoryController::class)->except('show');
 Route::get('/orders/{checkout}',[UserOrderHistoryController::class,'show'])->name('user.order.show')->middleware('auth:web');

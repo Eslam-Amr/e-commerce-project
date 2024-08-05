@@ -17,14 +17,19 @@
             </div>
         </div>
         <div class="main-dashboard-header-right">
-            <div>
-                <label class="tx-13">Customer Ratings</label>
-                <div class="main-star">
-                    <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
-                        class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
-                        class="typcn typcn-star"></i> <span>(14,873)</span>
+            @auth('seller')
+                <div>
+                    {{-- <label class="tx-13">Customer Ratings</label> --}}
+                    <label class="tx-13">{{ __('website/admin.customer_ratings') }}</label>
+                    <div class="main-star">
+                        {{-- <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
+                            class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i
+                            class="typcn typcn-star"></i> --}}
+                           {{ $avgReview }}
+                            <span>({{ $countReview }})</span>
+                    </div>
                 </div>
-            </div>
+            @endauth
             {{-- <div>
                 <label class="tx-13">Online Sales</label>
                 <h5>563,275</h5>
@@ -50,7 +55,8 @@
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfDay }}{{ __('website/admin.ُEGP') }}</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">
+                                    {{ $profitOfDay }}{{ __('website/admin.ُEGP') }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -72,7 +78,8 @@
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfMonth }}{{ __('website/admin.ُEGP') }}</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">
+                                    {{ $profitOfMonth }}{{ __('website/admin.ُEGP') }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -94,7 +101,8 @@
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $profitOfYear }}{{ __('website/admin.ُEGP') }}</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">
+                                    {{ $profitOfYear }}{{ __('website/admin.ُEGP') }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -117,7 +125,8 @@
                         <div class="d-flex">
                             <div class="">
                                 {{-- @dd($sumOfProfit) --}}
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $sumOfProfit }}{{ __("website/admin.ُEGP") }}</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">
+                                    {{ $sumOfProfit }}{{ __('website/admin.ُEGP') }}</h4>
                                 {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
                             </div>
                             {{-- <span class="float-right my-auto ml-auto">
@@ -235,8 +244,8 @@
             <div class="card mg-b-20">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-{{ __("website/admin.YEAR_PROFIT") }}                    </div>
-                    <p class="mg-b-20">{{ __("website/admin.YEAR_PROFIT_status") }} </p>
+                        {{ __('website/admin.YEAR_PROFIT') }} </div>
+                    <p class="mg-b-20">{{ __('website/admin.YEAR_PROFIT_status') }} </p>
                     <div id="echart2" class="ht-300"></div>
                 </div>
             </div>
@@ -268,7 +277,7 @@
             <div class="card overflow-hidden">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-{{ __('website/admin.YEAR_PROFIT') }}                    </div>
+                        {{ __('website/admin.YEAR_PROFIT') }} </div>
                     <div class="chartjs-wrapper-demo">
                         <canvas id="chartLine1"></canvas>
                     </div>
@@ -614,19 +623,19 @@
 
             const data = {
                 labels: [
-        "{{ __('website/admin.months.0') }}",  // January
-        "{{ __('website/admin.months.1') }}",  // February
-        "{{ __('website/admin.months.2') }}",  // March
-        "{{ __('website/admin.months.3') }}",  // April
-        "{{ __('website/admin.months.4') }}",  // May
-        "{{ __('website/admin.months.5') }}",  // June
-        "{{ __('website/admin.months.6') }}",  // July
-        "{{ __('website/admin.months.7') }}",  // August
-        "{{ __('website/admin.months.8') }}",  // September
-        "{{ __('website/admin.months.9') }}",  // October
-        "{{ __('website/admin.months.10') }}", // November
-        "{{ __('website/admin.months.11') }}"  // December
-    ],
+                    "{{ __('website/admin.months.0') }}", // January
+                    "{{ __('website/admin.months.1') }}", // February
+                    "{{ __('website/admin.months.2') }}", // March
+                    "{{ __('website/admin.months.3') }}", // April
+                    "{{ __('website/admin.months.4') }}", // May
+                    "{{ __('website/admin.months.5') }}", // June
+                    "{{ __('website/admin.months.6') }}", // July
+                    "{{ __('website/admin.months.7') }}", // August
+                    "{{ __('website/admin.months.8') }}", // September
+                    "{{ __('website/admin.months.9') }}", // October
+                    "{{ __('website/admin.months.10') }}", // November
+                    "{{ __('website/admin.months.11') }}" // December
+                ],
                 datasets: [{
                         label: "{{ __('website/admin.completed') }}",
                         data: @json($completedArray),
@@ -687,12 +696,12 @@
         var echart2 = echarts.init(document.getElementById('echart2'));
         var currentYear = new Date().getFullYear();
         var xAxisData = [
-            @foreach($salesData as $year => $data)
+            @foreach ($salesData as $year => $data)
                 "{{ $year }}",
             @endforeach
         ];
         var yAxisData = [
-            @foreach($salesData as $year )
+            @foreach ($salesData as $year)
                 "{{ $year }}",
             @endforeach
         ];
@@ -706,21 +715,22 @@
                 data: xAxisData
                 // data: [
                 //     @php
-                //         foreach($salesData as $key)
-                //         {{ $key }}
-                //     @endphp
+                    //         foreach($salesData as $key)
+                    //         {{ $key }}
+                    //
+                @endphp
                 // ]
             },
             yAxis: {
                 type: 'value'
             },
             series: [{
-//                 data: [{{ $years[0] }},
-// {{ $years[0] }},
-// {{ $years[0] }},
-// {{ $years[0] }},
-// {{ $years[0] }},],
-data : yAxisData,
+                //                 data: [{{ $years[0] }},
+                // {{ $years[0] }},
+                // {{ $years[0] }},
+                // {{ $years[0] }},
+                // {{ $years[0] }},],
+                data: yAxisData,
                 type: 'line'
             }]
         };
@@ -735,7 +745,7 @@ data : yAxisData,
 
 
 
-{{--
+    {{--
 <script>
     // Example data (replace with your actual data)
     var labels = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -770,55 +780,55 @@ data : yAxisData,
 
  --}}
 
- <script>
-    // Example data (replace with your actual data)
-    var labels = [
-        "{{ __('website/admin.months.0') }}",  // January
-        "{{ __('website/admin.months.1') }}",  // February
-        "{{ __('website/admin.months.2') }}",  // March
-        "{{ __('website/admin.months.3') }}",  // April
-        "{{ __('website/admin.months.4') }}",  // May
-        "{{ __('website/admin.months.5') }}",  // June
-        "{{ __('website/admin.months.6') }}",  // July
-        "{{ __('website/admin.months.7') }}",  // August
-        "{{ __('website/admin.months.8') }}",  // September
-        "{{ __('website/admin.months.9') }}",  // October
-        "{{ __('website/admin.months.10') }}", // November
-        "{{ __('website/admin.months.11') }}"  // December
-    ];;
-    var data = @json($yearGraph);
+    <script>
+        // Example data (replace with your actual data)
+        var labels = [
+            "{{ __('website/admin.months.0') }}", // January
+            "{{ __('website/admin.months.1') }}", // February
+            "{{ __('website/admin.months.2') }}", // March
+            "{{ __('website/admin.months.3') }}", // April
+            "{{ __('website/admin.months.4') }}", // May
+            "{{ __('website/admin.months.5') }}", // June
+            "{{ __('website/admin.months.6') }}", // July
+            "{{ __('website/admin.months.7') }}", // August
+            "{{ __('website/admin.months.8') }}", // September
+            "{{ __('website/admin.months.9') }}", // October
+            "{{ __('website/admin.months.10') }}", // November
+            "{{ __('website/admin.months.11') }}" // December
+        ];;
+        var data = @json($yearGraph);
 
-    // Get the canvas element
-    var ctx = document.getElementById('chartLine1').getContext('2d');
+        // Get the canvas element
+        var ctx = document.getElementById('chartLine1').getContext('2d');
 
-    // Set the height of the canvas (in pixels)
-    ctx.canvas.height = 70; // Adjust this value as needed
+        // Set the height of the canvas (in pixels)
+        ctx.canvas.height = 70; // Adjust this value as needed
 
-    // Initialize Chart.js chart
-    var chartLine1 = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: "{{ __('website/admin.Sales_Data') }}",
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                data: data,
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    suggestedMin: 0, // Minimum value will be 0
-                    suggestedMax: 90000, // Maximum value will be 100
+        // Initialize Chart.js chart
+        var chartLine1 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "{{ __('website/admin.Sales_Data') }}",
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    data: data,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        suggestedMin: 0, // Minimum value will be 0
+                        suggestedMax: 90000, // Maximum value will be 100
 
+                    }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
 
 
 

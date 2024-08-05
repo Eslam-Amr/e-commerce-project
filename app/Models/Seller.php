@@ -28,4 +28,7 @@ public function checkouts(){
     {
         return $this->hasMany(Profit::class);
     }
+    public function reviews(){
+        return $this->hasMany(SellerReview::class);
+    }
 }
