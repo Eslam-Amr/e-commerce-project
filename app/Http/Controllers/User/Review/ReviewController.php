@@ -17,6 +17,7 @@ class ReviewController extends Controller
         $this->reviewRepository = $reviewRepository;
     }
     // public function store(Request $request){
+<<<<<<< HEAD
     public function store(StoreReviewRequest $request){
 // dd($request->all());
 // $request->validate([
@@ -28,6 +29,13 @@ class ReviewController extends Controller
 // $review['user_id']=auth()->user()->id;
 // Review::create($review);
 $this->reviewRepository->createUserReview($request);
+=======
+    public function __invoke(StoreReviewRequest $request){
+
+$review=$request->validated();
+$review['user_id']=auth()->user()->id;
+Review::create($review);
+>>>>>>> 7156878f3e6c48b70ddaaefdbfa64da21f62e25d
 return redirect()->back()->with('success','Review created successfully');
     }
 }

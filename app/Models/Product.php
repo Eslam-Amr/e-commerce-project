@@ -68,6 +68,11 @@ class Product extends Model
                     ->withPivot('quantity')
                     ->withTimestamps();
     }
-
+    // public function seller(){
+    //     return $this->belongsTo(Seller::class);
+    // }
+public function reviews(){
+    return $this->hasMany(Review::class);
+}
 
 }

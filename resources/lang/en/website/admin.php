@@ -152,4 +152,12 @@ return [
 'products-requests'=>'Products Requests',
 'hided'=>'Hided',
 'not-hided'=>'Not Hided',
+'customer_ratings'=>'Customer Ratings',
+'rate'=>'rate',
+'comment'=>'comment',
+'product_review'=>'Product Teview',
+'product_review_table'=>'Product Review Table',
+'seller_review'=>'Seller Teview',
+'seller_review_table'=>'Seller Review Table',
+'seller_table'=>'Seller Table',
 ];

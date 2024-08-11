@@ -225,6 +225,12 @@
                                             </form>
                                         </div>
                                     </div> --}}
+
+                                <div class="d-flex  ">
+                                    <div class=" product-title">
+                                        <a class="btn btn-secondary" href="{{ route('admin.product.review',$product) }}">show review</a>
+                                    </div>
+                                </div>
                                 <x-product-hide-button-in-show :product="$product" />
 
                                 @endif
@@ -245,6 +251,19 @@
                                         </form>
                                     </div>
                                 </div>
+
+                                <div class="d-flex  ">
+                                    <div class=" product-title">
+                                        <a class="btn btn-secondary" href="{{ route('admin.product.review',$product) }}">show review</a>
+                                    </div>
+                                </div>
+                                        {{-- <form action="{{ route('admin.product.destroy', $product) }}" method="post">
+                                            @method('delete')
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-danger">{{ __('website/admin.delete') }}</button>
+                                        </form> --}}
+
                                 {{-- <div class="d-flex  ">
                                     <div class=" product-title">
                                         <form id="hide" method="post" class="d-inline"

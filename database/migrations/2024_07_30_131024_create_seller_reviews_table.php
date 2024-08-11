@@ -16,9 +16,14 @@ return new class extends Migration
             $table->decimal('rate');
             $table->string('comment');
 
+<<<<<<< HEAD
             // $table->foreignId('product_id')->references('id')->on('products')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+=======
+            $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+>>>>>>> 7156878f3e6c48b70ddaaefdbfa64da21f62e25d
 
             $table->timestamps();
         });

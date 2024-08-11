@@ -73,7 +73,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ trans('website/admin.seller') }}</h4>
+                <h4 class="content-title mb-0 my-auto">{{ trans('website/admin.product_review') }}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                     {{ trans('website/admin.view_all') }}</span>
             </div>
@@ -90,7 +90,7 @@
         <div class="card">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">{{ __('website/admin.seller_table') }}</h4>
+                    <h4 class="card-title mg-b-0">{{ __('website/admin.product_review_table') }}</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
                 </div>
                 {{-- policy --}}
@@ -108,18 +108,21 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{{ __('website/admin.seller') }}</th>
-                                <th>{{ __('website/admin.email') }}</th>
-                                {{-- <th>{{ __('website/admin.date') }}</th> --}}
-                                <th>{{ __('website/admin.completed') }}</th>
-                                <th>{{ __('website/admin.pending') }}</th>
-                                <th>{{ __('website/admin.profit') }}</th>
+                                <th>{{ __('website/admin.user_name') }}</th>
+                                <th>{{ __('website/admin.rate') }}</th>
+                                <th>{{ __('website/admin.comment') }}</th>
                                 {{-- @auth('admin')
 
                                 <th ></th>
                                 @endauth --}}
 
-                                <th>{{ __('website/admin.action') }}</th>
+                                {{-- @auth('admin')
+                                    <th>{{ __('website/admin.status') }}</th>
+                                @endauth
+                                @auth('seller')
+                                    <th>{{ __('website/admin.update_status') }}</th>
+                                @endauth --}}
+                                <th>{{ __('website/admin.date') }}</th>
 
                             </tr>
                         </thead>
@@ -127,53 +130,18 @@
                             {{-- @dd( count($categories)) --}}
                             {{-- @if (count($categories) > 0) --}}
                             {{-- @if ($categories != null) --}}
-                            @isset($sellers)
+                            @isset($reviews)
 
 
-                                @for ($i = 0; $i < count($sellers); $i++)
+                                @for ($i = 0; $i < count($reviews); $i++)
                                     <tr>
-                                        <th scope="row">{{ ($sellers->currentPage() - 1) * 15 + $i + 1 }}</th>
-                                        <td>{{ $sellers[$i]->name }}</td>
-                                        <td>{{ $sellers[$i]->email }}</td>
-                                        {{-- completed orders   --}}
-                                        <td>{{ $sellers[$i]->checkouts->where('status', 'Completed')->count() }}</td>
-                                        {{-- Pending orders   --}}
-                                        <td>{{ $sellers[$i]->checkouts->where('status', 'Pending')->count() }}</td>
-                                        {{-- total profit   --}}
-                                        <td>{{ $sellers[$i]->profits->sum('profit') }}</td>
+                                        <th scope="row">{{ ($reviews->currentPage() - 1) * 15 + $i + 1 }}</th>
+                                        <td>{{ $reviews[$i]->user->name }}</td>
+                                        <td>{{ $reviews[$i]->rate }}</td>
+                                        <td>{{ $reviews[$i]->comment }}</td>
+                                        <td>{{ $reviews[$i]->created_at->format('Y-m-d') }}</td>
                                         <td>
-                                            <div style="display: flex;">
-                                                <a class="btn btn-secondary mx-4"  href="{{ route('admin.seller.review' , $sellers[$i]) }}">show review</a>
-                                                @if ($sellers[$i]->block)
-                                                <form id="unblock"
-                                                    action="{{ route('admin.seller.unblock', $sellers[$i]) }}" method="POST">
-                                                    @method('put')
-                                                    @csrf
-                                                    <a class="btn btn-danger"
-                                                        href="javascript:$('form#unblock').submit();">{{ __('website/admin.unblock') }}</a>
-                                                </form>
-                                                @else
-                                                    <form id="block"
-                                                        action="{{ route('admin.seller.block', $sellers[$i]) }}" method="POST">
-                                                        @method('put')
-                                                        @csrf
-                                                        <a class="btn btn-danger"
-                                                            href="javascript:$('form#block').submit();">{{ __('website/admin.block') }}</a>
-                                                    </form>
-                                                @endif
-                                                <form style="margin-left: 20px;" id="destroy"
-                                                    action="{{ route('admin.seller.destroy', $sellers[$i]) }}" method="POST">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <a class="btn btn-danger"
-                                                        href="javascript:$('form#destroy').submit();">{{ __('website/admin.delete') }}</a>
-                                                </form>
-
-                                            </div>
-                                        </td>
-                                        {{-- <td>{{ $sellers[$i]->status }}</td> --}}
-                                        {{-- <td>
-                                            <form action="{{ route('admin.order.update') }}">
+                                            {{-- <form action="{{ route('admin.order.update') }}">
                                                 <select name="status" class="form-control-color" id="status">
                                                     <option value="Pending" {{ $orders[$i]->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                                                     <option value="Processing" {{ $orders[$i]->status == 'Processing' ? 'selected' : '' }}>Processing</option>
@@ -189,8 +157,8 @@
                                                     <option value="Partially" {{ $orders[$i]->status == 'Partially' ? 'selected' : '' }}>Partially</option>
                                                 </select>
 
-                                            </form>
-                                            @auth('seller')
+                                            </form> --}}
+                                            {{-- @auth('seller')
                                                 <form action="{{ route('admin.order.update', $orders[$i]) }}" method="POST">
                                                     @csrf
                                                     @method('put')
@@ -240,10 +208,10 @@
                                                         selectElement.form.submit();
                                                     }
                                                 </script>
-                                            @endauth
+                                            @endauth --}}
 
 
-                                        </td> --}}
+                                        </td>
                                         {{-- <td>
                                             <a class="btn btn-success m-0"
                                                 href="{{ route('admin.order.show', $orders[$i]) }}">{{ __('website/admin.For_More_Info') }}</a>
@@ -263,7 +231,7 @@
 
                         </tbody>
                     </table>
-                    {{ $sellers->links() }}
+                    {{ $reviews->links() }}
                 </div>
             </div>
         </div>

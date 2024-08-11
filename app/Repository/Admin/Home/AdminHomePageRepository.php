@@ -6,6 +6,7 @@ use App\Interface\Admin\Home\AdminHomePageRepositoryInterface;
 
 use App\Models\Checkout;
 use App\Models\Profit;
+use App\Models\SellerReview;
 use App\StautsArray;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -76,8 +77,11 @@ $yearGraph=$this->getProfitForYear();
 
             $salesData = $this->getSalesDataForFiveYear($years,$currentYear,$profitOfYear);
             // dd($salesData);
+            $avgReview=SellerReview::where('seller_id',auth('seller')->user()->id)->avg('rate');
+            $countReview=SellerReview::where('seller_id',auth('seller')->user()->id)->count();
         }
         // return get_defined_vars();
+
     return view('admin.index',get_defined_vars());
     }
 public function getProfitsForYear($year, $sellerId = null)
