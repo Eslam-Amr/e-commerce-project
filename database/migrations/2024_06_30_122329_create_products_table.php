@@ -27,6 +27,8 @@ return new class extends Migration
             // 0 show 1 hide
             $table->boolean('hide')->default(0);
             // $table->string('seller');
+            $table->enum('status',['pending','accepted','rejected'])->default('pending');
+
             // $table->enum('status',['pending','accepted','rejected'])->default('pending');
             $table->text('description');
             $table->string('additonal_information');

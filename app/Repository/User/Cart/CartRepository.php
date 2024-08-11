@@ -41,6 +41,17 @@ class CartRepository implements CartRepositoryInterface
 
                         return view('user.main.cart.index',get_defined_vars());
         }
+    public function getUserCart(){
+        return Cart::where('user_id', auth()->user()->id)->first();
+    }
+    public function createUserCart(){
+        return Cart::create(['user_id' => auth()->user()->id]);
+    }
+    public function getProductStock($id)
+    {
+        
+        return Product::select('stock')->findOrFail($id);
+    }
         public function increment($id){
             if (!Auth::check()) {
                 return redirect()->back()->with(['error' => "User is not authenticated."]);

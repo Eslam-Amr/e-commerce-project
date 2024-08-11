@@ -5,6 +5,9 @@ namespace App\Interface\User\Cart;
 interface CartRepositoryInterface
 {
     public function index();
+    public function getUserCart();
+    public function createUserCart();
+    public function getProductStock($id);
     // public function destroy($wishlist);
     // public function store($id);
     public function store($request, $id);
