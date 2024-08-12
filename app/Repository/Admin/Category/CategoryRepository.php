@@ -20,6 +20,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         //  return redirect()->back()->with(['categories'=>$categories]);
         //  view('admin.category.index',['categories'=>$categories]);
     }
+    public function getCategorySample(){
+        return Category::take(20)->get();
+    }
     public function create()
     {
         // flash()->success('Operation completed successfully.');

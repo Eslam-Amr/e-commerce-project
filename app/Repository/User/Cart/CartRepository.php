@@ -49,7 +49,7 @@ class CartRepository implements CartRepositoryInterface
     }
     public function getProductStock($id)
     {
-        
+
         return Product::select('stock')->findOrFail($id);
     }
         public function increment($id){
@@ -78,6 +78,9 @@ class CartRepository implements CartRepositoryInterface
             return redirect()->back()->with(['success' => "product deleted from cart successfully"]);
 
         }
+    public function getUserCartWithProduct(){
+        return Cart::where('user_id',auth()->user()->id)->with('products')->first();
+    }
         public function decrement($id){
             $cart=null;
             if(Auth::check())

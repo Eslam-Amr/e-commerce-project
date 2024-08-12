@@ -96,6 +96,14 @@ return redirect()->route('home')->with(['success' => 'Checkout created successfu
         return redirect()->back()->with('error', $errorMessage)->withInput();
     }
 }
+public function createCheckOutInfo($request){
+    return CheckoutInfo::create($request->all());
+
+}
+public function getUserCheckout(){
+    return  Checkout::where('user_id',auth()->user()->id)->get();
+
+ }
 //     public function store($request)
 //     {
 //         // dd('Create a new');

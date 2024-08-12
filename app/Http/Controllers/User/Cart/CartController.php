@@ -73,14 +73,21 @@ if ($cart == null)
     //     //     }
     //     //     return redirect()->back()->with(['success' => 'Product added to cart']);
     // }
-    public function index()
-    {
-        return $this->CartRepository->index();
-        // $cart=null;
-        // if(Auth::check())
-        // $cart = Cart::where('user_id',auth()->user()->id)->with('products')->first();
+    // public function index()
+    // {
+    //     return $this->CartRepository->index();
+    //     // $cart=null;
+    //     // if(Auth::check())
+    //     // $cart = Cart::where('user_id',auth()->user()->id)->with('products')->first();
 
-        //             return view('user.main.cart.index',get_defined_vars());
+    //     //             return view('user.main.cart.index',get_defined_vars());
+    // }
+
+    public function index(){
+        $cart=null;
+        if(Auth::check())
+        $cart = $this->CartRepository->getUserCartWithProduct();
+        return view('user.main.cart.index',get_defined_vars());
     }
     // public function increment($id){
     //     if (!Auth::check()) {
@@ -122,16 +129,60 @@ if ($cart == null)
     //     return redirect()->back()->with(['success' => "product in cart decrement successfully"]);
 
     // }
+    // public function increment($id)
+    // {
+    //     return $this->CartRepository->increment($id);
+    // }
     public function increment($id)
     {
-        return $this->CartRepository->increment($id);
+        $this->checkIfLogin();
+        $cart=null;
+        if(Auth::check())
+        $cart =$this->CartRepository->getUserCartWithProduct();
+        // $cart = Cart::where('\user_id',auth()->user()->id)->with('products')->first();
+        $cartProduct = $cart->products()->where('product_id', $id)->first();
+        // $product=Product::select('stock')->findOrFail($id);
+        $product=$this->CartRepository->getProductStock($id);
+        if($product->stock >= $cartProduct->pivot->quantity+1)
+        $cart->products()->updateExistingPivot($id, ['quantity' => ++$cartProduct->pivot->quantity  ]);
+
+        else
+        return redirect()->back()->with(['error' => "the available item is $product->stock"]);
+        return redirect()->back()->with(['success' => "product in cart increment successfully"]);
+
     }
+    // public function destroy($id)
+    // {
+    //     return $this->CartRepository->destroy($id);
+    // }
     public function destroy($id)
     {
-        return $this->CartRepository->destroy($id);
+        $cart=null;
+        if(Auth::check())
+        $cart = $this->CartRepository->getUserCartWithProduct();
+        // $cart = Cart::where('user_id',auth()->user()->id)->with('products')->first();
+        $cart->products()->detach($id);
+        return redirect()->back()->with(['success' => "product deleted from cart successfully"]);
+
     }
+    // public function decrement($id)
+    // {
+    //     return $this->CartRepository->decrement($id);
+    // }
     public function decrement($id)
     {
-        return $this->CartRepository->decrement($id);
+        $cart=null;
+        if(Auth::check())
+        $cart = $this->CartRepository->getUserCartWithProduct();
+        // $cart = Cart::where('user_id',auth()->user()->id)->with('products')->first();
+        $cartProduct = $cart->products()->where('product_id', $id)->first();
+        if(1 < $cartProduct->pivot->quantity)
+        $cart->products()->updateExistingPivot($id, ['quantity' => --$cartProduct->pivot->quantity  ]);
+        else{
+            $cart->products()->detach($id);
+        }
+
+        return redirect()->back()->with(['success' => "product in cart decrement successfully"]);
+
     }
 }

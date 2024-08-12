@@ -14,6 +14,45 @@ use App\Models\Review;
 
 class UserProductRepository implements UserProductRepositoryInterface
 {
+    public function getFilterdSortedProductQuery(){
+        return QueryBuilder::for(Product::class)
+        ->allowedFilters([
+            'name',
+            'category.name',
+            AllowedFilter::callback('search', function ($query, $value) {
+                $query->where(function ($query) use ($value) {
+                    $query->where('name', 'LIKE', "%{$value}%")
+                        ->orWhere('description', 'LIKE', "%{$value}%")
+                        ->orWhereHas('category', function ($query) use ($value) {
+                            $query->where('name', 'LIKE', "%{$value}%");
+                        });
+                });
+            }),
+        ])
+        ->allowedSorts('name', 'effective_price')
+        ->select('*')
+        ->addSelect(DB::raw('(price - (price * discount / 100)) as effective_price'))
+        ->when(request()->has('price_from'), function ($query) {
+            $query->having('effective_price', '>=', request()->query('price_from'));
+        })
+        ->when(request()->has('price_to'), function ($query) {
+            $query->having('effective_price', '<=', request()->query('price_to'));
+        })
+        ->when(request()->has('sort'), function ($query) {
+            if (request()->query('sort') === 'effective_price') {
+                $query->orderBy('effective_price', 'asc');
+            } elseif (request()->query('sort') === '-effective_price') {
+                $query->orderBy('effective_price', 'desc');
+            }
+        });
+    }
+    public function getProducts($productsQuery){
+        return  $productsQuery->where('stock','>',0)->where('admin-acceptance',1)->where('hide',0)->paginate()->appends(request()->query());
+    }
+    public function getProductsCount($productsQuery){
+return $productsQuery->where('stock','>',0)->where('admin-acceptance',1)->where('hide',0)->toBase()->getCountForPagination();
+
+    }
     public function index()
     {
         $categories = Category::all();

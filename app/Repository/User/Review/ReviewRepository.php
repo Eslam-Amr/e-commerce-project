@@ -12,4 +12,7 @@ public function createUserReview($request){
     $review['user_id']=auth()->user()->id;
   return   Review::create($review);
 }
+public function getProductReview($productId){
+    return Review::where('product_id', $productId)->get();
+}
 }

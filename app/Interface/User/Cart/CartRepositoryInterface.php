@@ -6,6 +6,7 @@ interface CartRepositoryInterface
 {
     public function index();
     public function getUserCart();
+    public function getUserCartWithProduct();
     public function createUserCart();
     public function getProductStock($id);
     // public function destroy($wishlist);

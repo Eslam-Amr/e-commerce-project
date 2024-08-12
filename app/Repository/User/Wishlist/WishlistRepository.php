@@ -7,7 +7,11 @@ use App\Interface\User\Wishlist\WishlistRepositoryInterface;
 
 class WishlistRepository implements WishlistRepositoryInterface
 {
-
+    public function getIfProductInWishlist($productId){
+        return Wishlist::where('product_id', $productId)
+        ->where('user_id', auth()->user()->id)
+        ->first();
+    }
 public function index(){
     $wishlists=[];
     if(auth()->user() != null)

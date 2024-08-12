@@ -7,6 +7,7 @@ interface WishlistRepositoryInterface
     public function index();
     public function destroy($wishlist);
     public function store($id);
+    public function getIfProductInWishlist($productId);
     // public function store($request);
     // public function update($request);
     // public function destroy($request);

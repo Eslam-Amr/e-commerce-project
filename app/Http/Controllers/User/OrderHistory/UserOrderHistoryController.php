@@ -5,11 +5,18 @@ namespace App\Http\Controllers\User\OrderHistory;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Interface\User\Checkout\CheckoutRepositoryInterface;
 
 class UserOrderHistoryController extends Controller
 {
+    protected $checkoutRepo;
+    public function __construct(CheckoutRepositoryInterface $checkoutRepo){
+$this->checkoutRepo = $checkoutRepo;
+
+}
     public function index(){
-        $allOrder=Checkout::where('user_id',auth()->user()->id)->get();
+        // $allOrder=Checkout::where('user_id',auth()->user()->id)->get();
+        $allOrder=$this->checkoutRepo->getUserCheckout();
         return view('user.main.orders.index',get_defined_vars());
     }
     public function show(Checkout $checkout){
