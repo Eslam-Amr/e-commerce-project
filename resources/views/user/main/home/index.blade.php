@@ -1,4 +1,5 @@
 @extends('user.part.master')
+@section('home-active', 'active')
 @section('title', 'home')
 @section('content')
     <section id="billboard" class="position-relative overflow-hidden bg-light-blue">

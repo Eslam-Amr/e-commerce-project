@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title', 'Cart')
+@section('cart-active', 'active')
+
 @section('content')
     @php
         $total = [];

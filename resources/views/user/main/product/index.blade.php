@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title', 'Product')
+@section('product-active', 'active')
+
 @section('content')
 @include('user.part.hero',['name'=>'Product'])
 
@@ -116,12 +118,19 @@
                                             </div>
                                             <div class="cart-concern position-absolute">
                                                 <div class="cart-button d-flex">
-                                                    <div class="btn-left">
+                                                    {{-- <div class="btn-left">
                                                         <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
                                                         <svg class="cart-outline position-absolute">
                                                             <use xlink:href="#cart-outline"></use>
                                                         </svg>
-                                                    </div>
+                                                    </div> --}}
+                                                    <form id="add_form" action="{{ route('cart.store',$product->id) }}" method="POST" >
+                                                        @csrf
+                                                        <a  href="javascript:$('form#add_form').submit();" class="btn btn-medium btn-black">Add to Cart<svg
+                                                            class="cart-outline">
+                                                            <use xlink:href="#cart-outline"></use>
+                                                        </svg></a>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="card-detail d-flex justify-content-between pt-3 pb-3">

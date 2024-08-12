@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title', 'product')
+@section('product-active', 'active')
+
 @section('content')
     {{-- @dd($product) --}}
     <section id="selling-product" class="single-product padding-xlarge">

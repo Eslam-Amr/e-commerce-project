@@ -17,22 +17,31 @@ class WishlistController extends Controller
         $this->wishlistRepository = $wishlistRepository;
     }
     public function index(){
-        return $this->wishlistRepository->index();
+        $wishlists=[];
+        if(auth()->user() != null)
+        $wishlists =$this->wishlistRepository->getUserWishlist();
+        return view('user.main.wishlist.wishlist',get_defined_vars());
+        // $wishlists = Wishlist::where('user_id',auth()->user()->id)->get();
+
+        // return $this->wishlistRepository->index();
         // $wishlists=[];
         // if(auth()->user() != null)
         // $wishlists = Wishlist::where('user_id',auth()->user()->id)->get();
         // return view('user.main.wishlist.wishlist',get_defined_vars());
     }
     public function destroy(wishlist $wishlist){
-        return $this->wishlistRepository->destroy($wishlist);
+         $this->wishlistRepository->destroyWishlist($wishlist);
+            return redirect()->back()->with('success','Wishlist Deleted Successfully');
 
         // $wishlist->delete();
         //         return redirect()->back()->with('success','Wishlist Deleted Successfully');
     }
     public function store($id){
-        return $this->wishlistRepository->store($id);
-    //     Wishlist::create(['product_id'=>$id,'user_id'=>auth()->user()->id]);
-    //     return redirect()->back()->with(['success'=>'added to wishlist successfuly']);
+         $this->wishlistRepository->storeWishlist($id);
+         return redirect()->back()->with(['success'=>'added to wishlist successfuly']);
     
+         //     Wishlist::create(['product_id'=>$id,'user_id'=>auth()->user()->id]);
+    //     return redirect()->back()->with(['success'=>'added to wishlist successfuly']);
+
     }
 }

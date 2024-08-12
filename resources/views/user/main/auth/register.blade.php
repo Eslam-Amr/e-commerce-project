@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title','register')
+@section('register-active', 'active')
+
 @section('content')
 <div class="container">
     <div class="row">

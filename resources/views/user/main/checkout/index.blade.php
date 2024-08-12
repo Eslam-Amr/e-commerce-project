@@ -567,6 +567,8 @@
 
 @extends('user.part.master')
 @section('title', 'Checkout')
+@section('cart-active', 'active')
+
 @section('content')
 @include('user.part.hero',['name'=>'Checkout'])
 

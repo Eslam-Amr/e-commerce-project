@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title', 'Wishlist')
+@section('wishlist-active', 'active')
+
 @section('content')
     {{-- @dd($wishlists) --}}
     @include('user.part.hero',['name'=>'Wishlist'])

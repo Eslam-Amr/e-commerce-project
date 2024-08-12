@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title','login')
+@section('login-active', 'active')
+
 @section('content')
 {{-- <style>
     body {

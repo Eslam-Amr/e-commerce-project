@@ -126,43 +126,55 @@
           <div class="offcanvas-body">
             <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link me-4 active" href="{{ route('home') }}">Home</a>
+                <a class="nav-link me-4 @yield('home-active') " href="{{ route('home') }}">Home</a>
               </li>
               {{-- <li class="nav-item">
                 <a class="nav-link me-4" href="#company-services">Services</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('user.product.index') }}">Products</a>
+                <a class="nav-link me-4  @yield('product-active') " href="{{ route('user.product.index') }}">Products</a>
               </li>
               {{-- <li class="nav-item">
                 <a class="nav-link me-4" href="#smart-watches">Watches</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('cart.index') }}">Cart</a>
+                <a class="nav-link me-4  @yield('cart-active') " href="{{ route('cart.index') }}">Cart</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('orders.index') }}">orders</a>
+                <a class="nav-link me-4  @yield('order-active') " href="{{ route('orders.index') }}">orders</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('wishlist.index') }}">Wishlist</a>
+                <a class="nav-link me-4  @yield('wishlist-active') " href="{{ route('wishlist.index') }}">Wishlist</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('contact.index') }}">Contact</a>
+                <a class="nav-link me-4  @yield('contact-active') " href="{{ route('contact.index') }}">Contact</a>
               </li>
               @auth
-              <li class="nav-item d-inline">
-                <form action="{{ route('logout') }}" method="POST">
+              <li class="nav-item">
+                <a class="nav-link me-4  @yield('setting-active') " href="{{ route('settings.index') }}">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+              </li>
+
+              <li class="nav-item d-inline ">
+                <form id="logout_form" action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-link nav-link me-4 p-0" style="background: none; border: none; text-decoration: none;">Logout</button>
+                    <a class="nav-link me-4   btn-danger btn text-dark" href="javascript:$('form#logout_form').submit();">logout</a>
+
+                    {{-- <button type="submit" class="btn btn-link nav-link me-4 p-0" style="background: none; border: none; text-decoration: none;">Logout</button> --}}
                 </form>
+                    {{-- <a  href="javascript:$('form#add_form').submit();" class="btn btn-medium btn-black">Add to Cart<svg
+                        class="cart-outline">
+                        <use xlink:href="#cart-outline"></use>
+                    </svg></a> --}}
               </li>
               @endauth
               @guest
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('register') }}">Register</a>
+                <a class="nav-link me-4  @yield('register-active') " href="{{ route('register') }}">Register</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('login') }}">login</a>
+                <a class="nav-link me-4  @yield('login-active') " href="{{ route('login') }}">login</a>
               </li>
 
               @endguest

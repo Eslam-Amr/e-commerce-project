@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title', 'Contact')
+@section('contact-active', 'active')
+
 @section('content')
 @include('user.part.hero',['name'=>'Contact'])
 

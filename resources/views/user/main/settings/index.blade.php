@@ -1,5 +1,7 @@
 @extends('user.part.master')
 @section('title', 'Settings')
+@section('setting-active', 'active')
+
 @section('content')
     <x-app-layout>
 
