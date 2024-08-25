@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 // use App\Admin\Home\AdminHomePageRepositoryInterface;
+
+use App\Interface\Admin\AdminControlOnSeller\AdminSellerInterface;
+use App\Interface\Admin\AdminControlOnUser\AdminUserInterface;
 use App\Interface\User\Category\CategoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\User\Cart\CartRepository;
@@ -22,9 +25,15 @@ use App\Interface\User\Checkout\CheckoutRepositoryInterface;
 use App\Interface\User\Wishlist\WishlistRepositoryInterface;
 use App\Interface\Admin\Category\CategoryRepositoryInterface;
 use App\Interface\Admin\Home\AdminHomePageRepositoryInterface;
+use App\Interface\User\Contact\ContactInterface;
 use App\Interface\User\OrderHistory\UserOrderHistoryInterface;
+use App\Interface\User\Seller\SellerRequestInterface;
 use App\Interface\User\UserProduct\UserProductRepositoryInterface;
+use App\Repository\Admin\AdminControlOnSeller\AdminSellerRepository;
+use App\Repository\Admin\AdminControlOnUser\AdminUserRepository;
+use App\Repository\User\Contact\ContactRepository;
 use App\Repository\User\OrderHistory\UserOrderHistoryRepository;
+use App\Repository\User\Seller\SellerRequestRepository;
 
 // App\Repository\Home\UserProductRepository
 // use App\Repository\Product\ProductRepository;
@@ -50,6 +59,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ReviewRepositoryInterface::class, ReviewRepository::class);
         $this->app->bind(UserOrderHistoryInterface::class, UserOrderHistoryRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
+        $this->app->bind(ContactInterface::class, ContactRepository::class);
+        $this->app->bind(SellerRequestInterface::class, SellerRequestRepository::class);
+        $this->app->bind(AdminSellerInterface::class, AdminSellerRepository::class);
+        $this->app->bind(AdminUserInterface::class, AdminUserRepository::class);
 
     }
 

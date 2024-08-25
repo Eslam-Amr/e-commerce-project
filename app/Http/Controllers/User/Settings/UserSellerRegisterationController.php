@@ -8,9 +8,16 @@ use App\Models\SellerRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreUserSellerRequest;
+use App\Interface\User\Seller\SellerRequestInterface;
+use App\Repository\User\Seller\SellerRequestRepository;
 
 class UserSellerRegisterationController extends Controller
 {
+    protected $SellerRequestRepo;
+    public function __construct(SellerRequestInterface $SellerRequestRepo){
+$this->SellerRequestRepo = $SellerRequestRepo;
+
+}
     /**
      * Handle the incoming request.
      */
@@ -27,7 +34,8 @@ class UserSellerRegisterationController extends Controller
         //     return redirect()->back()->with('error', 'email isn\'t correct ');
         // if(SellerRequest::where('user_id',auth()->user()->id)->first()!=null)
         // return redirect()->back()->with('error', 'request alredy send');
-        SellerRequest::create(['user_id' => auth()->user()->id, 'email' => $request->validated()['email']]);
+        $this->SellerRequestRepo->CreateSellerRequest($request->validated()['email']);
+        //SellerRequest::create(['user_id' => auth()->user()->id, 'email' => $request->validated()['email']]);
         return redirect()->back()->with('success', 'request sent successfully');
     }
 

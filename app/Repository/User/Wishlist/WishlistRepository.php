@@ -15,13 +15,13 @@ return  Wishlist::where('user_id',auth()->user()->id)->get();
         ->where('user_id', auth()->user()->id)
         ->first();
     }
-public function index(){
-    $wishlists=[];
-    if(auth()->user() != null)
-    $wishlists = Wishlist::where('user_id',auth()->user()->id)->get();
-    return view('user.main.wishlist.wishlist',get_defined_vars());
+// public function index(){
+//     $wishlists=[];
+//     if(auth()->user() != null)
+//     $wishlists = Wishlist::where('user_id',auth()->user()->id)->get();
+//     return view('user.main.wishlist.wishlist',get_defined_vars());
 
-}
+// }
 public function destroyWishlist( $wishlist){
 
    return $wishlist->delete();

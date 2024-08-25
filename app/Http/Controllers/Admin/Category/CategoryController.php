@@ -25,7 +25,11 @@ class CategoryController extends Controller
         // $categories=Category::paginate();
         // dd($categories);
         // toastr()->success('sdafffffffff');
-        return $this->categoryRepository->index();
+        // $categories = Category::paginate();
+        $categories = $this->categoryRepository->getCategorypaginate();
+        return view('admin.category.index', get_defined_vars());
+
+        // return $this->categoryRepository->index();
         // $categories=Category::paginate();
         // return view('admin.category.index',get_defined_vars());
     }
@@ -36,8 +40,10 @@ class CategoryController extends Controller
     public function create()
     {
         // toastr()->success('sdafffffffff');
-        return $this->categoryRepository->create();
-        //
+       // return $this->categoryRepository->create();
+       return view('admin.category.create', get_defined_vars());
+
+       //
     }
 
     /**
@@ -45,8 +51,15 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        // Category::create($request->validated());
+        // $categories = Category::paginate();
+        // Category::create($request->validated());\
+        $this->categoryRepository->createCategory($request);
+        $categories = $this->categoryRepository->getCategorypaginate();
+        return view('admin.category.index', ['categories' => $categories, 'success' => 'category created successfuly']);
+
         // toastr()->success('sdafffffffff');
-        return $this->categoryRepository->store($request);
+        // return $this->categoryRepository->store($request);
         // dd($request->all());
     }
 
@@ -55,7 +68,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return $this->categoryRepository->show($category);
+        // return $this->categoryRepository->show($category);
+        return view('admin.category.show',['category'=>$category]);
 
     }
 
@@ -64,7 +78,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return $this->categoryRepository->edit($category);
+        // return $this->categoryRepository->edit($category);
+        return view('admin.category.edit',['category'=>$category]);
 
     }
 
@@ -73,7 +88,16 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        return $this->categoryRepository->update($request,$category);
+        // $category->update($request->validated());
+        $this->categoryRepository->updateCategory($request, $category);
+        // $categories = Category::paginate();
+        $categories = $this->categoryRepository->getCategorypaginate();
+
+        // toastr()->success('category updated successfully.');
+        // return view('admin.category.index', ['categories' => $categories, 'success' => 'category updated successfuly']);
+        return redirect()->route('admin.category.index')->with(['categories' => $categories, 'success' => 'category updated successfuly']);
+
+        // return $this->categoryRepository->update($request,$category);
         //
     }
 
@@ -84,6 +108,8 @@ class CategoryController extends Controller
     {
         // dd("asf");
         // dd($category);
-        return $this->categoryRepository->destroy($category);
+        // return $this->categoryRepository->destroy($category);
+         $this->categoryRepository->destroyCategory($category);
+        return redirect()->back()->with(['success' => 'deleted successfuly']);
     }
 }

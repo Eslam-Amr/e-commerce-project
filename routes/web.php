@@ -64,7 +64,12 @@ reposaiory => command or interface and class
 migartion files
 
 */
-
+//------------------------------------
+// cehck for admincontactcontroller for make repostary desgin pattern for the program
+//check for admin route
+// check for user contact page
+// check for user checkout page
+//check vaildation for admin sigin in page 
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale() . '/admin',
@@ -116,6 +121,16 @@ Route::middleware('auth')->group(function () {
 });
 //############################### Admin login   ###############################
 Route::post('/admin/login',[AuthController::class , 'login'])->name('admin.login');
+
+
+
+
+
+
+
+
+
+//############################### User Route #####################################
 //############################### User Home Page   ###############################
 Route::get('/', HomeController::class)->name('home');
 //############################### User settings Page   ###############################
@@ -136,23 +151,24 @@ Route::post('/review',ReviewController::class)->name('review.store')->middleware
 //############################### User seller review   ###############################
 Route::post('/seller-review',SellerReviewController::class)->name('seller-review.store')->middleware('auth:web');
 //############################### User order history   ###############################
-Route::resource('/orders',UserOrderHistoryController::class)->except('show');
+Route::resource('/orders',UserOrderHistoryController::class)->only('index');
 Route::get('/orders/{checkout}',[UserOrderHistoryController::class,'show'])->name('user.order.show')->middleware('auth:web');
 Route::put('/orders/cancel/{checkout}',[UserOrderHistoryController::class,'cancel'])->name('user.order.cancel')->middleware('auth:web');
 
 //############################### User cart   ###############################
 Route::post('/cart/add/{id}', [CartController::class, 'store'])->name('cart.store');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index'); // Assuming you have an index method to display the cart
-Route::get('/cart/increment/{id}', [CartController::class, 'increment'])->name('cart.increment'); // Assuming you have an index method to display the cart
-Route::get('/cart/decrement/{id}', [CartController::class, 'decrement'])->name('cart.decrement'); // Assuming you have an index method to display the cart
-Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy'); // Assuming you have an index method to display the cart
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/increment/{id}', [CartController::class, 'increment'])->name('cart.increment');
+Route::get('/cart/decrement/{id}', [CartController::class, 'decrement'])->name('cart.decrement');
+Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 //############################### User contact   ###############################
-// Route::get('/contact', [UserContactController::class, 'index'])->name('contact.index'); // Assuming you have an index method to display the cart
-Route::resource('/contact', UserContactController::class)->only('index','store'); // Assuming you have an index method to display the cart
+// Route::get('/contact', [UserContactController::class, 'index'])->name('contact.index');
+Route::resource('/contact', UserContactController::class)->only('index','store');
 //############################### User checkout   ###############################
-Route::get('/checkout', [UserCheckoutController::class , 'create'])->name('checkout.create'); // Assuming you have an index method to display the cart
-Route::post('/checkout/store', [UserCheckoutController::class , 'store'])->name('checkout.store'); // Assuming you have an index method to display the cart
-// Route::resource('/checkout', UserCheckoutController::class ); // Assuming you have an index method to display the cart
+Route::get('/checkout', [UserCheckoutController::class , 'create'])->name('checkout.create');
+Route::post('/checkout/store', [UserCheckoutController::class , 'store'])->name('checkout.store');
+// Route::resource('/checkout', UserCheckoutController::class );
+//############################### end User Route #################################
 
 //############################### Admin dashboard   ###############################
 Route::get('/{page}', [AdminController::class,'index']);

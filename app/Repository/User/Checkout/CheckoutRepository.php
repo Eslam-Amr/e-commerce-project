@@ -16,86 +16,86 @@ use App\Models\CheckoutInfo;
 class CheckoutRepository implements CheckoutRepositoryInterface
 {
     use CalculateTotal;
-    public function store($request)
-    {
-        // dd('Create a new');
-        if(!Auth::check())
-        return redirect()->route('login')->with(['error'=>'please login first']);
-        if(!Cart::where('user_id', auth()->user()->id)->first() && Cart::where('user_id', auth()->user()->id)->first()->products->where('hide',0)->where('admin-acceptance',1)->count()>0)
-        return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
+//     public function store($request)
+//     {
+//         // dd('Create a new');
+//         if(!Auth::check())
+//         return redirect()->route('login')->with(['error'=>'please login first']);
+//         if(!Cart::where('user_id', auth()->user()->id)->first() && Cart::where('user_id', auth()->user()->id)->first()->products->where('hide',0)->where('admin-acceptance',1)->count()>0)
+//         return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
 
-    try {
-        DB::beginTransaction(); // Start transaction
+//     try {
+//         DB::beginTransaction(); // Start transaction
 
-$cart = Cart::where('user_id', auth()->user()->id)->first();
+// $cart = Cart::where('user_id', auth()->user()->id)->first();
 
-foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $product) {
-    if ($product->stock < $product->pivot->quantity) {
-        return redirect()->back()->with(['error' => 'stock amount doesn\'t match the quantity']);
-    }
-}
+// foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $product) {
+//     if ($product->stock < $product->pivot->quantity) {
+//         return redirect()->back()->with(['error' => 'stock amount doesn\'t match the quantity']);
+//     }
+// }
 
-$totalPriceAfterDiscount = $this->calculateTotalFromProductArray($cart->products);
+// $totalPriceAfterDiscount = $this->calculateTotalFromProductArray($cart->products);
 
-$checkoutInfo = CheckoutInfo::create($request->all());
+// $checkoutInfo = CheckoutInfo::create($request->all());
 
-$sellerCheckouts = []; // Array to track totals per seller
+// $sellerCheckouts = []; // Array to track totals per seller
 
-foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $product) {
-    // Ensure there is a checkout for the seller
-    $checkout = Checkout::firstOrCreate(
-        [
-            'user_id' => auth()->user()->id,
-            'seller_id' => $product->seller_id,
-            'checkout_info_id' => $checkoutInfo->id,
-        ],
-        [
-            'total' => 0,
-        ]
-    );
+// foreach ($cart->products->where('hide',0)->where('admin-acceptance',1) as $product) {
+//     // Ensure there is a checkout for the seller
+//     $checkout = Checkout::firstOrCreate(
+//         [
+//             'user_id' => auth()->user()->id,
+//             'seller_id' => $product->seller_id,
+//             'checkout_info_id' => $checkoutInfo->id,
+//         ],
+//         [
+//             'total' => 0,
+//         ]
+//     );
 
-    // Attach product to the checkout
-    $checkout->products()->attach($product->id, ['quantity' => $product->pivot->quantity]);
+//     // Attach product to the checkout
+//     $checkout->products()->attach($product->id, ['quantity' => $product->pivot->quantity]);
 
-    // Decrease product stock
-    $product->stock -= $product->pivot->quantity;
-    $product->save();
+//     // Decrease product stock
+//     $product->stock -= $product->pivot->quantity;
+//     $product->save();
 
-    // Calculate total for seller's checkout
-    // 1-(dis/100)
-    $productTotal = $product->pivot->quantity * ((1-($product->discount/100))*$product->price); // Assuming price is a property of the product
+//     // Calculate total for seller's checkout
+//     // 1-(dis/100)
+//     $productTotal = $product->pivot->quantity * ((1-($product->discount/100))*$product->price); // Assuming price is a property of the product
 
-    if (!isset($sellerCheckouts[$product->seller_id])) {
-        $sellerCheckouts[$product->seller_id] = $checkout;
-        $sellerCheckouts[$product->seller_id]->total = 0;
-    }
+//     if (!isset($sellerCheckouts[$product->seller_id])) {
+//         $sellerCheckouts[$product->seller_id] = $checkout;
+//         $sellerCheckouts[$product->seller_id]->total = 0;
+//     }
 
-    $sellerCheckouts[$product->seller_id]->total += $productTotal;
-}
+//     $sellerCheckouts[$product->seller_id]->total += $productTotal;
+// }
 
-// Save the updated totals for each seller's checkout
-foreach ($sellerCheckouts as $checkout) {
-    $checkout->save();
-}
+// // Save the updated totals for each seller's checkout
+// foreach ($sellerCheckouts as $checkout) {
+//     $checkout->save();
+// }
 
-$cart->products()->detach();
-$cart->delete();
+// $cart->products()->detach();
+// $cart->delete();
 
-DB::commit(); // Commit transaction if all operations succeed
+// DB::commit(); // Commit transaction if all operations succeed
 
-return redirect()->route('home')->with(['success' => 'Checkout created successfully']);
+// return redirect()->route('home')->with(['success' => 'Checkout created successfully']);
 
-    } catch (\Throwable $th) {
-        DB::rollback();
-        $errorMessage = "An error occurred during checkout: " . $th->getMessage();
+//     } catch (\Throwable $th) {
+//         DB::rollback();
+//         $errorMessage = "An error occurred during checkout: " . $th->getMessage();
 
-        if ($th instanceof ValidationException) {
-            $errorMessage = "Validation failed: " . $th->validator->errors()->first();
-        }
+//         if ($th instanceof ValidationException) {
+//             $errorMessage = "Validation failed: " . $th->validator->errors()->first();
+//         }
 
-        return redirect()->back()->with('error', $errorMessage)->withInput();
-    }
-}
+//         return redirect()->back()->with('error', $errorMessage)->withInput();
+//     }
+// }
 public function createCheckOutInfo($request){
     return CheckoutInfo::create($request->all());
 
@@ -210,16 +210,16 @@ public function getUserCheckout(){
 //         return redirect()->back()->with('error', $errorMessage)->withInput();
 //     }
 // }
-public function create()
-    {
-        // dd(Cart::where('user_id', auth()->user()->id)->first()->products()->where('hide',0)->where('admin-acceptance',1)->get());
-        if(!Auth::check())
-        return redirect()->route('login')->with(['error'=>'please login first']);
-        if(!Cart::where('user_id', auth()->user()->id)->first())
-        return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
-        if(!Cart::where('user_id', auth()->user()->id)->first()->products()->where('hide',0)->where('admin-acceptance',1)->count()>0)
-        return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
-        return view('user.main.checkout.index');
+// public function create()
+//     {
+//         // dd(Cart::where('user_id', auth()->user()->id)->first()->products()->where('hide',0)->where('admin-acceptance',1)->get());
+//         if(!Auth::check())
+//         return redirect()->route('login')->with(['error'=>'please login first']);
+//         if(!Cart::where('user_id', auth()->user()->id)->first())
+//         return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
+//         if(!Cart::where('user_id', auth()->user()->id)->first()->products()->where('hide',0)->where('admin-acceptance',1)->count()>0)
+//         return redirect()->route('user.product.index')->with(['error'=>'no cart found']);
+//         return view('user.main.checkout.index');
 
-    }
+//     }
 }

@@ -28,13 +28,7 @@ class UserCheckoutController extends Controller
         $this->CheckoutRepository = $CheckoutRepository;
         $this->CartRepository = $CartRepository;
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        // return view('user.main.checkout.index');
-    }
+
 
     /**
      * Show the form for creating a new resource.

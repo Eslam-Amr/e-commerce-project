@@ -6,8 +6,9 @@ interface CheckoutRepositoryInterface
 {
     // public function index();
     // public function destroy($wishlist);
+    /*
     public function store($request);
-    public function create();
+    public function create();*/
     public function createCheckOutInfo($request);
 public function getUserCheckout();
 

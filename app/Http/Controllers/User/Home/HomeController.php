@@ -25,7 +25,7 @@ class HomeController extends Controller
         }
         */
         protected $homeRepo;
-        public function __construct(HomeRepo $homeRepo){
+        public function __construct(HomeRepositoryInterface $homeRepo){
     $this->homeRepo = $homeRepo;
 
 }
@@ -40,7 +40,7 @@ class HomeController extends Controller
 // dd(Auth::guard('seller')->user());
 // dd($guard,auth()->guard('admin')->user());
     public function __invoke(){
-        $products= $this->homeRepo->getProductPaginatedForHomePage();
+        $products= $this->homeRepo->getProductInRandomForHomePage();
         return view('user.main.home.index', get_defined_vars());
     }
 }
