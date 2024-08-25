@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Checkout;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCheckoutRequest;
+use App\Http\Requests\UserCheckoutRequest;
 use App\Interface\User\Cart\CartRepositoryInterface;
 use App\Interface\User\Checkout\CheckoutRepositoryInterface;
 use App\Models\Cart;
@@ -60,7 +61,7 @@ delete from cart table
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(UserCheckoutRequest $request){
     // dd('Create a new');
     $this->checkIfLogin();
     // if(!Auth::check())

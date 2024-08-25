@@ -13,7 +13,6 @@ class ShowSellerReviewController extends Controller
      */
     public function __invoke(Seller $seller)
     {
-        // dd($seller->reviews()->paginate());
         return view('admin.seller.show-review',['reviews'=>$seller->reviews()->paginate()]);
     }
 }

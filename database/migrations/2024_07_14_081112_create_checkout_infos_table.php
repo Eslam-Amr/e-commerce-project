@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('street_address');
             $table->string('appartment_info');
             $table->string('city');
-            $table->string('state');
+            // $table->string('state');
             $table->string('phone');
             $table->string('email');
             $table->text('Order_notes')->nullable();
