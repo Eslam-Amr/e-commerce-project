@@ -6,7 +6,9 @@ namespace App\Providers;
 
 use App\Interface\Admin\AdminControlOnSeller\AdminSellerInterface;
 use App\Interface\Admin\AdminControlOnUser\AdminUserInterface;
+use App\Interface\Admin\Contact\AdminContactInterface;
 use App\Interface\User\Category\CategoryInterface;
+use App\Repository\Admin\Contact\AdminContactRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\User\Cart\CartRepository;
 use App\Repository\User\Home\HomeRepository;
@@ -63,6 +65,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SellerRequestInterface::class, SellerRequestRepository::class);
         $this->app->bind(AdminSellerInterface::class, AdminSellerRepository::class);
         $this->app->bind(AdminUserInterface::class, AdminUserRepository::class);
+        $this->app->bind(AdminContactInterface::class, AdminContactRepository::class);
 
     }
 

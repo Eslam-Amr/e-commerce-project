@@ -23,10 +23,12 @@ class OrderController extends Controller
     public function destroy(Checkout $checkout){
         // dd($checkout)
  $products = $checkout->products;
+ // destroy order return quantity to product
  foreach ($products as $product) {
      $product->stock += $product->pivot->quantity;
      $product->save();
  }
+ //delete order
         $checkout->delete();
         return redirect()->back()->with(['success' =>"order deleted successfully"]);
     }

@@ -69,7 +69,7 @@ migartion files
 //check for admin route
 // check for user contact page
 // check for user checkout page
-//check vaildation for admin sigin in page 
+//check vaildation for admin sigin in page
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale() . '/admin',
@@ -77,35 +77,47 @@ Route::group(
         'as'=>'admin.'
     ], function(){ //...
         Route::view('/test','admin.doctors.index');
-     //############################### Admin Category   ###############################
-     Route::get('/contact/all' , [AdminContactController::class,'displayAll'])->name('contact.all');
-        Route::resource('/contact',  AdminContactController::class);
+        //############################### Admin Contact   ###############################
+        Route::get('/contact/all' , [AdminContactController::class,'displayAll'])->name('contact.all');
+        Route::resource('/contact',  AdminContactController::class)->only('update','index','show','destroy');
+        //############################### end Admin Contact   ###########################
+        //############################### Admin Category   ###############################
         Route::resource('/category',  CategoryController::class )->middleware('auth:admin');
+        //############################### end Admin Category   ###########################
+        //############################### Admin order   ###############################
         Route::resource('/order',  OrderController::class )->except('destroy','show','update');
         Route::delete('/order/{checkout}',[  OrderController::class,'destroy'] )->name('order.destroy')->middleware('auth:seller');
         Route::get('/order/{checkout}/show',[  OrderController::class,'show'] )->name('order.show');
         Route::put('/order/update/{checkout}',[  OrderController::class,'update'] )->name('order.update')->middleware('auth:seller');
-     //############################### Admin Product   ###############################
+        //############################### end Admin order   ###########################
+        //############################### Admin logout   ###########################
         Route::post('/logout',  [AuthController::class, 'adminLogout'] )->name('logout');
-        Route::resource('/product',  ProductController::class );
-        Route::get('/product/{product}/review',  ShowProductReviewController::class )->name('product.review');
-        Route::resource('/product-requests',  ProductRequestController::class );
-        Route::post('/product-requests/accept/{product}',  [ProductRequestController::class,'accept'] )->name('product-request.accept')->middleware('auth:admin');
-        Route::post('/product-requests/reject/{product}',  [ProductRequestController::class ,'reject'])->name('product-request.reject')->middleware('auth:admin');
-        Route::post('/product-requests/hide/{product}',  [ProductRequestController::class ,'hide'])->name('product-request.hide');
-        Route::post('/product-requests/unhide/{product}',  [ProductRequestController::class ,'unhide'])->name('product-request.unhide');
-        Route::post('/product-requests/show/{product}',  [ProductRequestController::class ,'show'])->name('product-request.show')->middleware('auth:admin');
-Route::middleware('auth:admin')->group(function (){
+        //############################### end Admin logout   ###########################
+     //############################### Admin Product   ###############################
+     Route::resource('/product',  ProductController::class );
+     Route::get('/product/{product}/review',  ShowProductReviewController::class )->name('product.review');
+     Route::resource('/product-requests',  ProductRequestController::class );
+     Route::post('/product-requests/accept/{product}',  [ProductRequestController::class,'accept'] )->name('product-request.accept')->middleware('auth:admin');
+     Route::post('/product-requests/reject/{product}',  [ProductRequestController::class ,'reject'])->name('product-request.reject')->middleware('auth:admin');
+     Route::post('/product-requests/hide/{product}',  [ProductRequestController::class ,'hide'])->name('product-request.hide');
+     Route::post('/product-requests/unhide/{product}',  [ProductRequestController::class ,'unhide'])->name('product-request.unhide');
+     Route::post('/product-requests/show/{product}',  [ProductRequestController::class ,'show'])->name('product-request.show')->middleware('auth:admin');
+     //############################### end Admin Product   ###############################
+     Route::middleware('auth:admin')->group(function (){
 
-    Route::resource('/seller',  AdminSellerController::class );
-    Route::get('/seller/{seller}/review',  ShowSellerReviewController::class )->name('seller.review');
-    Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');
-    Route::put('/seller/unblock/{seller}',  [AdminSellerController::class,'unblock'] )->name('seller.unblock');
-    Route::resource('/seller-request',  AdminSellerRequestController::class );
-    Route::post('/seller-request/{seller_request}/accept',  [AdminSellerRequestController::class,'accept'] )->name('seller-request.accept');
-    Route::resource('/user',  AdminUserController::class );
-    Route::put('/user/block/{user}',  [AdminUserController::class,'block'] )->name('user.block');
-    Route::put('/user/unblock/{user}',  [AdminUserController::class,'unblock'] )->name('user.unblock');
+         //###############################  Admin seller   ###############################
+         Route::resource('/seller',  AdminSellerController::class )->only('index','destroy');
+         Route::get('/seller/{seller}/review',  ShowSellerReviewController::class )->name('seller.review');
+         Route::put('/seller/block/{seller}',  [AdminSellerController::class,'block'] )->name('seller.block');
+         Route::put('/seller/unblock/{seller}',  [AdminSellerController::class,'unblock'] )->name('seller.unblock');
+         Route::resource('/seller-request',  AdminSellerRequestController::class );
+         Route::post('/seller-request/{seller_request}/accept',  [AdminSellerRequestController::class,'accept'] )->name('seller-request.accept');
+         //###############################  end Admin seller   ###############################
+         //###############################   Admin users   ###############################
+         Route::resource('/user',  AdminUserController::class )->only('index','destroy');
+         Route::put('/user/block/{user}',  [AdminUserController::class,'block'] )->name('user.block');
+         Route::put('/user/unblock/{user}',  [AdminUserController::class,'unblock'] )->name('user.unblock');
+         //###############################  end Admin users   ###############################
 });
         // Route::view('/','admin.index')->name('index');
         Route::get('/',AdminHomePageController::class)->name('index');
@@ -121,6 +133,7 @@ Route::middleware('auth')->group(function () {
 });
 //############################### Admin login   ###############################
 Route::post('/admin/login',[AuthController::class , 'login'])->name('admin.login');
+//############################### end Admin login   ###############################
 
 
 
