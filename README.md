@@ -29,3 +29,12 @@ This is an eCommerce website built with Laravel 11, designed to provide a robust
 ```bash
 git clone https://github.com/your-repository.git
 cd your-repository
+
+
+
+## Installation
+
+### Install Dependencies
+```bash
+composer install
+npm install
